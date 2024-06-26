@@ -67,7 +67,7 @@ echo "export TENABLE_SECRET_KEY='<SECRET_KEY>'" >> ~/.bash_profile
 2. Update the shell with the new variables:
 
 ```
-source ~/.zshrc
+source ~/.bash_profile
 ```
 3. Confirm that you have set your environment variables using the following command:
 
