@@ -9,6 +9,7 @@ def main():
     vuln_export.request_vuln_export()
     vuln_export.request_vuln_export_status()
     vuln_export.download_all_vuln_chunks()
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
