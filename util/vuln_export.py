@@ -49,8 +49,6 @@ class VulnExport:
                 sys.exit(1)
             case 429:
                 logging.warning("Response Status Code 429: Too Many Requests.")
-                logging.error("Exiting program...")
-                sys.exit(1)
             case _:
                 logging.info("Unrecognised Status Code.") 
                 logging.error("Exiting program...")
@@ -86,7 +84,7 @@ class VulnExport:
         self.log_status_code(response.status_code)
         response_json = json.loads(response.text)
         self.set_values(response_json)
-        logging.info(f"vuln_export status updated...")
+        logging.info(f"vuln_export status updated... {self.status}")
         if self.status != "FINISHED":
             logging.info(f"vuln_export {self.uuid} status: {self.status}...")
             time.sleep(10)
@@ -95,14 +93,14 @@ class VulnExport:
             logging.info(f"vuln_export {self.uuid} status: {self.status}.")
         return 0
 
-    def download_all_vuln_chunks(self): # GET call to Tenable API to 
-        logging.info(f"Download {self.total_chunks} chunks...")
+    def download_all_vuln_chunks(self): # Initiate vulnerability chunk download loop
+        logging.info(f"Downloading {self.total_chunks} chunks...")
         for chunk in range(1, self.total_chunks):
             self.download_vuln_chunk(chunk)
         logging.info(f"All chunks downloaded.")
         return 0
 
-    def download_vuln_chunk(self, chunk):
+    def download_vuln_chunk(self, chunk): # GET call to Tenable API to download all vulnerability chunks
         url = f"https://cloud.tenable.com/vulns/export/{self.uuid}/chunks/{chunk}"
         logging.info(f"GET call to {url}...")
         headers = {
@@ -117,7 +115,7 @@ class VulnExport:
             self.download_vuln_chunk(chunk)
         else:
             response_json = json.loads(response.text)
-            EXPORT_DATA_FILE = VULN_EXPORT_DATA_DIR / f"{self.created}_{self.uuid}_{chunk}.json"
+            EXPORT_DATA_FILE = VULN_EXPORT_DIR / f"{self.created}_{self.uuid}_{chunk}.json"
             with open(EXPORT_DATA_FILE, "w", encoding="utf-8") as f:
                 json.dump(response_json, f, ensure_ascii=False, indent=4)
             logging.info(f"{self.created}_{self.uuid}_{chunk}.json downloaded.")

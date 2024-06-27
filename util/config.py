@@ -11,8 +11,10 @@ FORMATTED_TIME = CURRENT.strftime("%H%M%S")
 LOGS_DIR = Path.cwd() / "logs"
 EXPORT_LOG_DIR = LOGS_DIR / FORMATTED_DATE
 DATA_DIR = Path.cwd() / "data"
-VULN_EXPORT_DATA_DIR = DATA_DIR / f"{FORMATTED_DATE}_vuln"
-ASSET_EXPORT_DATA_DIR = DATA_DIR / f"{FORMATTED_DATE}_asset"
+VULN_DATA_DIR = DATA_DIR / "vulnerabilities"
+VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
+ASSET_DATA_DIR = DATA_DIR / "assets"
+ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
 
 def setup_logger():
 
@@ -37,21 +39,46 @@ def setup_logger():
 def setup_data():
 
     # Setup /data/ directory
-    logging.info(f"Checking if {DATA_DIR} directory exists...")
     try:
         os.mkdir(DATA_DIR)
-        logging.warning(f"Directory does not exist, creating {DATA_DIR} directory...")
-        logging.info(f"{DATA_DIR} directory created.")
     except FileExistsError:
-        logging.info(f"{DATA_DIR} directory exists.") 
+        pass
 
-    # Setup export-specific /data/ subdirectory
-    logging.info(f"Checking if {VULN_EXPORT_DATA_DIR} exists...")
+    # Setup /data/vulnerabilities/ directory
+    logging.info(f"Checking if {VULN_DATA_DIR} directory exists...")
     try:
-        os.mkdir(VULN_EXPORT_DATA_DIR)
-        logging.warning(f"Directory does not exist, creating {VULN_EXPORT_DATA_DIR} directory...")
-        logging.info(f"{VULN_EXPORT_DATA_DIR} directory created.")
+        os.mkdir(VULN_DATA_DIR)
+        logging.warning(f"Directory does not exist, creating {VULN_DATA_DIR} directory...")
+        logging.info(f"{VULN_DATA_DIR} directory created.")
     except FileExistsError:
-        logging.info(f"{VULN_EXPORT_DATA_DIR} directory exists.") 
+        logging.info(f"{VULN_DATA_DIR} directory exists.") 
+
+    # Setup export-specific /data/vulnerabilities/ subdirectory
+    logging.info(f"Checking if {VULN_EXPORT_DIR} exists...")
+    try:
+        os.mkdir(VULN_EXPORT_DIR)
+        logging.warning(f"Directory does not exist, creating {VULN_EXPORT_DIR} directory...")
+        logging.info(f"{VULN_EXPORT_DIR} directory created.")
+    except FileExistsError:
+        logging.info(f"{VULN_EXPORT_DIR} directory exists.") 
+
+        # Setup /data/assets/ directory
+    logging.info(f"Checking if {ASSET_DATA_DIR} directory exists...")
+    try:
+        os.mkdir(ASSET_DATA_DIR)
+        logging.warning(f"Directory does not exist, creating {ASSET_DATA_DIR} directory...")
+        logging.info(f"{ASSET_DATA_DIR} directory created.")
+    except FileExistsError:
+        logging.info(f"{ASSET_DATA_DIR} directory exists.") 
+
+    # Setup export-specific /data/assets/ subdirectory
+    logging.info(f"Checking if {ASSET_EXPORT_DIR} exists...")
+    try:
+        os.mkdir(ASSET_EXPORT_DIR)
+        logging.warning(f"Directory does not exist, creating {ASSET_EXPORT_DIR} directory...")
+        logging.info(f"{ASSET_EXPORT_DIR} directory created.")
+    except FileExistsError:
+        logging.info(f"{ASSET_EXPORT_DIR} directory exists.") 
+
 
     return 0
