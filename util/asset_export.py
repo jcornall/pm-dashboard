@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.12
+#-*- coding: utf-8 -*- 
+
 from util.config import *
 import requests
 import json
