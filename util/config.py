@@ -20,14 +20,13 @@ ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
 
 def setup_logger():
-
     # Setup /log/ directory
     try:
         os.mkdir(LOGS_DIR)
     except FileExistsError:
         pass
 
-    # Setup export-specific /log/ subdirectory
+    # Setup timestamped /log/ subdirectory
     try:
         os.mkdir(EXPORT_LOG_DIR)
     except FileExistsError:
@@ -40,7 +39,6 @@ def setup_logger():
     return 0
 
 def setup_data():
-
     # Setup /data/ directory
     try:
         os.mkdir(DATA_DIR)
@@ -56,7 +54,7 @@ def setup_data():
     except FileExistsError:
         logging.info(f"{VULN_DATA_DIR} directory exists.") 
 
-    # Setup export-specific /data/vulnerabilities/ subdirectory
+    # Setup timestamped /data/vulnerabilities/ subdirectory
     logging.info(f"Checking if {VULN_EXPORT_DIR} exists...")
     try:
         os.mkdir(VULN_EXPORT_DIR)
@@ -74,7 +72,7 @@ def setup_data():
     except FileExistsError:
         logging.info(f"{ASSET_DATA_DIR} directory exists.") 
 
-    # Setup export-specific /data/assets/ subdirectory
+    # Setup timestamped /data/assets/ subdirectory
     logging.info(f"Checking if {ASSET_EXPORT_DIR} exists...")
     try:
         os.mkdir(ASSET_EXPORT_DIR)
@@ -82,6 +80,5 @@ def setup_data():
         logging.info(f"{ASSET_EXPORT_DIR} directory created.")
     except FileExistsError:
         logging.info(f"{ASSET_EXPORT_DIR} directory exists.") 
-
 
     return 0
