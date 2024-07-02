@@ -3,7 +3,7 @@
 PYSCRIPT_NAME="__main__.py"
 
 CWD="$(dirname "$0")"
-PATH="$CWD/.venv.bin:$PATH"
+PATH="$CWD/.venv.Scripts:$PATH"
 
 "$CWD/$PYSCRIPT_NAME" "$@"
 
