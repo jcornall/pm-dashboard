@@ -13,6 +13,7 @@ def main():
     sys.exit(0)
 
 def vuln_export():
+    # Sequence API calls to Tenable service in order to download vulnerability data
     vuln_export = VulnExport()
     vuln_export.request_vuln_export()
     vuln_export.request_vuln_export_status()
@@ -20,10 +21,11 @@ def vuln_export():
     return 0
 
 def asset_export():
+    # Sequence API calls to Tenable service in order to download asset data
     asset_export = AssetExport()
     asset_export.request_asset_export()
     asset_export.request_asset_export_status()
-    asset_export.request_asset_export_jobs() # Required due to asset export status metadata differing from vulnerability export metadata
+    asset_export.request_asset_export_jobs()  # Required due to asset export status metadata differing from vulnerability export metadata
     asset_export.download_all_asset_chunks()
     return 0
 

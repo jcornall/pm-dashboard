@@ -9,10 +9,12 @@ import sys
 
 class VulnExport:
 
-    def __init__(self): # Instantiate VulnExport object
+    def __init__(self): 
+        # Instantiate VulnExport object
         pass
 
-    def set_values(self, response_json): # Populate instance variables with request_vuln_export_status values
+    def set_values(self, response_json): 
+        # Set all instance variables with request_vuln_export_status() values
         self.uuid = response_json["uuid"]
         self.status = response_json["status"]
         self.chunks_available = response_json["chunks_available"]
@@ -27,9 +29,11 @@ class VulnExport:
         self.created = response_json["created"]
 
     def set_uuid(self, response_json):
+        # Set uuid instance variable with request_vuln_export() value
         self.uuid = response_json["export_uuid"]
 
-    def log_status_code(self, status_code): # Log response status codes for monitoring
+    def log_status_code(self, status_code): 
+        # Log response status codes for monitoring
         logging.info("Handling response status code...")
         match status_code:
             case 200:
@@ -57,7 +61,8 @@ class VulnExport:
                 logging.error("Exiting program...")
                 sys.exit(1)
 
-    def request_vuln_export(self): # POST call to Tenable API to export vulnerabilities
+    def request_vuln_export(self): 
+        # POST call to Tenable API to generate vulnerabilities data export
         url = "https://cloud.tenable.com/vulns/export"
         logging.info(f"POST call to {url}...")
         payload = {
@@ -76,7 +81,8 @@ class VulnExport:
         logging.info(f"vuln_export {self.uuid} requested.")
         return 0
 
-    def request_vuln_export_status(self): # GET call to Tenable API to update the status of the current vulnerabilities export
+    def request_vuln_export_status(self): 
+        # GET call to Tenable API to update the status of the current vulnerabilities export
         url = f"https://cloud.tenable.com/vulns/export/{self.uuid}/status"
         logging.info(f"GET call to {url}...")
         headers = {
@@ -96,14 +102,16 @@ class VulnExport:
             logging.info(f"vuln_export {self.uuid} status: {self.status}.")
         return 0
 
-    def download_all_vuln_chunks(self): # Initiate vulnerability chunk download loop
+    def download_all_vuln_chunks(self): 
+        # Initiate export chunk download loop
         logging.info(f"Downloading {self.total_chunks} chunks...")
         for chunk in range(1, self.total_chunks):
             self.download_vuln_chunk(chunk)
         logging.info(f"All chunks downloaded.")
         return 0
 
-    def download_vuln_chunk(self, chunk): # GET call to Tenable API to download all vulnerability chunks
+    def download_vuln_chunk(self, chunk): 
+        # GET call to Tenable API to download all export chunks
         url = f"https://cloud.tenable.com/vulns/export/{self.uuid}/chunks/{chunk}"
         logging.info(f"GET call to {url}...")
         headers = {
