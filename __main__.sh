@@ -7,4 +7,4 @@ PATH="$CWD/.venv.Scripts:$PATH"
 
 "$CWD/$PYSCRIPT_NAME" "$@"
 
-exit $?
+break
