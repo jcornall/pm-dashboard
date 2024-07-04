@@ -1,9 +1,9 @@
 #!/usr/bin/env python3.12
 #-*- coding: utf-8 -*- 
 
-from util.vuln_export import *
+from util.tenable_vuln_export import *
 from util.config import *
-from util.asset_export import *
+from util.tenable_asset_export import *
 
 def main():
     setup_logger()
@@ -14,7 +14,7 @@ def main():
 
 def vuln_export():
     # Sequence API calls to Tenable service in order to download vulnerability data
-    vuln_export = VulnExport()
+    vuln_export = TenableVulnExport()
     vuln_export.request_vuln_export()
     vuln_export.request_vuln_export_status()
     vuln_export.download_all_vuln_chunks()
@@ -22,7 +22,7 @@ def vuln_export():
 
 def asset_export():
     # Sequence API calls to Tenable service in order to download asset data
-    asset_export = AssetExport()
+    asset_export = TenableAssetExport()
     asset_export.request_asset_export()
     asset_export.request_asset_export_status()
     asset_export.request_asset_export_jobs()  # Required due to asset export status metadata differing from vulnerability export metadata
