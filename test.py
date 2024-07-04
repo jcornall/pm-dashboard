@@ -1,6 +1,3 @@
-#!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
-
 from util.vuln_export import *
 from util.config import *
 # from util.asset_export import *

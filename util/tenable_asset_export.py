@@ -1,6 +1,3 @@
-#!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
-
 from util.config import *
 from util.api_export import APIExport
 import requests

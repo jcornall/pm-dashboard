@@ -1,6 +1,3 @@
-#!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
-
 from abc import ABC, abstractmethod
 
 class APIExport:

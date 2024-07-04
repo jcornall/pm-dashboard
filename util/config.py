@@ -1,6 +1,3 @@
-#!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
-
 import logging
 import logging.handlers as handlers
 from pathlib import Path

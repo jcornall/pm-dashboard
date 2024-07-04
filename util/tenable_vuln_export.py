@@ -1,6 +1,3 @@
-#!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
-
 from util.config import *
 from util.api_export import APIExport
 import requests
@@ -67,7 +64,7 @@ class TenableVulnExport(APIExport):
         url = "https://cloud.tenable.com/vulns/export"
         logging.info(f"POST call to {url}...")
         payload = {
-            "num_assets": 50,
+            "num_assets": 100,
             "include_unlicensed": True
         }
         headers = {
