@@ -1,8 +1,12 @@
 import logging
 import logging.handlers as handlers
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 import datetime
+
+ENV_PATH = Path(".") / ".env"
+load_dotenv(dotenv_path=ENV_PATH)
 
 CURRENT = datetime.datetime.now()
 FORMATTED_DATE = CURRENT.strftime("%Y%m%d")

@@ -70,7 +70,7 @@ class TenableVulnExport(APIExport):
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "X-ApiKeys": f"accessKey={os.environ["TENABLE_ACCESS_KEY"]};secretKey={os.environ["TENABLE_SECRET_KEY"]};"
+            "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = requests.post(url, json=payload, headers=headers)
         self.log_status_code(response.status_code)
@@ -85,7 +85,7 @@ class TenableVulnExport(APIExport):
         logging.info(f"GET call to {url}...")
         headers = {
             "accept": "application/json",
-            "X-ApiKeys": f"accessKey={os.environ["TENABLE_ACCESS_KEY"]};secretKey={os.environ["TENABLE_SECRET_KEY"]};"
+            "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = requests.get(url, headers=headers)
         self.log_status_code(response.status_code)
@@ -114,7 +114,7 @@ class TenableVulnExport(APIExport):
         logging.info(f"GET call to {url}...")
         headers = {
             "accept": "application/octet-stream",
-            "X-ApiKeys": f"accessKey={os.environ["TENABLE_ACCESS_KEY"]};secretKey={os.environ["TENABLE_SECRET_KEY"]};"
+            "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = requests.get(url, headers=headers)
         self.log_status_code(response.status_code)
