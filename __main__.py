@@ -1,9 +1,9 @@
 #!/usr/bin/env python3.12
 #-*- coding: utf-8 -*- 
 
-from util.tenable_vuln_export import *
-from util.config import *
-from util.tenable_asset_export import *
+from util.extract.tenable_vuln_export import *
+from util.extract.tenable_asset_export import *
+from util.extract.config import *
 
 def main():
     setup_logger()

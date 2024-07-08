@@ -1,6 +1,6 @@
-from util.vuln_export import *
-from util.config import *
-# from util.asset_export import *
+# from util.extract.tenable_vuln_export import *
+# from util.extract.tenable_asset_export import *
+# from util.extract.config import *
 
 # test_vuln_export = VulnExport()
 # # test_vuln_export.request_vuln_export()
