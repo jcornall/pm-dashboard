@@ -1,5 +1,5 @@
 from util.extract.config import *
-from util.extract.api_export import APIExport
+from util.api_export import APIExport
 import requests
 import json
 import time
