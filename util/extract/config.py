@@ -28,7 +28,6 @@ def setup_logger():
         os.mkdir(LOGS_DIR)
     except FileExistsError:
         pass
-
     # Setup timestamped /log/ subdirectory
     try:
         os.mkdir(EXPORT_LOG_DIR)
@@ -38,7 +37,6 @@ def setup_logger():
     logging.basicConfig(level=logging.INFO, filename=EXPORT_LOG_FILE, filemode="w", format="%(asctime)s:%(name)s:%(module)s:%(levelname)s - %(message)s")
     logging.info(f"Initiating log file {FORMATTED_TIME}.log.")
     logging.info(f"Application started in {os.getcwd()}.")
-    
     return 0
 
 def setup_data():
@@ -77,19 +75,26 @@ def setup_subdirectory(file_path):
     except FileExistsError:
         logging.info(f"{file_path} subdirectory exists.") 
 
-def cull_old_data():
+def cull_old_files(file_path):
     # Cull aged data older than DATA_EXPIRATION days
-    for root, dirs, files in os.walk(DATA_DIR):
+    logging.info(f"Culling old files...")
+    for root, dirs, files in os.walk(file_path):
         for file in files:
             creation_datetime = datetime.datetime.fromtimestamp((os.path.getctime(os.path.join(root, file))))
             current_datetime = datetime.datetime.today()
-            if creation_datetime > (current_datetime - datetime.timedelta(days=DATA_EXPIRATION)):
+            if creation_datetime < (current_datetime - datetime.timedelta(days=DATA_EXPIRATION)):
+                logging.info(f"Deleting {file}...")
                 os.remove(os.path.join(root, file))
+                logging.info(f"{file} deleted.")
+    logging.info(f"Old files culled successfully.")
 
-def cull_empty_directories():
+def cull_empty_directories(file_path):
     # Cull empty directories
-    for root, dirs, files in os.walk(DATA_DIR):
+    logging.info(f"Culling empty directories...")
+    for root, dirs, files in os.walk(file_path):
         for dir in dirs:
             if len(os.listdir(os.path.join(root, dir))) == 0:
-                print("is empty")
+                logging.info(f"Deleting {dir}...")
                 os.removedirs(os.path.join(root, dir))
+                logging.info(f"{dir} deleted.")
+    logging.info(f"Empty directories culled successfully.")

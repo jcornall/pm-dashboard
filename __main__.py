@@ -10,8 +10,10 @@ def main():
     setup_data()
     vuln_export()
     asset_export()
-    cull_old_data()
-    cull_empty_directories()
+    cull_old_files(DATA_DIR)
+    cull_empty_directories(DATA_DIR)
+    cull_old_files(LOGS_DIR)
+    cull_empty_directories(LOGS_DIR)
     sys.exit(0)
 
 def vuln_export():
