@@ -15,20 +15,23 @@ FORMATTED_TIME = CURRENT.strftime("%H%M%S")
 LOGS_DIR = Path.cwd() / "logs"
 EXPORT_LOG_DIR = LOGS_DIR / FORMATTED_DATE
 DATA_DIR = Path.cwd() / "data"
+TEMP_DIR = DATA_DIR / "temp"
+PROCESSED_DIR = DATA_DIR / "processed"
 VULN_DATA_DIR = DATA_DIR / "vulnerabilities"
 VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
 ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
 
+
 DATA_EXPIRATION = 3
 
 def setup_logger():
-    # Setup /log/ directory
+    #  Setup /log/ directory
     try:
         os.mkdir(LOGS_DIR)
     except FileExistsError:
         pass
-    # Setup timestamped /log/ subdirectory
+    #  Setup timestamped /log/ subdirectory
     try:
         os.mkdir(EXPORT_LOG_DIR)
     except FileExistsError:
@@ -40,23 +43,28 @@ def setup_logger():
     return 0
 
 def setup_data():
-    # Setup /data/ directory
+    #  Setup /data/ directory
     try:
         os.mkdir(DATA_DIR)
     except FileExistsError:
         pass
-    # Setup /data/vulnerabilities/ directory
+    #  Setup /data/vulnerabilities/ directory
     setup_directory(VULN_DATA_DIR)
-    # Setup timestamped /data/vulnerabilities/ subdirectory
+    #  Setup timestamped /data/vulnerabilities/ subdirectory
     setup_subdirectory(VULN_EXPORT_DIR)
-    # Setup /data/assets/ directory
+    #  Setup /data/assets/ directory
     setup_directory(ASSET_DATA_DIR)
-    # Setup timestamped /data/assets/ subdirectory
+    #  Setup timestamped /data/assets/ subdirectory
     setup_subdirectory(ASSET_EXPORT_DIR)
+    #  Setup /temp/ directory
+    try:
+        os.mkdir(TEMP_DIR)
+    except FileExistsError:
+        pass
     return 0
 
 def setup_directory(file_path):
-    # Setup /file_path/ directory
+    #  Setup /file_path/ directory
     logging.info(f"Checking if {file_path} directory exists...")
     try:
         os.mkdir(file_path)
@@ -66,7 +74,7 @@ def setup_directory(file_path):
         logging.info(f"{file_path} directory exists.")
 
 def setup_subdirectory(file_path):
-    # Setup /file_path/ subdirectory
+    #  Setup /file_path/ subdirectory
     logging.info(f"Checking if {file_path} subdirectory exists...")
     try:
         os.mkdir(file_path)
@@ -76,7 +84,7 @@ def setup_subdirectory(file_path):
         logging.info(f"{file_path} subdirectory exists.") 
 
 def cull_old_files(file_path):
-    # Cull aged data older than DATA_EXPIRATION days
+    #  Cull aged data older than DATA_EXPIRATION days
     logging.info(f"Culling old files...")
     for root, dirs, files in os.walk(file_path):
         for file in files:
@@ -89,7 +97,7 @@ def cull_old_files(file_path):
     logging.info(f"Old files culled successfully.")
 
 def cull_empty_directories(file_path):
-    # Cull empty directories
+    #  Cull empty directories
     logging.info(f"Culling empty directories...")
     for root, dirs, files in os.walk(file_path):
         for dir in dirs:
