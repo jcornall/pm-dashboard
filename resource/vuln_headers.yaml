@@ -13,6 +13,7 @@ first_found: true
 indexed: true
 last_fixed: true
 last_found: true
+output: false
 plugin_bid_0: true
 plugin_checks_for_default_account: true
 plugin_checks_for_malware: true

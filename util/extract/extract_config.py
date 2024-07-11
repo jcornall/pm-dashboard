@@ -1,14 +1,14 @@
 import logging
-import logging.handlers as handlers
+# import logging.handlers as handlers
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-import datetime
+import datetime as dt
 
 ENV_PATH = Path(".") / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
-CURRENT = datetime.datetime.now()
+CURRENT = dt.datetime.now()
 FORMATTED_DATE = CURRENT.strftime("%Y%m%d")
 FORMATTED_TIME = CURRENT.strftime("%H%M%S")
 
@@ -22,8 +22,7 @@ VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
 ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
 
-
-DATA_EXPIRATION = 3
+RETENTION_PERIOD = 3
 
 def setup_logger():
     #  Setup /log/ directory
@@ -44,18 +43,21 @@ def setup_logger():
 
 def setup_data():
     #  Setup /data/ directory
+    logging.info(f"Checking if {DATA_DIR} directory exists...")
     try:
         os.mkdir(DATA_DIR)
+        logging.warning(f"Directory does not exist, creating {DATA_DIR} directory...")
+        logging.info(f"{DATA_DIR} directory created.")
     except FileExistsError:
-        pass
+        logging.info(f"{DATA_DIR} directory exists.")
     #  Setup /data/vulnerabilities/ directory
-    setup_directory(VULN_DATA_DIR)
+    setup_dir(VULN_DATA_DIR)
     #  Setup timestamped /data/vulnerabilities/ subdirectory
-    setup_subdirectory(VULN_EXPORT_DIR)
+    setup_subdir(VULN_EXPORT_DIR)
     #  Setup /data/assets/ directory
-    setup_directory(ASSET_DATA_DIR)
+    setup_dir(ASSET_DATA_DIR)
     #  Setup timestamped /data/assets/ subdirectory
-    setup_subdirectory(ASSET_EXPORT_DIR)
+    setup_subdir(ASSET_EXPORT_DIR)
     #  Setup /temp/ directory
     try:
         os.mkdir(TEMP_DIR)
@@ -63,7 +65,7 @@ def setup_data():
         pass
     return 0
 
-def setup_directory(file_path):
+def setup_dir(file_path):
     #  Setup /file_path/ directory
     logging.info(f"Checking if {file_path} directory exists...")
     try:
@@ -73,7 +75,7 @@ def setup_directory(file_path):
     except FileExistsError:
         logging.info(f"{file_path} directory exists.")
 
-def setup_subdirectory(file_path):
+def setup_subdir(file_path):
     #  Setup /file_path/ subdirectory
     logging.info(f"Checking if {file_path} subdirectory exists...")
     try:
@@ -83,26 +85,36 @@ def setup_subdirectory(file_path):
     except FileExistsError:
         logging.info(f"{file_path} subdirectory exists.") 
 
-def cull_old_files(file_path):
+def purge_old_files(file_path):
     #  Cull aged data older than DATA_EXPIRATION days
-    logging.info(f"Culling old files...")
+    logging.info(f"Purging old files...")
     for root, dirs, files in os.walk(file_path):
         for file in files:
-            creation_datetime = datetime.datetime.fromtimestamp((os.path.getctime(os.path.join(root, file))))
-            current_datetime = datetime.datetime.today()
-            if creation_datetime < (current_datetime - datetime.timedelta(days=DATA_EXPIRATION)):
+            creation_datetime = dt.datetime.fromtimestamp((os.path.getctime(os.path.join(root, file))))
+            current_datetime = dt.datetime.today()
+            if creation_datetime < (current_datetime - dt.timedelta(days=RETENTION_PERIOD)):
                 logging.info(f"Deleting {file}...")
-                os.remove(os.path.join(root, file))
-                logging.info(f"{file} deleted.")
-    logging.info(f"Old files culled successfully.")
+                try:
+                    os.remove(os.path.join(root, file))
+                    logging.info(f"{file} deleted.")
+                except FileNotFoundError:
+                    logging.warning(f"{file} not found. Skipping...")
+                except PermissionError:
+                    logging.warning(f"Insufficient permissions. Skipping...")
+    logging.info(f"Old files purged successfully.")
 
-def cull_empty_directories(file_path):
+def purge_empty_dirs(file_path):
     #  Cull empty directories
-    logging.info(f"Culling empty directories...")
+    logging.info(f"Purging empty directories...")
     for root, dirs, files in os.walk(file_path):
         for dir in dirs:
             if len(os.listdir(os.path.join(root, dir))) == 0:
                 logging.info(f"Deleting {dir}...")
-                os.removedirs(os.path.join(root, dir))
-                logging.info(f"{dir} deleted.")
-    logging.info(f"Empty directories culled successfully.")
+                try:
+                    os.removedirs(os.path.join(root, dir))
+                    logging.info(f"{dir} deleted.")
+                except FileNotFoundError:
+                    logging.warning(f"{dir} not found. Skipping...")
+                except PermissionError:
+                    logging.warning(f"Insufficient permissions. Skipping...")
+    logging.info(f"Empty directories purged successfully.")
