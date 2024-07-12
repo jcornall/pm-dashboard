@@ -25,8 +25,7 @@ def main():
     purge_empty_dirs(LOGS_DIR)
 
     #  Transform
-    # transform_data(, DATA_DIR / "processed")
-    # transform_data()
+    # process_data(DATA_DIR / "processed")
 
     sys.exit(0)
 
@@ -47,8 +46,8 @@ def export_asset():
     asset_export.download_all_asset_chunks()
     return 0
 
-def process_data():
-    data_processor = DataProcessor()
+def process_data(file_path):
+    data_processor = DataProcessor(file_path)
     data_processor.transform_data()
     data_processor.merge_data()
     return 0

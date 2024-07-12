@@ -8,11 +8,8 @@ import json
 
 class DataProcessor():
 
-    def __init__(self): 
+    def __init__(self, file_path): 
         #  Instantiate DataProcessor object
-        pass
-
-    def set_values(self, file_path):
         self.dir_path = file_path
         self.data_type = re.split("_", file_path)[1]
 
@@ -52,6 +49,10 @@ class DataProcessor():
     def convert_json_to_csv(self, flattened_data, file_name):
         df = pd.DataFrame(flattened_data)
         df.to_csv(TEMP_DIR / f"{file_name}.csv", encoding="utf-8", index=False)
+
+    """
+    def validate_data():
+    """
 
     """
     def merge_data():

@@ -25,8 +25,9 @@
 #               "num_assets_per_chunk":100,
 #               "created":1718698015386}]}
 
-from src.config.resource import *
-from src.config.constants import *
+# from src.config.resource import *
+# from src.config.constants import *
+
 # from flatten_json import flatten
 # import yaml
 # import json
