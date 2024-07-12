@@ -24,3 +24,47 @@
 #               "finished_chunks":83,
 #               "num_assets_per_chunk":100,
 #               "created":1718698015386}]}
+
+from src.config.resource import *
+from src.config.constants import *
+# from flatten_json import flatten
+# import yaml
+# import json
+
+# def load_json(json_file):
+#     #  Load a json data file
+#     with open(json_file) as file:
+#         data = json.load(file)
+#     return data
+
+# def flatten_json(json_file, headers):
+#     #  Flatten the json data file's nested hierarchy
+#     flattened_data = []
+#     with open(headers, "r") as file:
+#             config = yaml.safe_load(file)
+#     for item in json_file:
+#         flattened_item = flatten(item)
+#         for header in list(flattened_item):
+#             if (config[header] != True):
+#                  flattened_item.pop(header)
+#         flattened_data.append(flattened_item)
+#     return flattened_data
+
+# with open(VULN_HEADERS, "r") as file:
+#     config = yaml.safe_load(file)
+#     print(config["output"])
+#     json_file = 
+#     for item in load_json(file):
+#         print(item)
+            # if "output" in item:
+            #     item.pop("output")
+        #     flattened_data.append(flatten(item))
+        # return flattened_data
+
+# def write_json(flattened_data):
+#         #  Write the flattened json data file to the /temp/ directory
+#         with open("flattened_data.json", "w") as file:
+#             json.dump(flattened_data, file)
+
+# flattened_data = flatten_json(load_json(TEST_FILE), VULN_HEADERS)
+# write_json(flattened_data)
