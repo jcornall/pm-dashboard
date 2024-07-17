@@ -33,8 +33,9 @@ class AssetExport(APIExport):
         #  Set chunks_available instance variable with request_asset_export() value
         self.chunks_available = response_json["chunks_available"]
 
-    def log_status_code(self, status_code): 
+    def log_status_code(self, response): 
         #  Log response status codes for monitoring
+        status_code = response.status_code
         logging.info("Handling response status code...")
         match status_code:
             case 200:
@@ -80,7 +81,7 @@ class AssetExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.post(url, json=payload, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         response_json = json.loads(response.text)
         self.set_uuid(response_json)
         logging.info(f"asset_export {self.uuid} requested.")
@@ -95,7 +96,7 @@ class AssetExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.get(url, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         response_json = json.loads(response.text)
         self.set_status(response_json)
         if self.status != "FINISHED":
@@ -117,7 +118,7 @@ class AssetExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.get(url, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         response_json = json.loads(response.text)
         for export in response_json["exports"]:
             if export["uuid"] == self.uuid:
@@ -144,7 +145,7 @@ class AssetExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.get(url, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         if response.status_code == 429:
             logging.warning(f"Re-attempting in {response.headers["Retry-After"]}...")
             time.sleep(int(response.headers["Retry-After"]))

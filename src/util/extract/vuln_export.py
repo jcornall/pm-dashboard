@@ -31,8 +31,9 @@ class VulnExport(APIExport):
         #  Set uuid instance variable with request_vuln_export() value
         self.uuid = response_json["export_uuid"]
 
-    def log_status_code(self, status_code): 
+    def log_status_code(self, response): 
         #  Log response status codes for monitoring
+        status_code = response.status_code
         logging.info("Handling response status code...")
         match status_code:
             case 200:
@@ -76,7 +77,7 @@ class VulnExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.post(url, json=payload, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         response_json = json.loads(response.text)
         self.set_uuid(response_json)
         logging.info(f"vuln_export {self.uuid} requested.")
@@ -91,7 +92,7 @@ class VulnExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.get(url, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         response_json = json.loads(response.text)
         self.set_values(response_json)
         logging.info(f"vuln_export status updated... {self.status}")
@@ -120,7 +121,7 @@ class VulnExport(APIExport):
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
         response = rq.get(url, headers=headers)
-        self.log_status_code(response.status_code)
+        self.log_status_code(response)
         if response.status_code == 429:
             logging.warning(f"Re-attempting in {response.headers["Retry-After"]}...")
             time.sleep(int(response.headers["Retry-After"]))
