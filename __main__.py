@@ -12,21 +12,31 @@ from src.config.logger_config import *
 
 
 def main():
-    print(Path.cwd())
+    print(f"Current Working Directory: {Path.cwd()}")
     setup_logger()
+    logging.info("Logger setup successful.")
     setup_file_structure()
+    logging.info("File structure setup successful.")
     # configure_data_processor()
 
     # #  Extract
+    logging.info("Extracting data...")
     export_vuln()
+    logging.info("Vulnerability data extraction successful...")
     export_asset()
+    logging.info("Asset data extraction successful...")
     purge_old_files(DATA_DIR)
-    purge_empty_dirs(DATA_DIR)
     purge_old_files(LOGS_DIR)
+    logging.info("Old data purge successful...")
+    purge_empty_dirs(DATA_DIR)
     purge_empty_dirs(LOGS_DIR)
+    logging.info("Empty data directory purge successful...")
+    logging.info("Extraction successful.")
 
     #  Transform
+    # logging.info("Transforming data...")
     # process_data(DATA_DIR / "processed")
+    # logging.info("Transformation successful.")
 
     sys.exit(0)
 

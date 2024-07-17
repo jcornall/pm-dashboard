@@ -40,6 +40,7 @@ class AssetExport(APIExport):
         match status_code:
             case 200:
                 logging.info("Response Status Code 200: Request Successful.")
+                return 0
             case 400:
                 logging.error("Response Status Code 400: Invalid Input Parameters.")
                 logging.error("Exiting program...")
