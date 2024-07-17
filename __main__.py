@@ -12,6 +12,7 @@ from src.config.logger_config import *
 
 
 def main():
+    print(Path.cwd())
     setup_logger()
     setup_file_structure()
     # configure_data_processor()

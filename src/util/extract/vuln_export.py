@@ -56,8 +56,10 @@ class VulnExport(APIExport):
             case 429:
                 logging.warning("Response Status Code 429: Too Many Requests.")
             case _:
-                logging.info("Unrecognised Status Code.") 
+                logging.info(f"Unrecognised Status Code {status_code}.") 
                 logging.error("Exiting program...")
+                print(f"Unrecognised Status Code {status_code}.")
+                print("Exiting program...")
                 sys.exit(1)
 
     def request_vuln_export(self): 

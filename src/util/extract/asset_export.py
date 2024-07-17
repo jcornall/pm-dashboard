@@ -60,8 +60,10 @@ class AssetExport(APIExport):
                 logging.error("Exiting program...")
                 sys.exit(1)
             case _:
-                logging.info("Unrecognised Status Code.") 
+                logging.info(f"Unrecognised Status Code {status_code}.") 
                 logging.error("Exiting program...")
+                print(f"Unrecognised Status Code {status_code}.")
+                print("Exiting program...")
                 sys.exit(1)
 
     def request_asset_export(self): 
