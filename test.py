@@ -1,71 +1,66 @@
-# from util.extract.tenable_vuln_export import *
-# from util.extract.tenable_asset_export import *
-# from util.extract.config import *
+# #!/usr/bin/env python3.12
+# #-*- coding: utf-8 -*- 
 
-# test_vuln_export = VulnExport()
-# # test_vuln_export.request_vuln_export()
-# test_vuln_export.uuid = "95b21172-94f8-4800-b55b-801d5b9f3414"
-# test_vuln_export.request_vuln_export_status()
-# test_vuln_export.download_all_vuln_chunks()
-
-# {"status":"FINISHED","chunks_available":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]}
-# json = {"exports":[{"uuid":"15a6510d-14df-485d-bb88-4371d8792a0d",
-#              "status":"FINISHED",
-#              "total_chunks":17,
-#              "filters":"{}",
-#              "finished_chunks":17,
-#              "num_assets_per_chunk":500,
-#              "created":1719485419313},
-             
-#              {"uuid":"e0d8ff65-e42f-4393-8838-c65b1b081658",
-#               "status":"FINISHED",
-#               "total_chunks":83,
-#               "filters":"{}",
-#               "finished_chunks":83,
-#               "num_assets_per_chunk":100,
-#               "created":1718698015386}]}
-
-# from src.config.resource import *
+# from src.util.extract.api_export import *
+# from src.util.extract.asset_export import *
+# from src.util.extract.vuln_export import *
+# from src.util.transform.data_processor import *
+# from src.config.transform_config import *
 # from src.config.constants import *
+# from src.config.extract_config import *
+# from src.config.logger_config import *
 
-# from flatten_json import flatten
-# import yaml
-# import json
 
-# def load_json(json_file):
-#     #  Load a json data file
-#     with open(json_file) as file:
-#         data = json.load(file)
-#     return data
+# def export_vuln():
+#     #  Sequence API calls to Tenable service in order to download vulnerability data
+#     vuln_export = VulnExport()
+#     vuln_export.request_vuln_export()
+#     vuln_export.request_vuln_export_status()
+#     vuln_export.download_all_vuln_chunks()
+#     return 0
 
-# def flatten_json(json_file, headers):
-#     #  Flatten the json data file's nested hierarchy
-#     flattened_data = []
-#     with open(headers, "r") as file:
-#             config = yaml.safe_load(file)
-#     for item in json_file:
-#         flattened_item = flatten(item)
-#         for header in list(flattened_item):
-#             if (config[header] != True):
-#                  flattened_item.pop(header)
-#         flattened_data.append(flattened_item)
-#     return flattened_data
+# def export_asset():
+#     #  Sequence API calls to Tenable service in order to download asset data
+#     asset_export = AssetExport()
+#     asset_export.request_asset_export()
+#     asset_export.request_asset_export_status()
+#     asset_export.request_asset_export_jobs()  #  Required due to asset export status metadata differing from vulnerability export metadata
+#     asset_export.download_all_asset_chunks()
+#     return 0
 
-# with open(VULN_HEADERS, "r") as file:
-#     config = yaml.safe_load(file)
-#     print(config["output"])
-#     json_file = 
-#     for item in load_json(file):
-#         print(item)
-            # if "output" in item:
-            #     item.pop("output")
-        #     flattened_data.append(flatten(item))
-        # return flattened_data
+# def process_data(file_path):
+#     data_processor = DataProcessor(file_path)
+#     data_processor.transform_data()
+#     # configure_data_processor(data_processor)
+#     # data_processor.merge_data()
+#     return 0
 
-# def write_json(flattened_data):
-#         #  Write the flattened json data file to the /temp/ directory
-#         with open("flattened_data.json", "w") as file:
-#             json.dump(flattened_data, file)
+# def configure_data_processor(data_processor):
+#     generate_header_yaml(data_processor)
 
-# flattened_data = flatten_json(load_json(TEST_FILE), VULN_HEADERS)
-# write_json(flattened_data)
+# # # Main
+# print(f"Current Working Directory: {Path.cwd()}")
+# setup_logger()
+# logging.info("Logger setup successful.")
+# setup_file_structure()
+# logging.info("File structure setup successful.")
+# # configure_data_processor()
+
+# # # #  Extract
+# # logging.info("Extracting data...")
+# # export_vuln()
+# # logging.info("Vulnerability data extraction successful...")
+# # export_asset()
+# # logging.info("Asset data extraction successful...")
+# # purge_old_files(DATA_DIR)
+# # purge_old_files(LOGS_DIR)
+# # logging.info("Old data purge successful...")
+# # purge_empty_dirs(DATA_DIR)
+# # purge_empty_dirs(LOGS_DIR)
+# # logging.info("Empty data directory purge successful...")
+# # logging.info("Extraction successful.")
+
+# #  Transform
+# # logging.info("Transforming data...")
+# # process_data(r"C:\Users\pam62425\OneDrive - Science and Technology Facilities Council\Documents\Projects\Graduate Rotation 1\pmt-dashboard\data\vulnerabilities\20240710_vuln")
+# # logging.info("Transformation successful.")

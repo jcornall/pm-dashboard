@@ -17,7 +17,6 @@ def main():
     logging.info("Logger setup successful.")
     setup_file_structure()
     logging.info("File structure setup successful.")
-    # configure_data_processor()
 
     # #  Extract
     logging.info("Extracting data...")
@@ -35,7 +34,8 @@ def main():
 
     #  Transform
     # logging.info("Transforming data...")
-    # process_data(DATA_DIR / "processed")
+    process_data(VULN_EXPORT_DIR)
+    process_data(ASSET_EXPORT_DIR)
     # logging.info("Transformation successful.")
 
     sys.exit(0)
@@ -60,19 +60,12 @@ def export_asset():
 def process_data(file_path):
     data_processor = DataProcessor(file_path)
     data_processor.transform_data()
-    data_processor.merge_data()
+    # configure_data_processor(data_processor)
+    # data_processor.merge_data()
     return 0
 
-def configure_data_processor():
-    pass
-    # vuln = flatten_json(load_json(TEST_FILE))
-    # write_headers_to_yaml(vuln)
-
-    # asset = flatten_json(load_json(TEST_FILE2))
-    # write_headers_to_yaml(asset)
-
-    # convert_json_to_csv(vuln)
-    # report_csv_columns(r"flattened_data.csv")
+def configure_data_processor(data_processor):
+    generate_header_yaml(data_processor)
 
 if __name__ == "__main__":
     main()

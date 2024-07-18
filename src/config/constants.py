@@ -1,6 +1,7 @@
 from pathlib import Path
 import datetime as dt
 
+
 #  Date & Time
 CURRENT = dt.datetime.now()
 FORMATTED_DATE = CURRENT.strftime("%Y%m%d")
@@ -16,9 +17,7 @@ VULN_DATA_DIR = DATA_DIR / "vulnerabilities"
 VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
 ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
-
-ASSET_HEADERS = r"src\config\resource\asset_headers.yml"
-VULN_HEADERS = r"src\config\resource\vuln_headers.yml"
+RESOURCE_DIR = r"src\config\resource"
 
 #  Data Configuration
 RETENTION_PERIOD = 3
