@@ -58,10 +58,10 @@ def report_csv_rows_columns(csv_file):
     except PermissionError:
         logging.warning("Insufficient permissions. Skipping...")
 
-def purge_temp():
+def purge_dir(dir_path):
     #  Deletes all files in the /temp/ directory
-    logging.info(f"Purging {TEMP_DIR}...")
-    for root, dirs, files in os.walk(TEMP_DIR):
+    logging.info(f"Purging {dir_path}...")
+    for root, dirs, files in os.walk(dir_path):
         for file in files:
             os.remove(os.path.join(root, file))
-    logging.info(f"{TEMP_DIR} purged successfully.")
+    logging.info(f"{dir_path} purged successfully.")

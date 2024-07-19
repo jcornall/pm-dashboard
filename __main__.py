@@ -19,7 +19,7 @@ def main():
     logging.info("File structure setup successful.")
 
     # #  Extract
-    logging.info("Extracting data...")
+    logging.info("Starting data extraction...")
     export_vuln()
     logging.info("Vulnerability data extraction successful...")
     export_asset()
@@ -30,13 +30,14 @@ def main():
     purge_empty_dirs(DATA_DIR)
     purge_empty_dirs(LOGS_DIR)
     logging.info("Empty data directory purge successful...")
-    logging.info("Extraction successful.")
+    logging.info("Data extraction successful.")
 
-    #  Transform
-    # logging.info("Transforming data...")
+    # #  Transform
+    logging.info("Starting data transformation...")
+    purge_dir(PROCESSED_DIR)
     process_data(VULN_EXPORT_DIR)
     process_data(ASSET_EXPORT_DIR)
-    # logging.info("Transformation successful.")
+    logging.info("Data transformation successful.")
 
     sys.exit(0)
 
@@ -59,7 +60,7 @@ def export_asset():
 
 def process_data(file_path):
     data_processor = DataProcessor(file_path)
-    data_processor.transform_data()
+    data_processor.transform_data(data_processor.dir_path, data_processor.header_file, data_processor.export_type)
     # configure_data_processor(data_processor)
     # data_processor.merge_data()
     return 0
