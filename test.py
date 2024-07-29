@@ -63,6 +63,6 @@ logging.info("File structure setup successful.")
 #  Transform
 logging.info("Starting data transformation...")
 purge_dir(PROCESSED_DIR)
-process_data(r"data\vulnerabilities\20240710_vuln")
-process_data(r"data\assets\20240710_asset")
+process_data(VULN_EXPORT_DIR)
+process_data(ASSET_EXPORT_DIR)
 logging.info("Data transformation successful.")

@@ -9,7 +9,7 @@ import json
 class DataProcessor():
 
     def __init__(self, file_path): 
-        #  Instantiate DataProcessor object
+        #  Instantiate DataProcessor objectfr
         self.dir_path = file_path
         self.export_type = re.split("_", str(file_path))[-1]
         self.header_file = Path(RESOURCE_DIR) / f"{self.export_type}_headers.yml"
@@ -29,20 +29,20 @@ class DataProcessor():
 
     def load_json(self, json_file):
         #  Load a json data file
-        logging.info(f"Loading {Path(json_file).stem}...")
+        logging.info(f"Loading {Path(json_file).stem}.json...")
         try:
             with open(json_file, encoding="utf8") as file:
                 data = json.load(file)
-            logging.info(f"{Path(json_file).stem} loaded successfully.")
+            logging.info(f"{Path(json_file).stem}.json loaded successfully.")
             return data
         except FileNotFoundError:
-            logging.warning(f"{Path(json_file).stem} not found. Skipping...")
+            logging.warning(f"{Path(json_file).stem}.json not found. Skipping...")
         except PermissionError:
             logging.warning("Insufficient permissions. Skipping...")
 
     def flatten_json(self, json_file, header_file):
         #  Flatten the json data file's nested hierarchy
-        logging.info(f"Flattening {Path(json_file).stem}...")
+        logging.info(f"Flattening {Path(json_file).stem}.json...")
         flattened_data = []
         fields = []
         try:
@@ -51,7 +51,7 @@ class DataProcessor():
                 for key, value in config.items():
                     if value == True:
                         fields.append(key)
-            logging.info(f"Flattening items in {Path(json_file).stem}...")
+            logging.info(f"Flattening items in {Path(json_file).stem}.json...")
             data = self.load_json(json_file)
             for item in data:
                 #  Checks header_file against yml configuration file
@@ -60,9 +60,9 @@ class DataProcessor():
                     if header not in fields:
                         flattened_item.pop(header)
                 flattened_data.append(flattened_item)
-            logging.info(f"{Path(json_file).stem} flattened successfully.")
+            logging.info(f"{Path(json_file).stem}.json flattened successfully.")
         except FileNotFoundError:
-            logging.warning(f"{Path(json_file).stem} not found. Skipping...")
+            logging.warning(f"{Path(json_file).stem}.json not found. Skipping...")
         except PermissionError:
             logging.warning("Insufficient permissions. Skipping...")
         return flattened_data
@@ -99,7 +99,7 @@ class DataProcessor():
                     if value == True:
                         fields.append(key)
             logging.info(f"Loaded {header_file} successfully...")
-            logging.info(f"Merging processed data into {Path(output_file).stem}...")
+            logging.info(f"Merging processed data into {Path(output_file).stem}.csv...")
             with open(output_file, "a", newline="") as csv_file:
                 writer = csv.DictWriter(csv_file, restval=None, fieldnames=fields)
                 writer.writeheader()
@@ -107,7 +107,7 @@ class DataProcessor():
                     data = self.load_json(TEMP_DIR / file)
                     for item in data:
                         writer.writerow(item)
-            logging.info(f"Processed data merged into {Path(output_file).stem} successfully.")
+            logging.info(f"Processed data merged into {Path(output_file).stem}.csv successfully.")
         except FileNotFoundError:
             logging.warning("File not found. Skipping...")
         except PermissionError:
