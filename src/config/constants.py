@@ -18,7 +18,7 @@ VULN_DATA_DIR = DATA_DIR / "vulnerabilities"
 VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
 ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
-RESOURCE_DIR = Path(r"src\config\resource")
+RESOURCE_DIR = Path(r"src") / "config" / "resource"
 
 #  Data Configuration
 RETENTION_PERIOD = 3

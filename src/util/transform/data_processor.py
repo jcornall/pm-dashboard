@@ -8,7 +8,7 @@ import json
 
 class DataProcessor():
 
-    def __init__(self, file_path): 
+    def __init__(self, file_path):
         #  Instantiate DataProcessor objectfr
         self.dir_path = file_path
         self.export_type = re.split("_", str(file_path))[-1]
@@ -19,30 +19,30 @@ class DataProcessor():
         logging.info(f"Transforming {export_type} data...")
         purge_dir(TEMP_DIR)
         for file in os.listdir(dir_path):
-            json_file = Path(dir_path) / file
-            flattened_data = self.flatten_json(json_file, header_file)
+            json_file_path = Path(dir_path) / file
+            flattened_data = self.flatten_json(json_file_path, header_file)
             self.write_json(flattened_data, file)
             # self.convert_json_to_csv(flattened_data, re.split(".", file)[0])
         self.merge_data_to_csv(export_type, header_file)
         logging.info(f"{export_type} data transformed successfully.")
         return 0
 
-    def load_json(self, json_file):
+    def load_json(self, json_file_path):
         #  Load a json data file
-        logging.info(f"Loading {Path(json_file).stem}.json...")
+        logging.info(f"Loading {Path(json_file_path).stem}.json...")
         try:
-            with open(json_file, encoding="utf8") as file:
+            with open(json_file_path, encoding="utf8") as file:
                 data = json.load(file)
-            logging.info(f"{Path(json_file).stem}.json loaded successfully.")
+            logging.info(f"{Path(json_file_path).stem}.json loaded successfully.")
             return data
         except FileNotFoundError:
-            logging.warning(f"{Path(json_file).stem}.json not found. Skipping...")
+            logging.warning(f"{Path(json_file_path).stem}.json not found. Skipping...")
         except PermissionError:
             logging.warning("Insufficient permissions. Skipping...")
 
-    def flatten_json(self, json_file, header_file):
+    def flatten_json(self, json_file_path, header_file):
         #  Flatten the json data file's nested hierarchy
-        logging.info(f"Flattening {Path(json_file).stem}.json...")
+        logging.info(f"Flattening {Path(json_file_path).stem}.json...")
         flattened_data = []
         fields = []
         try:
@@ -51,8 +51,8 @@ class DataProcessor():
                 for key, value in config.items():
                     if value == True:
                         fields.append(key)
-            logging.info(f"Flattening items in {Path(json_file).stem}.json...")
-            data = self.load_json(json_file)
+            logging.info(f"Flattening items in {Path(json_file_path).stem}.json...")
+            data = self.load_json(json_file_path)
             for item in data:
                 #  Checks header_file against yml configuration file
                 flattened_item = flatten(item)
@@ -60,9 +60,9 @@ class DataProcessor():
                     if header not in fields:
                         flattened_item.pop(header)
                 flattened_data.append(flattened_item)
-            logging.info(f"{Path(json_file).stem}.json flattened successfully.")
+            logging.info(f"{Path(json_file_path).stem}.json flattened successfully.")
         except FileNotFoundError:
-            logging.warning(f"{Path(json_file).stem}.json not found. Skipping...")
+            logging.warning(f"{Path(json_file_path).stem}.json not found. Skipping...")
         except PermissionError:
             logging.warning("Insufficient permissions. Skipping...")
         return flattened_data
