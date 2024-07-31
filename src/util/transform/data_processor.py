@@ -101,7 +101,7 @@ class DataProcessor():
             logging.info(f"Loaded {header_file} successfully...")
             logging.info(f"Merging processed data into {Path(output_file).stem}.csv...")
             with open(output_file, "a", newline="") as csv_file:
-                writer = csv.DictWriter(csv_file, restval=None, fieldnames=fields)
+                writer = csv.DictWriter(csv_file, restval=None, fieldnames=fields, quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writeheader()
                 for file in os.listdir(TEMP_DIR):
                     data = self.load_json(TEMP_DIR / file)
