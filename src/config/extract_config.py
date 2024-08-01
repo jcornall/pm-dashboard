@@ -27,8 +27,8 @@ def setup_dir(file_path):
         os.mkdir(file_path)
         logging.warning(f"Directory does not exist, creating {file_path} directory...")
         logging.info(f"{file_path} directory created.")
-    except FileExistsError:
-        logging.info(f"{file_path} directory exists.")
+    except FileExistsError as e:
+        logging.info(f"Error: {e}.")
 
 def setup_subdir(file_path):
     #  Setup /file_path/ subdirectory
@@ -37,8 +37,8 @@ def setup_subdir(file_path):
         os.mkdir(file_path)
         logging.warning(f"Subdirectory does not exist, creating {file_path} directory...")
         logging.info(f"{file_path} subdirectory created.")
-    except FileExistsError:
-        logging.info(f"{file_path} subdirectory exists.") 
+    except FileExistsError as e:
+        logging.info(f"Error: {e}.")
 
 def purge_old_files(file_path):
     #  Cull aged data older than DATA_EXPIRATION days
@@ -52,10 +52,10 @@ def purge_old_files(file_path):
                 try:
                     os.remove(os.path.join(root, file))
                     logging.info(f"{file} deleted.")
-                except FileNotFoundError:
-                    logging.warning(f"{file} not found. Skipping...")
-                except PermissionError:
-                    logging.warning(f"Insufficient permissions. Skipping...")
+                except FileNotFoundError as e:
+                    logging.warning(f"Error: {e}. Skipping...")
+                except PermissionError as e:
+                    logging.warning(f"Error: {e}. Skipping...")
     logging.info(f"Old files purged successfully.")
 
 def purge_empty_dirs(file_path):
@@ -68,8 +68,8 @@ def purge_empty_dirs(file_path):
                 try:
                     os.removedirs(os.path.join(root, dir))
                     logging.info(f"{dir} deleted.")
-                except FileNotFoundError:
-                    logging.warning(f"{dir} not found. Skipping...")
-                except PermissionError:
-                    logging.warning(f"Insufficient permissions. Skipping...")
+                except FileNotFoundError as e:
+                    logging.warning(f"Error: {e}. Skipping...")
+                except PermissionError as e:
+                    logging.warning(f"Error: {e}. Skipping...")
     logging.info(f"Empty directories purged successfully.")

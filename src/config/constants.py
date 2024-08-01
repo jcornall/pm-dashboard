@@ -19,6 +19,7 @@ VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
 ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
 RESOURCE_DIR = Path(r"src") / "config" / "resource"
+SQL_DIR = RESOURCE_DIR / "sql"
 
 #  Data Configuration
 RETENTION_PERIOD = 3

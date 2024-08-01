@@ -5,7 +5,7 @@ import re
 import json
 
 
-class DataProcessor():
+class DataValidator():
 
     def __init__(self):
         pass

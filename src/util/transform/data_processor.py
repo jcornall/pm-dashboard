@@ -34,10 +34,10 @@ class DataProcessor():
                 data = json.load(file)
             logging.info(f"{Path(json_file_path).stem}.json loaded successfully.")
             return data
-        except FileNotFoundError:
-            logging.warning(f"{Path(json_file_path).stem}.json not found. Skipping...")
-        except PermissionError:
-            logging.warning("Insufficient permissions. Skipping...")
+        except FileNotFoundError as e:
+            logging.warning(f"Error: {e}. Skipping...")
+        except PermissionError as e:
+            logging.warning(f"Error: {e}. Skipping...")
 
     def flatten_json(self, json_file_path, header_file):
         #  Flatten the json data file's nested hierarchy
@@ -60,23 +60,24 @@ class DataProcessor():
                         flattened_item.pop(header)
                 flattened_data.append(flattened_item)
             logging.info(f"{Path(json_file_path).stem}.json flattened successfully.")
-        except FileNotFoundError:
-            logging.warning(f"{Path(json_file_path).stem}.json not found. Skipping...")
-        except PermissionError:
-            logging.warning("Insufficient permissions. Skipping...")
+        except FileNotFoundError as e:
+            logging.warning(f"Error: {e}. Skipping...")
+        except PermissionError as e:
+            logging.warning(f"Error: {e}. Skipping...")
         return flattened_data
 
     def write_json(self, flattened_data, file_name):
         #  Write the flattened json data file to the /temp/ directory
+        json_file = TEMP_DIR / f"{file_name}"
         logging.info(f"Writing {file_name} flattened data to {TEMP_DIR}...")
         try:
-            with open(TEMP_DIR / file_name, "w") as file:
+            with open(json_file, "w") as file:
                 json.dump(flattened_data, file)
             logging.info(f"{file_name} flattened data written successfully.")
-        except FileNotFoundError:
-            logging.warning("File not found. Skipping...")
-        except PermissionError:
-            logging.warning("Insufficient permissions. Skipping...")
+        except FileNotFoundError as e:
+            logging.warning(f"Error: {e}. Skipping...")
+        except PermissionError as e:
+            logging.warning(f"Error: {e}. Skipping...")
 
     def convert_json_to_csv(self, flattened_data, file_name):
         #  Convert a flattened json object into a csv format
@@ -107,10 +108,10 @@ class DataProcessor():
                     for item in data:
                         writer.writerow(item)
             logging.info(f"Processed data merged into {Path(output_file).stem}.csv successfully.")
-        except FileNotFoundError:
-            logging.warning("File not found. Skipping...")
-        except PermissionError:
-            logging.warning("Insufficient permissions. Skipping...")
+        except FileNotFoundError as e:
+            logging.warning(f"Error: {e}. Skipping...")
+        except PermissionError as e:
+            logging.warning(f"Error: {e}. Skipping...")
 
     """
     def validate_data():

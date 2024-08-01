@@ -13,10 +13,10 @@ def load_json(json_file):
         with open(json_file, encoding="utf8") as file:
             data = json.load(file)
         logging.info(f"{json_file} loaded successfully.")
-    except FileNotFoundError:
-        logging.warning(f"{json_file} not found. Skipping...")
-    except PermissionError:
-        logging.warning("Insufficient permissions. Skipping...")
+    except FileNotFoundError as e:
+        logging.warning(f"Error: {e}. Skipping...")
+    except PermissionError as e:
+        logging.warning(f"Error: {e}. Skipping...")
     return data
 
 def dump_headers_to_yaml(headers, export_type):
@@ -53,10 +53,10 @@ def report_csv_rows_columns(csv_file):
             logging.info(f"{csv_file} opened successfully.")
             print(f"{csv_file} Row Count:", len(data))
             print(f"{csv_file} Column Count:", len(data[0]))
-    except FileNotFoundError:
-        logging.warning(f"{csv_file} not found. Skipping...")
-    except PermissionError:
-        logging.warning("Insufficient permissions. Skipping...")
+    except FileNotFoundError as e:
+        logging.warning(f"Error: {e}. Skipping...")
+    except PermissionError as e:
+        logging.warning(f"Error: {e}. Skipping...")
 
 def purge_dir(dir_path):
     #  Deletes all files in the /temp/ directory
