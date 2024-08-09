@@ -7,7 +7,6 @@ import os
 import datetime as dt
 
 
-ENV_PATH = Path(".") / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
 def setup_file_structure():

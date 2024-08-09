@@ -69,6 +69,7 @@ class VulnExport(APIExport):
         url = "https://cloud.tenable.com/vulns/export"
         logging.info(f"POST call to {url}...")
         payload = {
+            "filters": { "since": VULNEXPORT_FILTER_SINCE },
             "num_assets": 100,
             "include_unlicensed": True
         }

@@ -5,6 +5,7 @@ from src.util.extract.api_export import *
 from src.util.extract.asset_export import *
 from src.util.extract.vuln_export import *
 from src.util.transform.data_processor import *
+from src.util.load.database_loader import *
 from src.config.transform_config import *
 from src.config.constants import *
 from src.config.extract_config import *
@@ -38,6 +39,14 @@ def process_data(file_path):
 def configure_data_processor(data_processor):
     generate_header_yaml(data_processor)
 
+def load_data(table, create_statement, load_statement):
+    database_loader = DatabaseLoader(table)
+    database_loader.connect_to_database(CONN_PARAMS)
+    database_loader.drop_table(database_loader.cursor)
+    database_loader.create_table(database_loader.cursor, create_statement)
+    database_loader.load_csv(database_loader.cursor, load_statement)
+    database_loader.close_connection()
+
 # # Main
 print(f"Current Working Directory: {Path.cwd()}")
 setup_logger()
@@ -60,9 +69,14 @@ logging.info("File structure setup successful.")
 # logging.info("Empty data directory purge successful...")
 # logging.info("Data extraction successful.")
 
-#  Transform
-logging.info("Starting data transformation...")
-purge_dir(PROCESSED_DIR)
-process_data(VULN_EXPORT_DIR)
-process_data(ASSET_EXPORT_DIR)
-logging.info("Data transformation successful.")
+# # #  Transform
+# logging.info("Starting data transformation...")
+# purge_dir(PROCESSED_DIR)
+# process_data(VULN_EXPORT_DIR)
+# process_data(ASSET_EXPORT_DIR)
+# logging.info("Data transformation successful.")
+
+# # Load
+logging.info("Starting data loading...")
+load_data("vulnerabilities", "create_vuln_table.txt", "load_vuln_csv.txt")
+# load_data("assets", "create_asset_table.txt", "load_asset_csv.txt")

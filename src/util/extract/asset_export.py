@@ -79,7 +79,7 @@ class AssetExport(APIExport):
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
+            "X-ApiKeys": f"accessKey={TENABLE_ACCESS_KEY};secretKey={TENABLE_SECRET_KEY};"
         }
         response = rq.post(url, json=payload, headers=headers)
         self.log_status_code(response)

@@ -1,4 +1,5 @@
 from src.config.transform_config import *
+from src.config.constants import *
 from pathlib import Path
 import pandas as pd
 import re
@@ -9,23 +10,50 @@ import sys
 
 class DatabaseLoader():
 
-    def __init__(self):
+    def __init__(self, table):
         self.conn = self.connect_to_database
+        self.table = table
+        self.cursor = self.set_cursor
 
-    def connect_to_database():
+    def connect_to_database(self, connection_parameters):
+        logging.info(f"Connecting to {connection_parameters["host"]} as {connection_parameters["user"]}...")
         try:
-            conn = mariadb.connect(
-                user="pmt-dashboard",
-                password="@Scl7ps5&$",
-                host="pam62425@host-172-16-105-249",
-                port=22,
-                database="tenable"
-            )
+            conn = mariadb.connect(**connection_parameters)
+            logging.info(f"Successfully connected to {connection_parameters("host")}.")
             return conn
         except mariadb.Error as e:
-            print(f"Error connecting to MariaDB platform: {e}")
+            logging.warning(f"Error: {e}.")
             sys.exit(1)
-        
-    def get_cursor(self):
-        cursor = self.conn.cursor()
 
+    def set_cursor(self):
+        cursor = self.conn.cursor()
+        return cursor
+
+    def drop_table(self, cursor):
+        try:
+            cursor.execute(
+                "DROP TABLE ?", (self.table)
+            )
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
+    def create_table(self, cursor, sql_file):
+        file_path = SQL_DIR / sql_file
+        try:
+            with open(file_path, "r") as file:
+                statement = file.read()
+                cursor.execute(statement)
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
+    def load_csv(self, cursor, sql_file):
+        file_path = SQL_DIR / sql_file
+        try:
+            with open(file_path, "r") as file:
+                statement = file.read()
+                cursor.execute(statement)
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
+    def close_connection(self):
+        self.conn.close()
