@@ -5,6 +5,7 @@ from src.util.extract.api_export import *
 from src.util.extract.asset_export import *
 from src.util.extract.vuln_export import *
 from src.util.transform.data_processor import *
+from src.util.load.database_loader import *
 from src.config.transform_config import *
 from src.config.constants import *
 from src.config.extract_config import *
@@ -40,6 +41,11 @@ def main():
     process_data(ASSET_EXPORT_DIR)
     logging.info("Data transformation successful.")
 
+    # # Load
+    logging.info("Starting data loading...")
+    load_data("vulnerabilities", "create_vuln_table.txt", "load_vuln_csv.txt")
+    # load_data("assets", "create_asset_table.txt", "load_asset_csv.txt")
+
     sys.exit(0)
 
 def export_vuln():
@@ -68,6 +74,15 @@ def process_data(file_path):
 
 def configure_data_processor(data_processor):
     generate_header_yaml(data_processor)
+
+def load_data(table, create_statement, load_statement):
+    database_loader = DatabaseLoader(table, CONN_PARAMS)
+    database_loader.drop_table(database_loader.cursor, "tenable", table)
+    database_loader.create_table(database_loader.cursor, create_statement)
+    database_loader.load_csv(database_loader.cursor, load_statement)
+    database_loader.conn.commit()
+    database_loader.cursor.close()
+    database_loader.close_connection()
 
 if __name__ == "__main__":
     main()

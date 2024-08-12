@@ -76,6 +76,5 @@ logging.info("File structure setup successful.")
 
 # # Load
 logging.info("Starting data loading...")
-print(CONN_PARAMS)
 load_data("vulnerabilities", "create_vuln_table.txt", "load_vuln_csv.txt")
 # load_data("assets", "create_asset_table.txt", "load_asset_csv.txt")
