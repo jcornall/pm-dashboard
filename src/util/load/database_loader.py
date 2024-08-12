@@ -30,7 +30,7 @@ class DatabaseLoader():
         return cursor
 
     def drop_table(self, cursor, database, table):
-        logging.info(f"Dropping existing MariaDB table "{table}" if it exists...")
+        logging.info(f"Dropping existing MariaDB table {table} if it exists...")
         use_statement = f"USE {database}"
         drop_statement = f"DROP TABLE IF EXISTS {table}"
         try:
@@ -40,7 +40,7 @@ class DatabaseLoader():
             cursor.execute(
                 drop_statement
             )
-            logging.info(f"MariaDB table "{table}" dropped.")
+            logging.info(f"MariaDB table {table} dropped.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
