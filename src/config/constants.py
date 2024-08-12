@@ -1,22 +1,14 @@
 from pathlib import Path
+from dotenv import load_dotenv
 import datetime as dt
 import time
-import os 
+import os
 
 
 #  Date & Time
 CURRENT = dt.datetime.now()
 FORMATTED_DATE = CURRENT.strftime("%Y%m%d")
 FORMATTED_TIME = CURRENT.strftime("%H%M%S")
-
-#  Keys
-TENABLE_ACCESS_KEY = os.getenv("TENABLE_ACCESS_KEY")
-TENABLE_SECRET_KEY = os.getenv("TENABLE_SECRET_KEY")
-MARIADB_USER = os.getenv("MARIADB_USER")
-MARIADB_PWD = os.getenv("MARIADB_PWD")
-MARIADB_HOST = os.getenv("MARIADB_HOST")
-MARIADB_PORT = os.getenv("MARIADB_PORT")
-MARIADB_DB = os.getenv("MARIADB_DB")
 
 #  Filepaths
 ENV_PATH = Path(".") / ".env"
@@ -32,13 +24,15 @@ ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
 RESOURCE_DIR = Path(r"src") / "config" / "resource"
 SQL_DIR = RESOURCE_DIR / "sql"
 
-#  Data Configuration
-RETENTION_PERIOD = 3 
-VULNEXPORT_FILTER_SINCE = int(time.mktime((dt.datetime.now() - dt.timedelta(days=365)).timetuple()))
-
-#  Testing
-# TEST_FILE = r"data\1720626296255_32f50088-cc41-46f7-883b-5317343562b7_1.json"
-# TEST_FILE2 = r"data\1720626360688_18ed6cd5-25b1-4cd7-b126-1a944713d116_1.json"
+#  Keys
+load_dotenv(dotenv_path=ENV_PATH)
+TENABLE_ACCESS_KEY = os.getenv("TENABLE_ACCESS_KEY")
+TENABLE_SECRET_KEY = os.getenv("TENABLE_SECRET_KEY")
+MARIADB_USER = os.getenv("MARIADB_USER")
+MARIADB_PWD = os.getenv("MARIADB_PWD")
+MARIADB_HOST = os.getenv("MARIADB_HOST")
+MARIADB_PORT = os.getenv("MARIADB_PORT")
+MARIADB_DB = os.getenv("MARIADB_DB")
 
 #  MariaDB Connection Parameters
 CONN_PARAMS = {
@@ -48,3 +42,11 @@ CONN_PARAMS = {
     "port":MARIADB_PORT,
     "database":MARIADB_DB
 }
+
+#  Data Configuration
+RETENTION_PERIOD = 3 
+VULNEXPORT_FILTER_SINCE = int(time.mktime((dt.datetime.now() - dt.timedelta(days=365)).timetuple()))
+
+#  Testing
+# TEST_FILE = r"data\1720626296255_32f50088-cc41-46f7-883b-5317343562b7_1.json"
+# TEST_FILE2 = r"data\1720626360688_18ed6cd5-25b1-4cd7-b126-1a944713d116_1.json"

@@ -1,7 +1,6 @@
 from src.config.constants import *
 # import logging.handlers as handlers
 from pathlib import Path
-from dotenv import load_dotenv
 import logging
 import os
 import datetime as dt

@@ -46,7 +46,6 @@ def load_data(table, create_statement, load_statement):
 
 # # Main
 print(f"Current Working Directory: {Path.cwd()}")
-load_dotenv(dotenv_path=ENV_PATH)
 setup_logger()
 logging.info("Logger setup successful.")
 setup_file_structure()

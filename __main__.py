@@ -14,7 +14,6 @@ from src.config.logger_config import *
 def main():
     # #  Setup
     print(f"Current Working Directory: {Path.cwd()}")
-    load_dotenv(dotenv_path=ENV_PATH)
     setup_logger()
     logging.info("Logger setup successful.")
     purge_old_files(DATA_DIR)
