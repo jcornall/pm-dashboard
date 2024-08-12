@@ -19,7 +19,7 @@ class DatabaseLoader():
         logging.info(f"Connecting to {connection_parameters["host"]} as {connection_parameters["user"]}...")
         try:
             conn = mariadb.connect(**connection_parameters)
-            logging.info(f"Successfully connected to {connection_parameters("host")}.")
+            logging.info(f"Successfully connected to {connection_parameters["host"]}.")
             return conn
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
