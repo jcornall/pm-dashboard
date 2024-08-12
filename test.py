@@ -38,7 +38,7 @@ def configure_data_processor(data_processor):
 
 def load_data(table, create_statement, load_statement):
     database_loader = DatabaseLoader(table, CONN_PARAMS)
-    database_loader.drop_table(database_loader.cursor)
+    database_loader.drop_table(database_loader.cursor, "tenable", table)
     database_loader.create_table(database_loader.cursor, create_statement)
     database_loader.load_csv(database_loader.cursor, load_statement)
     database_loader.close_connection()

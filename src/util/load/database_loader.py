@@ -29,10 +29,11 @@ class DatabaseLoader():
         cursor = conn.cursor()
         return cursor
 
-    def drop_table(self, cursor):
+    def drop_table(self, cursor, database, table):
         try:
             cursor.execute(
-                "DROP TABLE IF EXISTS (?)", (self.table,)
+                "USE (?)"
+                "DROP TABLE IF EXISTS (?)", (database, table)
             )
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
