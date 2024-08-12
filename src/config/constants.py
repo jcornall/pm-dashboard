@@ -31,7 +31,7 @@ TENABLE_SECRET_KEY = os.getenv("TENABLE_SECRET_KEY")
 MARIADB_USER = os.getenv("MARIADB_USER")
 MARIADB_PWD = os.getenv("MARIADB_PWD")
 MARIADB_HOST = os.getenv("MARIADB_HOST")
-MARIADB_PORT = os.getenv("MARIADB_PORT")
+MARIADB_PORT = int(os.getenv("MARIADB_PORT"))
 MARIADB_DB = os.getenv("MARIADB_DB")
 
 #  MariaDB Connection Parameters
