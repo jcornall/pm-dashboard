@@ -7,8 +7,6 @@ import os
 import datetime as dt
 
 
-load_dotenv(dotenv_path=ENV_PATH)
-
 def setup_file_structure():
     setup_dir(DATA_DIR)
     setup_dir(VULN_DATA_DIR)
