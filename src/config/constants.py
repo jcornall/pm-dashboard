@@ -42,9 +42,9 @@ VULNEXPORT_FILTER_SINCE = int(time.mktime((dt.datetime.now() - dt.timedelta(days
 
 #  MariaDB Connection Parameters
 CONN_PARAMS = {
-    "host":MARIADB_HOST,
     "user":MARIADB_USER,
     "password":MARIADB_PWD,
+    "host":MARIADB_HOST,
     "port":MARIADB_PORT,
     "database":MARIADB_DB
 }
