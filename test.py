@@ -37,8 +37,7 @@ def configure_data_processor(data_processor):
     generate_header_yaml(data_processor)
 
 def load_data(table, create_statement, load_statement):
-    database_loader = DatabaseLoader(table)
-    database_loader.connect_to_database(CONN_PARAMS)
+    database_loader = DatabaseLoader(table, CONN_PARAMS)
     database_loader.drop_table(database_loader.cursor)
     database_loader.create_table(database_loader.cursor, create_statement)
     database_loader.load_csv(database_loader.cursor, load_statement)
