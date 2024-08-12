@@ -15,10 +15,10 @@ class DatabaseLoader():
         self.table = table
         self.cursor = self.set_cursor
 
-    def connect_to_database(self, connection_parameters):
+    def connect_to_database(self, *connection_parameters):
         logging.info(f"Connecting to {connection_parameters["host"]} as {connection_parameters["user"]}...")
         try:
-            conn = mariadb.connect(**connection_parameters)
+            conn = mariadb.connect(connection_parameters)
             logging.info(f"Successfully connected to {connection_parameters("host")}.")
             return conn
         except mariadb.Error as e:
