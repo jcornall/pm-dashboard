@@ -10,8 +10,8 @@ import sys
 
 class DatabaseLoader():
 
-    def __init__(self, table):
-        self.conn = self.connect_to_database
+    def __init__(self, table, connection_parameters):
+        self.conn = self.connect_to_database(connection_parameters)
         self.table = table
         self.cursor = self.set_cursor(self.conn)
 
