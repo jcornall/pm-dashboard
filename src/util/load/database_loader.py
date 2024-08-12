@@ -13,7 +13,7 @@ class DatabaseLoader():
     def __init__(self, table):
         self.conn = self.connect_to_database
         self.table = table
-        self.cursor = self.set_cursor
+        self.cursor = self.set_cursor(self.conn)
 
     def connect_to_database(self, connection_parameters):
         logging.info(f"Connecting to {connection_parameters["host"]} as {connection_parameters["user"]}...")
@@ -25,8 +25,8 @@ class DatabaseLoader():
             logging.warning(f"Error: {e}.")
             sys.exit(1)
 
-    def set_cursor(self):
-        cursor = self.conn.cursor()
+    def set_cursor(self, conn):
+        cursor = conn.cursor()
         return cursor
 
     def drop_table(self, cursor):
