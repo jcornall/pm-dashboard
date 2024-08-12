@@ -32,7 +32,7 @@ class DatabaseLoader():
     def drop_table(self, cursor):
         try:
             cursor.execute(
-                "DROP TABLE ?", (self.table)
+                "DROP TABLE IF EXISTS ?", (self.table,)
             )
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
