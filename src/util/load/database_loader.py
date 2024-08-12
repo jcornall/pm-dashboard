@@ -30,6 +30,7 @@ class DatabaseLoader():
         return cursor
 
     def drop_table(self, cursor, database, table):
+        logging.info(f"Dropping existing MariaDB table "{table}" if it exists...")
         use_statement = f"USE {database}"
         drop_statement = f"DROP TABLE IF EXISTS {table}"
         try:
@@ -39,24 +40,29 @@ class DatabaseLoader():
             cursor.execute(
                 drop_statement
             )
+            logging.info(f"MariaDB table "{table}" dropped.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
     def create_table(self, cursor, sql_file):
+        logging.info("Creating new MariaDB table...")
         file_path = SQL_DIR / sql_file
         try:
             with open(file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
+            logging.info("MariaDB table created.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
     def load_csv(self, cursor, sql_file):
+        logging.info(f"Loading {sql_file} data into MariaDB table...")
         file_path = SQL_DIR / sql_file
         try:
             with open(file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
+            logging.info("Data successfully loaded into MariaDB table.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
