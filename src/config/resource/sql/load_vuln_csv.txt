@@ -1,4 +1,4 @@
-LOAD DATA LOCAL INFILE '/home/pam62425/pmt-dashboard/data/processed/vuln.csv'
+LOAD DATA LOCAL INFILE '/home/pam62425/pm-dashboard/data/processed/vuln.csv'
 INTO TABLE vulnerabilities
 CHARACTER SET UTF8
 FIELDS TERMINATED BY ','
