@@ -1,14 +1,18 @@
+#!/usr/bin/env python3.12
+#-*- coding: utf-8 -*- 
+"""This module contains methods to set up and configure the Python logging functionality.
+"""
+
 from src.config.constants import *
 import logging
 import os
 
-def setup_logger():
-    #  Setup /log/ directory
+def set_up_logger():
+    """Set up /log/ directory for log files."""
     try:
         os.mkdir(LOGS_DIR)
     except FileExistsError:
         pass
-    #  Setup timestamped /log/ subdirectory
     try:
         os.mkdir(EXPORT_LOG_DIR)
     except FileExistsError:

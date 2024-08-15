@@ -1,3 +1,8 @@
+#!/usr/bin/env python3.12
+#-*- coding: utf-8 -*- 
+"""This module defines the AssetExport class, used to make API calls to the Tenable service.
+"""
+
 from src.config.extract_config import *
 from src.util.extract.api_export import APIExport
 import requests as rq
@@ -9,11 +14,11 @@ import sys
 class AssetExport(APIExport):
 
     def __init__(self): 
-        #  Instantiate AssetExport object
+        """Instantiate an AssetExport object."""
         pass
 
     def set_values(self, response_json): 
-        #  Populate instance variables with request_asset_export_status() values
+        """Populate object's instance variables with request_asset_export_status() values."""
         self.uuid = response_json["uuid"]
         self.total_chunks = response_json["total_chunks"]
         self.filters = response_json["filters"]
@@ -22,19 +27,19 @@ class AssetExport(APIExport):
         self.created = response_json["created"]
 
     def set_status(self, response_json):
-        #  Set status instance variable with request_asset_export() and request_asset_export_jobs() value
+        """Set status instance variable with value returned by request_asset_export() and request_asset_export_jobs()."""
         self.status = response_json["status"]
 
     def set_uuid(self, response_json):
-        #  Set uuid instance variable with request_asset_export() value
+        """Set uuid instance variable with value returned by request_asset_export()."""
         self.uuid = response_json["export_uuid"]
 
     def set_chunks_available(self, response_json):
-        #  Set chunks_available instance variable with request_asset_export() value
+        """Set chunks_available instance variable with value returned by request_asset_export()."""
         self.chunks_available = response_json["chunks_available"]
 
     def log_status_code(self, response): 
-        #  Log response status codes for monitoring
+        """Log API response status codes for monitoring."""
         status_code = response.status_code
         logging.info("Handling response status code...")
         match status_code:
@@ -68,8 +73,8 @@ class AssetExport(APIExport):
                 print("Exiting program...")
                 sys.exit(1)
 
-    def request_asset_export(self): 
-        #  POST call to Tenable API to generate asset data export
+    def post_asset_export(self): 
+        """Send POST call to Tenable API to generate asset data export."""
         url = "https://cloud.tenable.com/assets/export"
         logging.info(f"POST call to {url}...")
         payload = {
@@ -88,8 +93,8 @@ class AssetExport(APIExport):
         logging.info(f"asset_export {self.uuid} requested.")
         return 0
 
-    def request_asset_export_status(self): 
-        #  GET call to Tenable API to update the status of the current asset export
+    def get_asset_export_status(self): 
+        """Send GET call to Tenable API to update the status of the current asset export."""
         url = f"https://cloud.tenable.com/assets/export/{self.uuid}/status"
         logging.info(f"GET call to {url}...")
         headers = {
@@ -103,15 +108,15 @@ class AssetExport(APIExport):
         if self.status != "FINISHED":
             logging.info(f"asset_export {self.uuid} status: {self.status}...")
             time.sleep(10)
-            self.request_asset_export_status()
+            self.get_asset_export_status()
         else:
             self.set_chunks_available(response_json)
-            self.request_asset_export_jobs()
+            self.get_asset_export_jobs()
             logging.info(f"asset_export {self.uuid} status: {self.status}.")
         return 0
     
-    def request_asset_export_jobs(self): 
-        #  GET call to Tenable API to update AssetExport instance variables 
+    def get_asset_export_jobs(self): 
+        """Send GET call to Tenable API to update AssetExport instance variables."""
         url = "https://cloud.tenable.com/assets/export/status"
         logging.info(f"GET call to {url}...")
         headers = {
@@ -130,15 +135,15 @@ class AssetExport(APIExport):
         return 0
 
     def download_all_asset_chunks(self): 
-        #  Initiate export chunk download loop
+        """Loop through and download all available export chunks."""
         logging.info(f"Downloading {self.total_chunks} chunks...")
         for chunk in range(1, self.total_chunks):
-            self.download_asset_chunk(chunk)
+            self.get_asset_chunk(chunk)
         logging.info(f"All chunks downloaded.")
         return 0
 
-    def download_asset_chunk(self, chunk): 
-        #  GET call to Tenable API to download all export chunks
+    def get_asset_chunk(self, chunk): 
+        """Send GET call to Tenable API to download the specified export chunk."""
         url = f"https://cloud.tenable.com/assets/export/{self.uuid}/chunks/{chunk}"
         logging.info(f"GET call to {url}...")
         headers = {
@@ -150,7 +155,7 @@ class AssetExport(APIExport):
         if response.status_code == 429:
             logging.warning(f"Re-attempting in {response.headers["Retry-After"]}...")
             time.sleep(int(response.headers["Retry-After"]))
-            self.download_asset_chunk(chunk)
+            self.get_asset_chunk(chunk)
         else:
             response_json = json.loads(response.text)
             EXPORT_DATA_FILE = ASSET_EXPORT_DIR / f"{self.created}_{self.uuid}_{chunk}.json"

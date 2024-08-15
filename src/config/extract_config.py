@@ -1,45 +1,50 @@
+#!/usr/bin/env python3.12
+#-*- coding: utf-8 -*- 
+"""This module contains methods used to configure the extract functionality of the program, as well as setting up and maintaining the data file structure.
+"""
+
 from src.config.constants import *
-# import logging.handlers as handlers
 from pathlib import Path
 import logging
 import os
 import datetime as dt
 
 
-def setup_file_structure():
-    setup_dir(DATA_DIR)
-    setup_dir(VULN_DATA_DIR)
-    setup_subdir(VULN_EXPORT_DIR)
-    setup_dir(ASSET_DATA_DIR)
-    setup_subdir(ASSET_EXPORT_DIR)
-    setup_dir(TEMP_DIR)
-    setup_dir(PROCESSED_DIR)
+def set_up_file_structure():
+    """Sequence method calls to set up the data file structure."""
+    set_up_dir(DATA_DIR)
+    set_up_dir(VULN_DATA_DIR)
+    set_up_subdir(VULN_EXPORT_DIR)
+    set_up_dir(ASSET_DATA_DIR)
+    set_up_subdir(ASSET_EXPORT_DIR)
+    set_up_dir(TEMP_DIR)
+    set_up_dir(PROCESSED_DIR)
     return 0
 
-def setup_dir(file_path):
-    #  Setup /file_path/ directory
-    logging.info(f"Checking if {file_path} directory exists...")
+def set_up_dir(dir_path):
+    """Setup a directory using the supplied directory path."""
+    logging.info(f"Checking if {dir_path} directory exists...")
     try:
-        os.mkdir(file_path)
-        logging.warning(f"Directory does not exist, creating {file_path} directory...")
-        logging.info(f"{file_path} directory created.")
+        os.mkdir(dir_path)
+        logging.warning(f"Directory does not exist, creating {dir_path} directory...")
+        logging.info(f"{dir_path} directory created.")
     except FileExistsError as e:
         logging.info(f"Error: {e}.")
 
-def setup_subdir(file_path):
-    #  Setup /file_path/ subdirectory
-    logging.info(f"Checking if {file_path} subdirectory exists...")
+def set_up_subdir(dir_path):
+    """Setup a subdirectory using the supplied directory path."""
+    logging.info(f"Checking if {dir_path} subdirectory exists...")
     try:
-        os.mkdir(file_path)
-        logging.warning(f"Subdirectory does not exist, creating {file_path} directory...")
-        logging.info(f"{file_path} subdirectory created.")
+        os.mkdir(dir_path)
+        logging.warning(f"Subdirectory does not exist, creating {dir_path} directory...")
+        logging.info(f"{dir_path} subdirectory created.")
     except FileExistsError as e:
         logging.info(f"Error: {e}.")
 
-def purge_old_files(file_path):
-    #  Cull aged data older than DATA_EXPIRATION days
+def purge_old_files(dir_path):
+    """Purge a directory of all files in the supplied directory path older than the RETENTION_PERIOD constant."""
     logging.info(f"Purging old files...")
-    for root, dirs, files in os.walk(file_path):
+    for root, dirs, files in os.walk(dir_path):
         for file in files:
             creation_datetime = dt.datetime.fromtimestamp((os.path.getctime(os.path.join(root, file))))
             current_datetime = dt.datetime.today()
@@ -54,10 +59,10 @@ def purge_old_files(file_path):
                     logging.warning(f"Error: {e}. Skipping...")
     logging.info(f"Old files purged successfully.")
 
-def purge_empty_dirs(file_path):
-    #  Cull empty directories
+def purge_empty_dirs(dir_path):
+    """Purge all empty directories."""
     logging.info(f"Purging empty directories...")
-    for root, dirs, files in os.walk(file_path):
+    for root, dirs, files in os.walk(dir_path):
         for dir in dirs:
             if len(os.listdir(os.path.join(root, dir))) == 0:
                 logging.info(f"Deleting {dir}...")

@@ -1,3 +1,8 @@
+#!/usr/bin/env python3.12
+#-*- coding: utf-8 -*- 
+"""This module contains utility methods for the DataProcessor class, as well as methods used to configure the processor's resource files.
+"""
+
 from src.config.extract_config import *
 from src.config.constants import *
 import json
@@ -7,7 +12,7 @@ import os
 from flatten_json import flatten
 
 def load_json(json_file):
-    #  Load a json data file
+    """Load JSON data file."""
     logging.info(f"Loading {json_file}...")
     try:
         with open(json_file, encoding="utf8") as file:
@@ -20,7 +25,7 @@ def load_json(json_file):
     return data
 
 def dump_headers_to_yaml(headers, export_type):
-    #  Dumps list of headers to a yaml resource file
+    """Dump list of JSON data headers to a YAML resource file."""
     yml_file = f"{export_type}_headers.yml"
     logging.info(f"Dumping json headers to {yml_file}...")
     headers = dict(sorted(headers.items(), key=lambda x:x[1]))
@@ -32,7 +37,7 @@ def dump_headers_to_yaml(headers, export_type):
         logging.warning("Header dump unsuccessful.")
 
 def generate_header_yaml(data_processor):
-    #  Generates a list of headers
+    """Generate a list of JSON data headers."""
     logging.info("Compiling list of json headers...")
     headers = {}
     for flattened_json in os.listdir(TEMP_DIR):
@@ -45,7 +50,7 @@ def generate_header_yaml(data_processor):
     logging.info("Header list compiled successfully.")
 
 def report_csv_rows_columns(csv_file):
-    #  Reports a count of a csv file's rows and columns
+    """Count all the rows and columns in the supplied CSV file and print the results."""
     logging.info(f"Reporting {csv_file} column count...")
     try:
         with open(csv_file) as file:
@@ -59,7 +64,7 @@ def report_csv_rows_columns(csv_file):
         logging.warning(f"Error: {e}. Skipping...")
 
 def purge_dir(dir_path):
-    #  Deletes all files in the /temp/ directory
+    """Purge all files in the supplied directory path."""
     logging.info(f"Purging {dir_path}...")
     for root, dirs, files in os.walk(dir_path):
         for file in files:

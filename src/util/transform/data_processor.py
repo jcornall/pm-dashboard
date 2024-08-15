@@ -1,3 +1,8 @@
+#!/usr/bin/env python3.12
+#-*- coding: utf-8 -*- 
+"""This module defines the DataProcessor class, used to process the raw exported JSON data into a consolidated, normalised CSV file.
+"""
+
 from src.config.transform_config import *
 from pathlib import Path
 import pandas as pd
@@ -8,13 +13,13 @@ import json
 class DataProcessor():
 
     def __init__(self, file_path):
-        #  Instantiate DataProcessor objectfr
+        """Instantiate a DataProcessor object."""
         self.dir_path = file_path
         self.export_type = re.split("_", str(file_path))[-1]
         self.header_file = Path(RESOURCE_DIR) / f"{self.export_type}_headers.yml"
 
     def transform_data(self, dir_path, header_file, export_type):
-        #  Transform the data in the object's dir_path instance variable
+        """Sequence method calls to transform the data in the supplied dir_path."""
         logging.info(f"Transforming {export_type} data...")
         purge_dir(TEMP_DIR)
         for file in os.listdir(dir_path):
@@ -27,7 +32,7 @@ class DataProcessor():
         return 0
 
     def load_json(self, json_file_path):
-        #  Load a json data file
+        """Load the supplied JSON data file."""
         logging.info(f"Loading {Path(json_file_path).stem}.json...")
         try:
             with open(json_file_path, encoding="utf8") as file:
@@ -40,7 +45,7 @@ class DataProcessor():
             logging.warning(f"Error: {e}. Skipping...")
 
     def flatten_json(self, json_file_path, header_file):
-        #  Flatten the json data file's nested hierarchy
+        """Flatten the JSON data file's nested hierarchy."""
         logging.info(f"Flattening {Path(json_file_path).stem}.json...")
         flattened_data = []
         fields = []
@@ -52,8 +57,7 @@ class DataProcessor():
                         fields.append(key)
             logging.info(f"Flattening items in {Path(json_file_path).stem}.json...")
             data = self.load_json(json_file_path)
-            for item in data:
-                #  Checks header_file against yml configuration file
+            for item in data:  # Checks header_file against YAML configuration file
                 flattened_item = flatten(item)
                 for header in list(flattened_item):
                     if header not in fields:
@@ -67,7 +71,7 @@ class DataProcessor():
         return flattened_data
 
     def write_json(self, flattened_data, file_name):
-        #  Write the flattened json data file to the /temp/ directory
+        """Write the flattened json data file to the /temp/ directory."""
         json_file = TEMP_DIR / f"{file_name}"
         logging.info(f"Writing {file_name} flattened data to {TEMP_DIR}...")
         try:
@@ -80,7 +84,7 @@ class DataProcessor():
             logging.warning(f"Error: {e}. Skipping...")
 
     def convert_json_to_csv(self, flattened_data, file_name):
-        #  Convert a flattened json object into a csv format
+        """Convert a flattened JSON object into a CSV format."""
         csv_file = TEMP_DIR / f"{file_name}.csv"
         logging.info(f"Converting flattened {file_name} to {csv_file}...")
         df = pd.DataFrame(flattened_data)
@@ -88,7 +92,7 @@ class DataProcessor():
         logging.info(f"Converted {file_name} to {csv_file} successfully.")
 
     def merge_data_to_csv(self, export_type, header_file):
-        #  Merge files in /temp/ folder into a single csv file
+        """Merge files in the /temp/ folder into a single CSV file."""
         output_file = PROCESSED_DIR / f"{export_type}.csv"
         logging.info(f"Merging processed data into {Path(output_file).stem}...")
         fields = []
@@ -112,7 +116,3 @@ class DataProcessor():
             logging.warning(f"Error: {e}. Skipping...")
         except PermissionError as e:
             logging.warning(f"Error: {e}. Skipping...")
-
-    """
-    def validate_data():
-    """
