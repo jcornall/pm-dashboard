@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module defines the AssetExport class, used to make API calls to the Tenable service.
 """
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module defines the DatabaseLoader class, used to load processed data into the MariaDB database.
 """
 

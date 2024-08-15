@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module contains utility methods for the DataProcessor class, as well as methods used to configure the processor's resource files.
 """
 

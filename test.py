@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
-"""This module is used for testing .
+#-*- coding: utf-8 -*-
+"""This module is used for testing.
 """
 
 from src.util.extract.api_export import *

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module defines the DataProcessor class, used to process the raw exported JSON data into a consolidated, normalised CSV file.
 """
 

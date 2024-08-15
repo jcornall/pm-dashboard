@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module contains methods used to configure the extract functionality of the program, as well as setting up and maintaining the data file structure.
 """
 
