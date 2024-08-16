@@ -1,6 +1,6 @@
 CREATE TABLE vulnerabilities (
 vulnerability_id INT AUTO_INCREMENT NOT NULL,
-created_on DATE DEFAULT GETDATE(),
+created_on DATE DEFAULT CURENT_TIMESTAMP,
 asset_agent_uuid VARCHAR(64),
 asset_bios_uuid VARCHAR(64),
 asset_device_type VARCHAR(32),
