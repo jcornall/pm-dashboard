@@ -43,7 +43,7 @@ def main():
 
     # Load
     logging.info("Starting data loading...")
-    load_data("vulnerabilities", "create_vuln_table.txt", "load_vuln_csv.txt")
+    load_data("vulnerabilities", "create_vuln_table.sql", "load_vuln_csv.sql")
 
     logging.info("Program execution successful, exiting program.")
     sys.exit(0)
@@ -79,7 +79,7 @@ def configure_data_processor(data_processor):
 def load_data(table, create_statement, load_statement):
     """Load the data into a MariaDB database."""
     database_loader = DatabaseLoader(table, CONN_PARAMS)
-    database_loader.drop_table(database_loader.cursor, "tenable", table)
+    # database_loader.drop_table(database_loader.cursor, "tenable", table)
     database_loader.create_table(database_loader.cursor, create_statement)
     database_loader.load_csv(database_loader.cursor, load_statement)
     database_loader.conn.commit()

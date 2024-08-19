@@ -68,5 +68,14 @@ def purge_dir(dir_path):
     logging.info(f"Purging {dir_path}...")
     for root, dirs, files in os.walk(dir_path):
         for file in files:
-            os.remove(os.path.join(root, file))
-    logging.info(f"{dir_path} purged successfully.")
+            try:
+                os.remove(os.path.join(root, file))
+                logging.info(f"{file} deleted.")
+            except FileNotFoundError as e:
+                logging.warning(f"Error: {e}. Skipping...")
+            except PermissionError as e:
+                logging.warning(f"Error: {e}. Skipping...")
+    if len(os.listdir(dir_path)) == 0:
+        logging.info(f"{dir_path} purged successfully.")
+    else:
+        logging.warning(f"{dir_path} purge unsuccessful.")

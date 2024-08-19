@@ -39,10 +39,10 @@ class VulnExport(APIExport):
     def log_status_code(self, response): 
         """Log API response status codes for monitoring."""
         status_code = response.status_code
-        logging.info("Handling response status code...")
+        # logging.info("Handling response status code...")
         match status_code:
             case 200:
-                logging.info("Response Status Code 200: Request Successful.")
+                # logging.info("Response Status Code 200: Request Successful.")
                 return 0
             case 400:
                 logging.error("Response Status Code 400: Invalid Input Parameters.")
@@ -122,7 +122,7 @@ class VulnExport(APIExport):
     def get_vuln_chunk(self, chunk): 
         """Send GET call to Tenable API to download the specified export chunk."""
         url = f"https://cloud.tenable.com/vulns/export/{self.uuid}/chunks/{chunk}"
-        logging.info(f"GET call to {url}...")
+        # logging.info(f"GET call to {url}...")
         headers = {
             "accept": "application/octet-stream",
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
@@ -138,5 +138,5 @@ class VulnExport(APIExport):
             EXPORT_DATA_FILE = VULN_EXPORT_DIR / f"{self.created}_{self.uuid}_{chunk}.json"
             with open(EXPORT_DATA_FILE, "w", encoding="utf-8") as f:
                 json.dump(response_json, f, ensure_ascii=False, indent=4)
-            logging.info(f"{self.created}_{self.uuid}_{chunk}.json downloaded.")
+            # logging.info(f"{self.created}_{self.uuid}_{chunk}.json downloaded.")
         return 0
