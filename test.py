@@ -49,7 +49,7 @@ def load_data(table):
     database_loader.create_table(database_loader.cursor, "create_vuln_export_table.sql")
     database_loader.create_table(database_loader.cursor, "create_vuln_timeseries_table.sql")
     database_loader.load_csv(database_loader.cursor, "load_vuln_csv.sql")
-    database_loader.insert_into_table(database_loader.cursor, "insert_into_vuln_csv.sql")
+    database_loader.insert_into_table(database_loader.cursor, "insert_into_vuln_table.sql")
     database_loader.delete_from_table(database_loader.cursor, "delete_from_vuln_export_table.sql")
     database_loader.conn.commit()
     database_loader.cursor.close()
