@@ -77,6 +77,30 @@ class DatabaseLoader():
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
+    def insert_into_table(self, cursor, sql_file):
+        """Executes an INSERT INTO statement."""
+        logging.info(f"Inserting data into MariaDB table...")
+        file_path = SQL_DIR / sql_file
+        try:
+            with open(file_path, "r") as file:
+                statement = file.read()
+                cursor.execute(statement)
+            logging.info("Data successfully inserted into MariaDB table.")
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
+    def delete_from_table(self, cursor, sql_file):
+        """Executes a DELETE FROM statement."""
+        logging.info(f"Deleting data from MariaDB table...")
+        file_path = SQL_DIR / sql_file
+        try:
+            with open(file_path, "r") as file:
+                statement = file.read()
+                cursor.execute(statement)
+            logging.info("Data successfully delete from MariaDB table.")
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
     def close_connection(self):
         """Closes the connection to the MariaDB database."""
         self.conn.close()
