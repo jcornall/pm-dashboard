@@ -51,11 +51,11 @@ def purge_old_files(dir_path):
             creation_datetime = dt.datetime.fromtimestamp((os.path.getctime(os.path.join(root, file))))
             current_datetime = dt.datetime.today()
             if creation_datetime < (current_datetime - dt.timedelta(days=RETENTION_PERIOD)):
-                logging.info(f"Deleting {file}...")
+                # logging.info(f"Deleting {file}...")
                 try:
                     os.remove(os.path.join(root, file))
                     count += 1
-                    logging.info(f"{file} deleted.")
+                    # logging.info(f"{file} deleted.")
                 except FileNotFoundError as e:
                     logging.warning(f"Error: {e}. Skipping...")
                 except PermissionError as e:
@@ -69,11 +69,11 @@ def purge_empty_dirs(dir_path):
     for root, dirs, files in os.walk(dir_path):
         for dir in dirs:
             if len(os.listdir(os.path.join(root, dir))) == 0:
-                logging.info(f"Deleting {dir}...")
+                # logging.info(f"Deleting {dir}...")
                 try:
                     os.removedirs(os.path.join(root, dir))
                     count += 1
-                    logging.info(f"{dir} deleted.")
+                    # logging.info(f"{dir} deleted.")
                 except FileNotFoundError as e:
                     logging.warning(f"Error: {e}. Skipping...")
                 except PermissionError as e:
