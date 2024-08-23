@@ -66,11 +66,13 @@ def report_csv_rows_columns(csv_file):
 def purge_dir(dir_path):
     """Purge all files in the supplied directory path."""
     logging.info(f"Purging {dir_path}...")
+    count = 0
     for root, dirs, files in os.walk(dir_path):
         for file in files:
             try:
                 os.remove(os.path.join(root, file))
-                logging.info(f"{file} deleted.")
+                count += 1
+                # logging.info(f"{file} deleted.")
             except FileNotFoundError as e:
                 logging.warning(f"Error: {e}. Skipping...")
             except PermissionError as e:
