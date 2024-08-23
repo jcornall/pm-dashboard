@@ -15,10 +15,10 @@ import sys
 
 class DatabaseLoader():
 
-    def __init__(self, table, connection_parameters):
+    def __init__(self, export_type, connection_parameters):
         """Instantiate a DatabaseLoader object."""
         self.conn = self.connect_to_database(connection_parameters)
-        self.table = table
+        self.export_type = export_type
         self.cursor = self.set_cursor(self.conn)
 
     def connect_to_database(self, connection_parameters):
@@ -53,48 +53,48 @@ class DatabaseLoader():
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
-    def create_table(self, cursor, sql_file):
+    def create_table(self, cursor, file_path, sql_file):
         """Executes a CREATE TABLE statement."""
         logging.info("Creating new MariaDB table...")
-        file_path = SQL_DIR / sql_file
+        sql_file_path = Path(file_path) / sql_file
         try:
-            with open(file_path, "r") as file:
+            with open(sql_file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("MariaDB table created.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
-    def load_csv(self, cursor, sql_file):
+    def load_csv(self, cursor, file_path, sql_file):
         """Executes a LOAD DATA statement."""
         logging.info(f"Loading {sql_file} data into MariaDB table...")
-        file_path = SQL_DIR / sql_file
+        sql_file_path = Path(file_path) / sql_file
         try:
-            with open(file_path, "r") as file:
+            with open(sql_file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("Data successfully loaded into MariaDB table.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
-    def insert_into_table(self, cursor, sql_file):
+    def insert_into_table(self, cursor, file_path, sql_file):
         """Executes an INSERT INTO statement."""
         logging.info(f"Inserting data into MariaDB table...")
-        file_path = SQL_DIR / sql_file
+        sql_file_path = Path(file_path) / sql_file
         try:
-            with open(file_path, "r") as file:
+            with open(sql_file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("Data successfully inserted into MariaDB table.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
-    def delete_from_table(self, cursor, sql_file):
+    def delete_from_table(self, cursor, file_path, sql_file):
         """Executes a DELETE FROM statement."""
         logging.info(f"Deleting data from MariaDB table...")
-        file_path = SQL_DIR / sql_file
+        sql_file_path = Path(file_path) / sql_file
         try:
-            with open(file_path, "r") as file:
+            with open(sql_file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("Data successfully delete from MariaDB table.")
