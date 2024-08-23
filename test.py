@@ -77,16 +77,17 @@ logging.info("File structure setup successful.")
 # logging.info("Empty data directory purge successful...")
 # logging.info("Data extraction successful.")
 
-# # #  Transform
-# logging.info("Starting data transformation...")
-# purge_dir(PROCESSED_DIR)
-# process_data(VULN_EXPORT_DIR)
-# process_data(ASSET_EXPORT_DIR)
-# logging.info("Data transformation successful.")
+# # Transform
+logging.info("Starting data transformation...")
+purge_dir(PROCESSED_DIR)
+process_data(VULN_EXPORT_DIR)
+process_data(ASSET_EXPORT_DIR)
+logging.info("Data transformation successful.")
 
-# Load
+# # Load
 logging.info("Starting data loading...")
-load_data("vulnerabilities")
+load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
+load_data("assets", TENABLE_SQL_DIR / "assets")
 
 logging.info("Program execution successful, exiting program.")
 sys.exit(0)
