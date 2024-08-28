@@ -86,6 +86,8 @@ def load_data(data_type, sql_file_path):
     database_loader.load_csv(database_loader.cursor, sql_file_path, "load_csv.sql")
     database_loader.insert_into_table(database_loader.cursor, sql_file_path, "insert_into_timeseries_table.sql")
     database_loader.delete_from_table(database_loader.cursor, sql_file_path, "delete_from_export_table.sql")
+    database_loader.select_count(database_loader.cursor, sql_file_path, "select_count_export_table.sql")
+    database_loader.select_count(database_loader.cursor, sql_file_path, "select_count_timeseries_table.sql")
     database_loader.conn.commit()
     database_loader.cursor.close()
     database_loader.close_connection()

@@ -101,6 +101,20 @@ class DatabaseLoader():
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
+    def select_count(self, cursor, file_path, sql_file):
+        """Executes a SELECT * statement and logs a count of the results."""
+        logging.info(f"Selecting data from MariaDB table...")
+        sql_file_path = Path(file_path) / sql_file
+        try:
+            with open(sql_file_path, "r") as file:
+                statement = file.read()
+                for result in cursor.execute(statement):
+                    logging.info(f"{result.statement}")
+                    logging.info(f"{result.rowcount}")
+            logging.info("Data successfully selected from MariaDB table.")
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
     def close_connection(self):
         """Closes the connection to the MariaDB database."""
         self.conn.close()
