@@ -1,4 +1,5 @@
 INSERT INTO vulnerabilities_timeseries (
+vulnerability_id,
 created_on,
 asset_agent_uuid,
 asset_bios_uuid,
