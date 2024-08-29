@@ -109,8 +109,8 @@ class DatabaseLoader():
             with open(sql_file_path, "r") as file:
                 statement = file.read()
                 cursor.execute(statement)
-                logging.info(f"{statement.statement}")
-                logging.info(f"{statement.rowcount}")
+                logging.info(f"{cursor.statement}")
+                logging.info(f"{cursor.rowcount}")
             logging.info("Data successfully selected from MariaDB table.")
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
