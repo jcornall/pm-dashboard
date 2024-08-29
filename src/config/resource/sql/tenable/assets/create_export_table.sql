@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS assets_export (
+asset_id INT AUTO_INCREMENT NOT NULL,
 created_on DATE DEFAULT DATE(CURRENT_TIMESTAMP),
 acr_score INT,
 agent_names_0 TEXT,
@@ -131,5 +132,5 @@ tags_9_value VARCHAR(32),
 terminated_at DATETIME,
 terminated_by TEXT,
 updated_at DATETIME,
-PRIMARY KEY (created_on, created_at, id, ipv4s_0, updated_at)
+PRIMARY KEY (asset_id)
 );

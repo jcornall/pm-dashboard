@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS assets_timeseries (
-asset_id INT AUTO_INCREMENT NOT NULL,
+asset_id INT NOT NULL,
 created_on DATE,
 acr_score INT,
 agent_names_0 TEXT,

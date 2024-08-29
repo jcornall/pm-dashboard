@@ -1,4 +1,5 @@
 INSERT INTO assets_timeseries (
+asset_id,
 created_on,
 acr_score,
 agent_names_0,

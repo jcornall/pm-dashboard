@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS vulnerabilities_timeseries (
-vulnerability_id INT AUTO_INCREMENT NOT NULL,
+vulnerability_id INT NOT NULL,
 created_on DATE,
 asset_agent_uuid VARCHAR(64),
 asset_bios_uuid VARCHAR(64),
