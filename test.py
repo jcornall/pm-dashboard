@@ -6,6 +6,7 @@
 from src.util.extract.api_export import *
 from src.util.extract.asset_export import *
 from src.util.extract.vuln_export import *
+from src.util.extract.compliance_export import *
 from src.util.transform.data_processor import *
 from src.util.load.database_loader import *
 from src.config.transform_config import *
