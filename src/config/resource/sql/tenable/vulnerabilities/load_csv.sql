@@ -1,5 +1,5 @@
 LOAD DATA LOCAL INFILE '/home/pam62425/pm-dashboard/data/processed/vuln.csv'
-INTO TABLE vulnerabilities_export
+INTO TABLE vuln_export
 CHARACTER SET UTF8
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'

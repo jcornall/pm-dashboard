@@ -31,6 +31,15 @@ def export_asset():
     asset_export.download_all_asset_chunks()
     return 0
 
+def export_compliance():
+    """Sequence API calls to Tenable service and return downloaded compliance data."""
+    compliance_export = ComplianceExport()
+    compliance_export.post_compliance_export()
+    compliance_export.get_compliance_export_status()
+    compliance_export.get_compliance_export_jobs()  # Required due to asset export status metadata differing from vulnerability export metadata
+    compliance_export.download_all_compliance_chunks()
+    return 0
+
 def process_data(file_path):
     """Sequence DataProcessor calls to DataProcessor."""
     data_processor = DataProcessor(file_path)
@@ -61,35 +70,38 @@ def load_data(data_type, sql_file_path):
 print(f"Current Working Directory: {Path.cwd()}")
 set_up_logger()
 logging.info("Logger setup successful.")
+purge_old_files(DATA_DIR)
+purge_old_files(LOGS_DIR)
+logging.info("Old data purge successful...")
+purge_empty_dirs(DATA_DIR)
+purge_empty_dirs(LOGS_DIR)
+logging.info("Empty data directory purge successful...")
+logging.info("Data extraction successful.")
 set_up_file_structure()
 logging.info("File structure setup successful.")
-# configure_data_processor()
 
-# # #  Extract
-# logging.info("Starting data extraction...")
-# export_vuln()
-# logging.info("Vulnerability data extraction successful...")
-# export_asset()
-# logging.info("Asset data extraction successful...")
-# purge_old_files(DATA_DIR)
-# purge_old_files(LOGS_DIR)
-# logging.info("Old data purge successful...")
-# purge_empty_dirs(DATA_DIR)
-# purge_empty_dirs(LOGS_DIR)
-# logging.info("Empty data directory purge successful...")
-# logging.info("Data extraction successful.")
+# # Extract
+# # logging.info("Starting data extraction...")
+# # export_vuln()
+# # logging.info("Vulnerability data extraction successful...")
+# # export_asset()
+# # logging.info("Asset data extraction successful...")
+export_compliance()
+logging.info("Compliance data extraction successful...")
 
 # # Transform
-logging.info("Starting data transformation...")
-purge_dir(PROCESSED_DIR)
-process_data(VULN_EXPORT_DIR)
-process_data(ASSET_EXPORT_DIR)
-logging.info("Data transformation successful.")
+# logging.info("Starting data transformation...")
+# purge_dir(PROCESSED_DIR)
+# process_data(VULN_EXPORT_DIR)
+# process_data(ASSET_EXPORT_DIR)
+# process_data(COMPLIANCE_EXPORT_DIR)
+# logging.info("Data transformation successful.")
 
 # # Load
-logging.info("Starting data loading...")
-load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
-load_data("assets", TENABLE_SQL_DIR / "assets")
+# logging.info("Starting data loading...")
+# load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
+# load_data("assets", TENABLE_SQL_DIR / "assets")
+# load_data("compliance", TENABLE_SQL_DIR / "compliance")
 
-logging.info("Program execution successful, exiting program.")
-sys.exit(0)
+# logging.info("Program execution successful, exiting program.")
+# sys.exit(0)

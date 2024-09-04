@@ -113,8 +113,8 @@ class VulnExport(APIExport):
 
     def download_all_vuln_chunks(self): 
         """Loop through and download all available export chunks."""
-        logging.info(f"Downloading {self.total_chunks} chunks...")
-        for chunk in range(1, self.total_chunks):
+        logging.info(f"Downloading {self.chunks_available_count} chunks...")
+        for chunk in range(1, self.chunks_available_count):
             self.get_vuln_chunk(chunk)
         logging.info(f"All chunks downloaded.")
         return 0

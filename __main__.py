@@ -4,6 +4,7 @@
 from src.util.extract.api_export import *
 from src.util.extract.asset_export import *
 from src.util.extract.vuln_export import *
+from src.util.extract.compliance_export import *
 from src.util.transform.data_processor import *
 from src.util.load.database_loader import *
 from src.config.transform_config import *
@@ -33,18 +34,22 @@ def main():
     logging.info("Vulnerability data extraction successful...")
     export_asset()
     logging.info("Asset data extraction successful...")
+    export_compliance()
+    logging.info("Compliance data extraction successful...")
 
     # Transform
     logging.info("Starting data transformation...")
     purge_dir(PROCESSED_DIR)
     process_data(VULN_EXPORT_DIR)
     process_data(ASSET_EXPORT_DIR)
+    process_data(COMPLIANCE_EXPORT_DIR)
     logging.info("Data transformation successful.")
 
     # Load
     logging.info("Starting data loading...")
     load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
     load_data("assets", TENABLE_SQL_DIR / "assets")
+    load_data("compliance", TENABLE_SQL_DIR / "compliance")
 
     logging.info("Program execution successful, exiting program.")
     sys.exit(0)
@@ -64,6 +69,15 @@ def export_asset():
     asset_export.get_asset_export_status()
     asset_export.get_asset_export_jobs()  # Required due to asset export status metadata differing from vulnerability export metadata
     asset_export.download_all_asset_chunks()
+    return 0
+
+def export_compliance():
+    """Sequence API calls to Tenable service and return downloaded compliance data."""
+    compliance_export = ComplianceExport()
+    compliance_export.post_compliance_export()
+    compliance_export.get_compliance_export_status()
+    compliance_export.get_compliance_export_jobs()  # Required due to asset export status metadata differing from vulnerability export metadata
+    compliance_export.download_all_compliance_chunks()
     return 0
 
 def process_data(file_path):

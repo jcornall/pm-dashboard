@@ -1,5 +1,5 @@
 LOAD DATA LOCAL INFILE '/home/pam62425/pm-dashboard/data/processed/asset.csv'
-INTO TABLE assets_export
+INTO TABLE asset_export
 CHARACTER SET UTF8
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'

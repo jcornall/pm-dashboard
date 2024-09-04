@@ -17,6 +17,8 @@ def set_up_file_structure():
     set_up_subdir(VULN_EXPORT_DIR)
     set_up_dir(ASSET_DATA_DIR)
     set_up_subdir(ASSET_EXPORT_DIR)
+    set_up_dir(COMPLIANCE_DATA_DIR)
+    set_up_subdir(COMPLIANCE_EXPORT_DIR)
     set_up_dir(TEMP_DIR)
     set_up_dir(PROCESSED_DIR)
     return 0
