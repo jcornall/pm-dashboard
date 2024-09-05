@@ -65,6 +65,18 @@ class DatabaseLoader():
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
 
+    def create_view(self, cursor, file_path, sql_file):
+        """Executes a CREATE TABLE statement."""
+        logging.info("Creating new MariaDB view...")
+        sql_file_path = Path(file_path) / sql_file
+        try:
+            with open(sql_file_path, "r") as file:
+                statement = file.read()
+                cursor.execute(statement)
+            logging.info("MariaDB view created.")
+        except mariadb.Error as e:
+            logging.warning(f"Error: {e}.")
+
     def load_csv(self, cursor, file_path, sql_file):
         """Executes a LOAD DATA statement."""
         logging.info(f"Loading {sql_file} data into MariaDB table...")

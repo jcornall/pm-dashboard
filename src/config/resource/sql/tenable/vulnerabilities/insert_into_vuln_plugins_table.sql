@@ -1,5 +1,5 @@
 INSERT INTO vuln_plugins (
-vulnerability_id,
+e_id,
 created_on,
 plugin_bid_0,
 plugin_canvas_package,
@@ -73,8 +73,8 @@ plugin_vpr_score,
 plugin_vpr_updated,
 plugin_vuln_publication_date
 )
-SELECT DISTINCT * FROM vulnerabilities_export
+SELECT DISTINCT * FROM vuln_export
 WHERE NOT EXISTS (
-    SELECT * FROM vulnerabilities_timeseries
-    WHERE vulnerabilities_export.created_on = vulnerabilities_timeseries.created_on 
+    SELECT * FROM vuln_plugins
+    WHERE vuln_export.created_on = vuln_plugins.created_on
 );

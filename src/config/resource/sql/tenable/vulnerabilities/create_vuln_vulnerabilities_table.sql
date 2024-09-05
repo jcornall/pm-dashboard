@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS vuln_vulnerabilities (
-vulnerability_id INT AUTO_INCREMENT NOT NULL,
+v_id INT AUTO_INCREMENT NOT NULL,
+e_id INT NOT NULL,
 created_on DATE DEFAULT DATE(CURRENT_TIMESTAMP),
 first_found DATETIME,
 indexed DATETIME,
@@ -19,5 +20,5 @@ severity_id INT,
 severity_modification_type VARCHAR(16),
 source VARCHAR(8),
 state VARCHAR(16),
-PRIMARY KEY (vulnerability_id)
+PRIMARY KEY (v_id)
 );

@@ -81,13 +81,13 @@ set_up_file_structure()
 logging.info("File structure setup successful.")
 
 # # Extract
-# # logging.info("Starting data extraction...")
-# # export_vuln()
-# # logging.info("Vulnerability data extraction successful...")
-# # export_asset()
-# # logging.info("Asset data extraction successful...")
-export_compliance()
-logging.info("Compliance data extraction successful...")
+# logging.info("Starting data extraction...")
+# export_vuln()
+# logging.info("Vulnerability data extraction successful...")
+# export_asset()
+# logging.info("Asset data extraction successful...")
+# export_compliance()
+# logging.info("Compliance data extraction successful...")
 
 # # Transform
 # logging.info("Starting data transformation...")
@@ -98,9 +98,9 @@ logging.info("Compliance data extraction successful...")
 # logging.info("Data transformation successful.")
 
 # # Load
-# logging.info("Starting data loading...")
-# load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
-# load_data("assets", TENABLE_SQL_DIR / "assets")
+logging.info("Starting data loading...")
+load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
+load_data("assets", TENABLE_SQL_DIR / "assets")
 # load_data("compliance", TENABLE_SQL_DIR / "compliance")
 
 # logging.info("Program execution successful, exiting program.")

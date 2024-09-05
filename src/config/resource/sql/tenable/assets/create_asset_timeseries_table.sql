@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS asset_timeseries (
-asset_id INT NOT NULL,
+asset_export_id INT NOT NULL,
 created_on DATE,
 acr_score INT,
 agent_names_0 TEXT,
@@ -110,5 +110,5 @@ tags_9_value VARCHAR(32),
 terminated_at DATETIME,
 terminated_by TEXT,
 updated_at DATETIME,
-PRIMARY KEY (asset_id)
+PRIMARY KEY (asset_export_id)
 );

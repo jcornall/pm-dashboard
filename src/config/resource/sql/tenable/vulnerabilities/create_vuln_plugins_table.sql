@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS vuln_plugins (
-vulnerability_id INT AUTO_INCREMENT NOT NULL,
+p_id INT AUTO_INCREMENT NOT NULL,
+e_id INT NOT NULL,
 created_on DATE DEFAULT DATE(CURRENT_TIMESTAMP),
 plugin_bid_0 INT,
 plugin_canvas_package VARCHAR(16),
@@ -73,5 +74,5 @@ plugin_vpr_drivers_threat_sources_last28_1 VARCHAR(64),
 plugin_vpr_score DECIMAL(10,1),
 plugin_vpr_updated DATETIME,
 plugin_vuln_publication_date DATETIME,
-PRIMARY KEY (vulnerability_id)
+PRIMARY KEY (p_id)
 );

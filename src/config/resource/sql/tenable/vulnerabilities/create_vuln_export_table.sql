@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS vuln_export (
-vulnerability_id INT AUTO_INCREMENT NOT NULL,
+e_id INT AUTO_INCREMENT NOT NULL,
 created_on DATE DEFAULT DATE(CURRENT_TIMESTAMP),
 asset_agent_uuid VARCHAR(64),
 asset_bios_uuid VARCHAR(64),
@@ -108,5 +108,5 @@ severity_id INT,
 severity_modification_type VARCHAR(16),
 source VARCHAR(8),
 state VARCHAR(16),
-PRIMARY KEY (vulnerability_id)
+PRIMARY KEY (e_id)
 );

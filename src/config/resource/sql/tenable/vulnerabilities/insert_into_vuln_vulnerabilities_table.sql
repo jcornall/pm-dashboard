@@ -1,5 +1,5 @@
 INSERT INTO vuln_vulnerabilities (
-vulnerability_id,
+e_id,
 created_on,
 first_found,
 indexed,
@@ -20,8 +20,8 @@ severity_modification_type,
 source,
 state
 )
-SELECT DISTINCT * FROM vulnerabilities_export
+SELECT DISTINCT * FROM vuln_export
 WHERE NOT EXISTS (
-    SELECT * FROM vulnerabilities_timeseries
-    WHERE vulnerabilities_export.created_on = vulnerabilities_timeseries.created_on 
+    SELECT * FROM vuln_vulnerabilities
+    WHERE vuln_export.created_on = vuln_vulnerabilities.created_on
 );

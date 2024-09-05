@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS vuln_assets (
-vulnerability_id INT AUTO_INCREMENT NOT NULL,
-created_on DATE DEFAULT DATE(CURRENT_TIMESTAMP),
+a_id INT AUTO_INCREMENT NOT NULL,
+e_id INT NOT NULL,
+created_on DATE,
 asset_agent_uuid VARCHAR(64),
 asset_bios_uuid VARCHAR(64),
 asset_device_type VARCHAR(32),
@@ -18,5 +19,5 @@ asset_operating_system_2 VARCHAR(128),
 asset_operating_system_3 VARCHAR(128),
 asset_tracked VARCHAR(8),
 asset_uuid VARCHAR(64),
-PRIMARY KEY (vulnerability_id)
+PRIMARY KEY (a_id)
 );

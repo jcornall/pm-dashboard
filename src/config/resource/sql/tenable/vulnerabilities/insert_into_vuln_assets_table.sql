@@ -1,5 +1,5 @@
 INSERT INTO vuln_assets (
-vulnerability_id,
+e_id,
 created_on,
 asset_agent_uuid,
 asset_bios_uuid,
@@ -18,8 +18,8 @@ asset_operating_system_2,
 asset_operating_system_3,
 asset_tracked, asset_uuid
 )
-SELECT DISTINCT * FROM vulnerabilities_export
+SELECT DISTINCT * FROM vuln_export
 WHERE NOT EXISTS (
-    SELECT * FROM vulnerabilities_timeseries
-    WHERE vulnerabilities_export.created_on = vulnerabilities_timeseries.created_on 
+    SELECT * FROM vuln_assets
+    WHERE vuln_export.created_on = vuln_assets.created_on
 );
