@@ -78,7 +78,7 @@ class ComplianceExport(APIExport):
             "content-type": "application/json",
             "X-ApiKeys": f"accessKey={os.getenv("TENABLE_ACCESS_KEY")};secretKey={os.getenv("TENABLE_SECRET_KEY")};"
         }
-        response = rq.post(url, headers=headers)
+        response = rq.post(url, json=payload, headers=headers)
         self.log_status_code(response)
         response_json = json.loads(response.text)
         self.set_uuid(response_json)
