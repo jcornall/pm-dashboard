@@ -76,7 +76,6 @@ def export_compliance():
     compliance_export = ComplianceExport()
     compliance_export.post_compliance_export()
     compliance_export.get_compliance_export_status()
-    compliance_export.get_compliance_export_jobs()  # Required due to asset export status metadata differing from vulnerability export metadata
     compliance_export.download_all_compliance_chunks()
     return 0
 
