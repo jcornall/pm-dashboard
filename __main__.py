@@ -34,22 +34,22 @@ def main():
     logging.info("Vulnerability data extraction successful...")
     export_asset()
     logging.info("Asset data extraction successful...")
-    export_compliance()
-    logging.info("Compliance data extraction successful...")
+    # export_compliance()
+    # logging.info("Compliance data extraction successful...")
 
     # Transform
     logging.info("Starting data transformation...")
     purge_dir(PROCESSED_DIR)
     process_data(VULN_EXPORT_DIR)
     process_data(ASSET_EXPORT_DIR)
-    process_data(COMPLIANCE_EXPORT_DIR)
+    # process_data(COMPLIANCE_EXPORT_DIR)
     logging.info("Data transformation successful.")
 
     # Load
     logging.info("Starting data loading...")
     load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
     load_data("assets", TENABLE_SQL_DIR / "assets")
-    load_data("compliance", TENABLE_SQL_DIR / "compliance")
+    # load_data("compliance", TENABLE_SQL_DIR / "compliance")
 
     logging.info("Program execution successful, exiting program.")
     sys.exit(0)
