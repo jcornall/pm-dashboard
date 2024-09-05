@@ -111,8 +111,8 @@ terminated_at,
 terminated_by,
 updated_at
 )
-SELECT DISTINCT * FROM assets_export
+SELECT DISTINCT * FROM asset_export
 WHERE NOT EXISTS (
-    SELECT * FROM assets_timeseries
-    WHERE assets_export.created_on = assets_timeseries.created_on 
+    SELECT * FROM asset_timeseries
+    WHERE asset_export.created_on = asset_timeseries.created_on 
 );

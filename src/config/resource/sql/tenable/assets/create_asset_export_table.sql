@@ -110,5 +110,5 @@ tags_9_value VARCHAR(32),
 terminated_at DATETIME,
 terminated_by TEXT,
 updated_at DATETIME,
-PRIMARY KEY (asset_id)
+PRIMARY KEY (asset_export_id)
 );
