@@ -119,8 +119,8 @@ logging.info("File structure setup successful.")
 
 # # Load
 logging.info("Starting data loading...")
-load_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
-load_data("assets", TENABLE_SQL_DIR / "assets")
+load_vuln_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
+load_asset_data("assets", TENABLE_SQL_DIR / "assets")
 # load_data("compliance", TENABLE_SQL_DIR / "compliance")
 
 # logging.info("Program execution successful, exiting program.")
