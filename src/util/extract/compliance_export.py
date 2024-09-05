@@ -73,6 +73,9 @@ class ComplianceExport(APIExport):
         """Send POST call to Tenable API to generate compliance data export."""
         url = "https://cloud.tenable.com/compliance/export"
         logging.info(f"POST call to {url}...")
+        payload = {
+             "num_findings": 5000 
+        }
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
@@ -87,7 +90,7 @@ class ComplianceExport(APIExport):
 
     def get_compliance_export_status(self): 
         """Send GET call to Tenable API to update the status of the current compliance export."""
-        url = f"https://cloud.tenable.com/compliance/export/export_uuid/{self.uuid}/status"
+        url = f"https://cloud.tenable.com/compliance/export/{self.uuid}/status"
         logging.info(f"GET call to {url}...")
         headers = {
             "accept": "application/json",
