@@ -1,5 +1,5 @@
 INSERT INTO asset_timeseries (
-asset_id,
+asset_export_id,
 created_on,
 acr_score,
 agent_names_0,
