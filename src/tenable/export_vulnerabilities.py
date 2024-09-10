@@ -54,20 +54,27 @@ def export_vulnerabilities(creds: TenableCredentials):
     )
     export_uuid = response.json()["export_uuid"]
 
+    logging.info(f"vuln_export {export_uuid} requested.")
+
     export_status: VulnExportStatus | None = None
     while not export_status or export_status.status != ExportRequestStatus.Finished:
         # if status previously queried, wait for 10 seconds before re-querying
         if export_status:
             sleep(10)
 
+        url = f"{TENABLE_API_URL}/vuln/export/{export_uuid}/status"
+        logging.info(f"GET call to {url}...")
         status_res = requests.get(
-            f"{TENABLE_API_URL}/vuln/export/{export_uuid}/status",
+            url,
             headers={
                 "accept": "application/json",
                 "X-ApiKeys": api_keys,
             },
         )
+
         export_status = VulnExportStatus(**status_res.json())
+
+        logging.info(f"vuln_export {export_uuid} status: {export_status.status}...")
 
     threads = []
     for chunk in export_status.chunks_available:
@@ -84,6 +91,10 @@ def export_vulnerabilities(creds: TenableCredentials):
 def __save_single_vuln_chunk(
     api_keys: str, current_export: VulnExportStatus, chunk_id: int
 ):
+    logging.info(
+        f"downloading chunk {chunk_id} for vuln export {current_export.uuid}..."
+    )
+
     should_retry = True
     res_json: Any | None = None
     while should_retry:
@@ -92,8 +103,10 @@ def __save_single_vuln_chunk(
             headers={"accept": "application/octet-stream", "X-ApiKeys": api_keys},
         )
 
-        if response.status_code == 429:
-            sleep(int(response.headers["Retry-After"]))
+        if response.status_code != 200:
+            retry_after = int(response.headers["Retry-After"])
+            logging.warning(f"Re-attempting in {retry_after}...")
+            sleep(retry_after)
             continue
 
         should_retry = False

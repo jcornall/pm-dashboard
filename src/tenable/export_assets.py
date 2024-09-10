@@ -37,14 +37,18 @@ def export_assets(creds: TenableCredentials):
     )
     export_uuid = response.json()["export_uuid"]
 
+    logging.info(f"asset_export {export_uuid} requested.")
+
     export_status: AssetExportStatus | None = None
     while not export_status or export_status.status != ExportRequestStatus.Finished:
         # if status previously queried, wait for 10 seconds before re-querying
         if export_status:
             sleep(10)
 
+        url = f"{TENABLE_API_URL}/assets/export/{export_uuid}/status"
+        logging.info(f"GET call to {url}...")
         status_res = requests.get(
-            f"{TENABLE_API_URL}/assets/export/{export_uuid}/status",
+            url,
             headers={
                 "accept": "application/json",
                 "X-ApiKeys": api_keys,
@@ -54,6 +58,8 @@ def export_assets(creds: TenableCredentials):
         export_status = AssetExportStatus(
             created=int(now.timestamp()), uuid=export_uuid, **status_res.json()
         )
+
+        logging.info(f"asset_export {export_uuid} status: {export_status.status}...")
 
     threads: list[Thread] = []
     for chunk_id in export_status.chunks_available:
@@ -71,6 +77,8 @@ def export_assets(creds: TenableCredentials):
 def __save_single_assets_chunk(
     api_keys: str, current_export: AssetExportStatus, chunk_id: int
 ):
+    logging.info(f"dowloading chunk {chunk_id} for asset_export {current_export.uuid}")
+
     should_retry = True
     res_json: Any | None = None
     while should_retry:
