@@ -22,6 +22,12 @@ class AssetExportStatus:
 
 
 def export_assets(creds: TenableCredentials):
+    """
+    Requests tennable to export all assets, and then saves the data into JSON files.
+    This will generate multiple JSON files containing assets, as Tenable returns them in chunks.
+    Each JSON file will contain a chunk of all exported assets data
+    """
+
     api_keys = creds.to_api_keys_str()
 
     body = {"chunk_size": 100, "include_open_ports": False}
