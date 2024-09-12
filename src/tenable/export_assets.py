@@ -79,12 +79,12 @@ def export_tenable_assets(creds: TenableCredentials):
 
     threads: list[Thread] = []
     for chunk_id in export_status.chunks_available:
-        threads.append(
-            Thread(
-                target=__save_single_assets_chunk,
-                args=(api_keys, export_status, chunk_id),
-            )
+        t = Thread(
+            target=__save_single_assets_chunk,
+            args=(api_keys, export_status, chunk_id),
         )
+        threads.append(t)
+        t.start()
 
     for t in threads:
         t.join()

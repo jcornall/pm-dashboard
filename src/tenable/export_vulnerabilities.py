@@ -86,11 +86,11 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
 
     threads = []
     for chunk in export_status.chunks_available:
-        threads.append(
-            Thread(
-                target=__save_single_vuln_chunk, args=(api_keys, export_status, chunk)
-            )
+        t = Thread(
+            target=__save_single_vuln_chunk, args=(api_keys, export_status, chunk)
         )
+        threads.append(t)
+        t.start()
 
     for t in threads:
         t.join()
