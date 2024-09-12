@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module defines the DataProcessor class, used to process the raw exported JSON data into a consolidated, normalised CSV file.
 """
 
@@ -22,6 +22,7 @@ class DataProcessor():
         """Sequence method calls to transform the data in the supplied dir_path."""
         logging.info(f"Transforming {export_type} data...")
         purge_dir(TEMP_DIR)
+        logging.info(f"Flattening {len(os.listdir(dir_path))} files...")
         for file in os.listdir(dir_path):
             json_file_path = Path(dir_path) / file
             flattened_data = self.flatten_json(json_file_path, header_file)
@@ -33,11 +34,11 @@ class DataProcessor():
 
     def load_json(self, json_file_path):
         """Load the supplied JSON data file."""
-        logging.info(f"Loading {Path(json_file_path).stem}.json...")
+        # logging.info(f"Loading {Path(json_file_path).stem}.json...")
         try:
             with open(json_file_path, encoding="utf8") as file:
                 data = json.load(file)
-            logging.info(f"{Path(json_file_path).stem}.json loaded successfully.")
+            # logging.info(f"{Path(json_file_path).stem}.json loaded successfully.")
             return data
         except FileNotFoundError as e:
             logging.warning(f"Error: {e}. Skipping...")
@@ -46,7 +47,7 @@ class DataProcessor():
 
     def flatten_json(self, json_file_path, header_file):
         """Flatten the JSON data file's nested hierarchy."""
-        logging.info(f"Flattening {Path(json_file_path).stem}.json...")
+        # logging.info(f"Flattening {Path(json_file_path).stem}.json...")
         flattened_data = []
         fields = []
         try:
@@ -55,7 +56,7 @@ class DataProcessor():
                 for key, value in config.items():
                     if value == True:
                         fields.append(key)
-            logging.info(f"Flattening items in {Path(json_file_path).stem}.json...")
+            # logging.info(f"Flattening items in {Path(json_file_path).stem}.json...")
             data = self.load_json(json_file_path)
             for item in data:  # Checks header_file against YAML configuration file
                 flattened_item = flatten(item)
@@ -63,7 +64,7 @@ class DataProcessor():
                     if header not in fields:
                         flattened_item.pop(header)
                 flattened_data.append(flattened_item)
-            logging.info(f"{Path(json_file_path).stem}.json flattened successfully.")
+            # logging.info(f"{Path(json_file_path).stem}.json flattened successfully.")
         except FileNotFoundError as e:
             logging.warning(f"Error: {e}. Skipping...")
         except PermissionError as e:
@@ -73,11 +74,11 @@ class DataProcessor():
     def write_json(self, flattened_data, file_name):
         """Write the flattened json data file to the /temp/ directory."""
         json_file = TEMP_DIR / f"{file_name}"
-        logging.info(f"Writing {file_name} flattened data to {TEMP_DIR}...")
+        # logging.info(f"Writing {file_name} flattened data to {TEMP_DIR}...")
         try:
             with open(json_file, "w") as file:
                 json.dump(flattened_data, file)
-            logging.info(f"{file_name} flattened data written successfully.")
+            # logging.info(f"{file_name} flattened data written successfully.")
         except FileNotFoundError as e:
             logging.warning(f"Error: {e}. Skipping...")
         except PermissionError as e:

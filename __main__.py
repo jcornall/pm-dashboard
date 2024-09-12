@@ -1,9 +1,10 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 
 from src.util.extract.api_export import *
 from src.util.extract.asset_export import *
 from src.util.extract.vuln_export import *
+from src.util.extract.compliance_export import *
 from src.util.transform.data_processor import *
 from src.util.load.database_loader import *
 from src.config.transform_config import *
@@ -33,17 +34,22 @@ def main():
     logging.info("Vulnerability data extraction successful...")
     export_asset()
     logging.info("Asset data extraction successful...")
+    # export_compliance()
+    # logging.info("Compliance data extraction successful...")
 
     # Transform
     logging.info("Starting data transformation...")
     purge_dir(PROCESSED_DIR)
     process_data(VULN_EXPORT_DIR)
     process_data(ASSET_EXPORT_DIR)
+    # process_data(COMPLIANCE_EXPORT_DIR)
     logging.info("Data transformation successful.")
 
     # Load
     logging.info("Starting data loading...")
-    load_data("vulnerabilities", "create_vuln_table.txt", "load_vuln_csv.txt")
+    load_vuln_data("vulnerabilities", TENABLE_SQL_DIR / "vulnerabilities")
+    load_asset_data("assets", TENABLE_SQL_DIR / "assets")
+    # load_data("compliance", TENABLE_SQL_DIR / "compliance")
 
     logging.info("Program execution successful, exiting program.")
     sys.exit(0)
@@ -65,6 +71,14 @@ def export_asset():
     asset_export.download_all_asset_chunks()
     return 0
 
+def export_compliance():
+    """Sequence API calls to Tenable service and return downloaded compliance data."""
+    compliance_export = ComplianceExport()
+    compliance_export.post_compliance_export()
+    compliance_export.get_compliance_export_status()
+    compliance_export.download_all_compliance_chunks()
+    return 0
+
 def process_data(file_path):
     """Sequence DataProcessor calls to DataProcessor."""
     data_processor = DataProcessor(file_path)
@@ -76,12 +90,38 @@ def configure_data_processor(data_processor):
     """Configure the DataProcessor by generating new YAML files containing all JSON data headers."""
     generate_header_yaml(data_processor)
 
-def load_data(table, create_statement, load_statement):
+def load_vuln_data(data_type, sql_file_path):
+    """Load the vulnerabilities data into a MariaDB database."""
+    database_loader = DatabaseLoader(data_type, CONN_PARAMS)
+    # database_loader.drop_table(database_loader.cursor, "tenable", table)
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_vuln_export_table.sql")
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_vuln_assets_table.sql")
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_vuln_plugins_table.sql")
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_vuln_vulnerabilities_table.sql")
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_vuln_timeseries_table.sql")
+    database_loader.load_csv(database_loader.cursor, sql_file_path, "load_csv.sql")
+    database_loader.insert_into_table(database_loader.cursor, sql_file_path, "insert_into_vuln_assets_table.sql")
+    database_loader.insert_into_table(database_loader.cursor, sql_file_path, "insert_into_vuln_plugins_table.sql")
+    database_loader.insert_into_table(database_loader.cursor, sql_file_path, "insert_into_vuln_vulnerabilities_table.sql")
+    database_loader.insert_into_table(database_loader.cursor, sql_file_path, "insert_into_vuln_timeseries_table.sql")
+    database_loader.delete_from_table(database_loader.cursor, sql_file_path, "delete_from_vuln_export_table.sql")
+    database_loader.select_count(database_loader.cursor, sql_file_path, "select_count_vuln_export_table.sql")
+    database_loader.select_count(database_loader.cursor, sql_file_path, "select_count_vuln_timeseries_table.sql")
+    database_loader.conn.commit()
+    database_loader.cursor.close()
+    database_loader.close_connection()
+
+def load_asset_data(data_type, sql_file_path):
     """Load the data into a MariaDB database."""
-    database_loader = DatabaseLoader(table, CONN_PARAMS)
-    database_loader.drop_table(database_loader.cursor, "tenable", table)
-    database_loader.create_table(database_loader.cursor, create_statement)
-    database_loader.load_csv(database_loader.cursor, load_statement)
+    database_loader = DatabaseLoader(data_type, CONN_PARAMS)
+    # database_loader.drop_table(database_loader.cursor, "tenable", table)
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_asset_export_table.sql")
+    database_loader.create_table(database_loader.cursor, sql_file_path, "create_asset_timeseries_table.sql")
+    database_loader.load_csv(database_loader.cursor, sql_file_path, "load_csv.sql")
+    database_loader.insert_into_table(database_loader.cursor, sql_file_path, "insert_into_asset_timeseries_table.sql")
+    database_loader.delete_from_table(database_loader.cursor, sql_file_path, "delete_from_asset_export_table.sql")
+    database_loader.select_count(database_loader.cursor, sql_file_path, "select_count_asset_export_table.sql")
+    database_loader.select_count(database_loader.cursor, sql_file_path, "select_count_asset_timeseries_table.sql")
     database_loader.conn.commit()
     database_loader.cursor.close()
     database_loader.close_connection()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module contains utility methods for the DataProcessor class, as well as methods used to configure the processor's resource files.
 """
 
@@ -66,7 +66,18 @@ def report_csv_rows_columns(csv_file):
 def purge_dir(dir_path):
     """Purge all files in the supplied directory path."""
     logging.info(f"Purging {dir_path}...")
+    count = 0
     for root, dirs, files in os.walk(dir_path):
         for file in files:
-            os.remove(os.path.join(root, file))
-    logging.info(f"{dir_path} purged successfully.")
+            try:
+                os.remove(os.path.join(root, file))
+                count += 1
+                # logging.info(f"{file} deleted.")
+            except FileNotFoundError as e:
+                logging.warning(f"Error: {e}. Skipping...")
+            except PermissionError as e:
+                logging.warning(f"Error: {e}. Skipping...")
+    if len(os.listdir(dir_path)) == 0:
+        logging.info(f"{dir_path} purged successfully.")
+    else:
+        logging.warning(f"{dir_path} purge unsuccessful.")
