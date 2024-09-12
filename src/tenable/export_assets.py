@@ -17,7 +17,8 @@ from src.config.constants import ASSET_EXPORT_DIR
 class AssetExportStatus:
     created: int
     uuid: str
-    status: ExportRequestStatus
+    # this stores the value of ExportRequestStatus
+    status: str
     chunks_available: list[int]
 
 
@@ -53,7 +54,9 @@ def export_tenable_assets(creds: TenableCredentials):
     logging.info(f"asset_export {export_uuid} requested.")
 
     export_status: AssetExportStatus | None = None
-    while not export_status or export_status.status != ExportRequestStatus.Finished:
+    while (
+        not export_status or export_status.status != ExportRequestStatus.Finished.value
+    ):
         # if status previously queried, wait for 10 seconds before re-querying
         if export_status:
             sleep(10)

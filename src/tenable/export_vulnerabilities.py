@@ -15,7 +15,8 @@ from src.tenable.export_status import ExportRequestStatus
 @dataclass
 class VulnExportStatus:
     uuid: str
-    status: ExportRequestStatus
+    # this stores the value of ExportRequestStatus
+    status: str
     chunks_available: list[int]
     chunks_failed: list[int]
     chunks_cancelled: list[int]
@@ -62,7 +63,9 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
     logging.info(f"vuln_export {export_uuid} requested.")
 
     export_status: VulnExportStatus | None = None
-    while not export_status or export_status.status != ExportRequestStatus.Finished:
+    while (
+        not export_status or export_status.status != ExportRequestStatus.Finished.value
+    ):
         # if status previously queried, wait for 10 seconds before re-querying
         if export_status:
             sleep(10)
