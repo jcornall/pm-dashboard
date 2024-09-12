@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
+from src.tenable.credentials import TenableCredentials
+from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
 from src.util.extract.api_export import *
 from src.util.extract.asset_export import *
 from src.util.extract.vuln_export import *
@@ -48,13 +50,16 @@ def main():
     logging.info("Program execution successful, exiting program.")
     sys.exit(0)
 
+
 def export_vuln():
     """Sequence API calls to Tenable service and return downloaded vulnerability data."""
-    vuln_export = VulnExport()
-    vuln_export.post_vuln_export()
-    vuln_export.get_vuln_export_status()
-    vuln_export.download_all_vuln_chunks()
-    return 0
+    export_tenable_vulnerabilities(
+        TenableCredentials(
+            access_key=os.getenv("TENABLE_ACCESS_KEY"),
+            secret_key=os.getenv("TENABLE_SECRET_KEY"),
+        )
+    )
+
 
 def export_asset():
     """Sequence API calls to Tenable service and return downloaded asset data."""
@@ -65,16 +70,21 @@ def export_asset():
     asset_export.download_all_asset_chunks()
     return 0
 
+
 def process_data(file_path):
     """Sequence DataProcessor calls to DataProcessor."""
     data_processor = DataProcessor(file_path)
-    data_processor.transform_data(data_processor.dir_path, data_processor.header_file, data_processor.export_type)
+    data_processor.transform_data(
+        data_processor.dir_path, data_processor.header_file, data_processor.export_type
+    )
     # configure_data_processor(data_processor)
     return 0
+
 
 def configure_data_processor(data_processor):
     """Configure the DataProcessor by generating new YAML files containing all JSON data headers."""
     generate_header_yaml(data_processor)
+
 
 def load_data(table, create_statement, load_statement):
     """Load the data into a MariaDB database."""
@@ -85,6 +95,7 @@ def load_data(table, create_statement, load_statement):
     database_loader.conn.commit()
     database_loader.cursor.close()
     database_loader.close_connection()
+
 
 if __name__ == "__main__":
     main()
