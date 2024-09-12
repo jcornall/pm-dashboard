@@ -44,7 +44,7 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
     }
 
     response = requests.post(
-        f"{TENABLE_API_URL}/vuln/export",
+        f"{TENABLE_API_URL}/vulns/export",
         headers={
             "accept": "application/json",
             "content-type": "application/json",
