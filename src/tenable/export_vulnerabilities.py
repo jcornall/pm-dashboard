@@ -28,7 +28,7 @@ class VulnExportStatus:
     created: int
 
 
-def export_vulnerabilities(creds: TenableCredentials):
+def export_tenable_vulnerabilities(creds: TenableCredentials):
     """
     Requests tennable to export all vulnerabilities, and then saves the data into JSON files.
     This will generate multiple JSON files containing vulnerabilities as Tenable returns them in chunks.

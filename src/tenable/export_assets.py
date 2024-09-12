@@ -21,7 +21,7 @@ class AssetExportStatus:
     chunks_available: list[int]
 
 
-def export_assets(creds: TenableCredentials):
+def export_tenable_assets(creds: TenableCredentials):
     """
     Requests tennable to export all assets, and then saves the data into JSON files.
     This will generate multiple JSON files containing assets, as Tenable returns them in chunks.
