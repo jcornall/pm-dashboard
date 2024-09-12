@@ -52,6 +52,11 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
         },
         json=body,
     )
+    if response.status_code != 200:
+        msg = f"vuln_export failed with status {response.status_code}: {response.text}"
+        logging.error(msg)
+        raise RuntimeError(msg)
+
     export_uuid = response.json()["export_uuid"]
 
     logging.info(f"vuln_export {export_uuid} requested.")

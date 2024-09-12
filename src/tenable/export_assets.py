@@ -41,6 +41,13 @@ def export_tenable_assets(creds: TenableCredentials):
         },
         json=body,
     )
+    if response.status_code != 200:
+        msg = (
+            f"assets_export failed with status {response.status_code}: {response.text}"
+        )
+        logging.error(msg)
+        raise RuntimeError(msg)
+
     export_uuid = response.json()["export_uuid"]
 
     logging.info(f"asset_export {export_uuid} requested.")
