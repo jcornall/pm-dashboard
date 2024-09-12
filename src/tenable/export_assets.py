@@ -117,7 +117,7 @@ def __save_single_assets_chunk(
         )
 
     file_name = f"{current_export.created}_{current_export.uuid}_{chunk_id}.json"
-    with open(ASSET_EXPORT_DIR / file_name) as f:
+    with open(ASSET_EXPORT_DIR / file_name, "w") as f:
         json.dump(res_json, f, ensure_ascii=False, indent=4)
 
     logging.info(f"{file_name} downloaded.")
