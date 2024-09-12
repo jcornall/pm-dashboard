@@ -67,7 +67,7 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
         if export_status:
             sleep(10)
 
-        url = f"{TENABLE_API_URL}/vuln/export/{export_uuid}/status"
+        url = f"{TENABLE_API_URL}/vulns/export/{export_uuid}/status"
         logging.info(f"GET call to {url}...")
         status_res = requests.get(
             url,
