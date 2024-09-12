@@ -1,11 +1,9 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """This module is used for testing .
 """
 
 from src.util.extract.api_export import *
-from src.util.extract.asset_export import *
-from src.util.extract.vuln_export import *
 from src.util.transform.data_processor import *
 from src.util.load.database_loader import *
 from src.config.transform_config import *
@@ -16,30 +14,26 @@ from src.config.logger_config import *
 
 def export_vuln():
     #  Sequence API calls to Tenable service in order to download vulnerability data
-    vuln_export = VulnExport()
-    vuln_export.post_vuln_export()
-    vuln_export.get_vuln_export_status()
-    vuln_export.download_all_vuln_chunks()
-    return 0
+    pass
+
 
 def export_asset():
-    #  Sequence API calls to Tenable service in order to download asset data
-    asset_export = AssetExport()
-    asset_export.post_asset_export()
-    asset_export.get_asset_export_status()
-    asset_export.get_asset_export_jobs()  #  Required due to asset export status metadata differing from vulnerability export metadata
-    asset_export.download_all_asset_chunks()
-    return 0
+    pass
+
 
 def process_data(file_path):
     data_processor = DataProcessor(file_path)
-    data_processor.transform_data(data_processor.dir_path, data_processor.header_file, data_processor.export_type)
+    data_processor.transform_data(
+        data_processor.dir_path, data_processor.header_file, data_processor.export_type
+    )
     # configure_data_processor(data_processor)
     # data_processor.merge_data()
     return 0
 
+
 def configure_data_processor(data_processor):
     generate_header_yaml(data_processor)
+
 
 def load_data(table, create_statement, load_statement):
     database_loader = DatabaseLoader(table, CONN_PARAMS)
@@ -49,6 +43,7 @@ def load_data(table, create_statement, load_statement):
     database_loader.conn.commit()
     database_loader.cursor.close()
     database_loader.close_connection()
+
 
 # # Main
 print(f"Current Working Directory: {Path.cwd()}")
