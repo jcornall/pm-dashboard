@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 """This module contains all constants relevant to the various modules of this program.
 """
 
@@ -26,8 +26,11 @@ VULN_DATA_DIR = DATA_DIR / "vulnerabilities"
 VULN_EXPORT_DIR = VULN_DATA_DIR / f"{FORMATTED_DATE}_vuln"
 ASSET_DATA_DIR = DATA_DIR / "assets"
 ASSET_EXPORT_DIR = ASSET_DATA_DIR / f"{FORMATTED_DATE}_asset"
+COMPLIANCE_DATA_DIR = DATA_DIR / "compliance"
+COMPLIANCE_EXPORT_DIR = COMPLIANCE_DATA_DIR / f"{FORMATTED_DATE}_compliance"
 RESOURCE_DIR = Path(r"src") / "config" / "resource"
-SQL_DIR = RESOURCE_DIR / "sql"
+TENABLE_SQL_DIR = RESOURCE_DIR / "sql" / "tenable"
+
 
 # Keys
 load_dotenv(dotenv_path=ENV_PATH)

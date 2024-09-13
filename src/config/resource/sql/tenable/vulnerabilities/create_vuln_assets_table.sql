@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS vuln_assets (
+    a_id INT AUTO_INCREMENT NOT NULL,
+    e_id INT NOT NULL,
+    created_on DATE,
+    asset_agent_uuid VARCHAR(64),
+    asset_bios_uuid VARCHAR(64),
+    asset_device_type VARCHAR(32),
+    asset_fqdn VARCHAR(128),
+    asset_hostname VARCHAR(128),
+    asset_ipv4 VARCHAR(64),
+    asset_ipv6 VARCHAR(64),
+    asset_last_authenticated_results DATETIME,
+    asset_mac_address VARCHAR(32),
+    asset_netbios_name VARCHAR(32),
+    asset_network_id VARCHAR(64),
+    asset_operating_system_0 VARCHAR(128),
+    asset_operating_system_1 VARCHAR(128),
+    asset_operating_system_2 VARCHAR(128),
+    asset_operating_system_3 VARCHAR(128),
+    asset_tracked VARCHAR(8),
+    asset_uuid VARCHAR(64),
+    PRIMARY KEY (a_id)
+);
