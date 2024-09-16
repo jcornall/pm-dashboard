@@ -217,8 +217,12 @@ CREATE TABLE IF NOT EXISTS plugin_bugtraqs
 
 CREATE TABLE IF NOT EXISTS plugin_cpes
 (
-    plugin_id INTEGER NOT NULL,
-    cpe       TEXT    NOT NULL,
+    plugin_id INTEGER      NOT NULL,
+
+    # cpe strings doesn't have a defined length
+    # but primary key requires all participating columns to have fixed length
+    # 512 should be long enough
+    cpe       VARCHAR(512) NOT NULL,
 
     CONSTRAINT pk_plugin_cpe PRIMARY KEY (plugin_id, cpe),
     CONSTRAINT fk_plugin_cpe FOREIGN KEY (plugin_id) REFERENCES plugins (id)
@@ -228,8 +232,12 @@ CREATE TABLE IF NOT EXISTS plugin_cpes
 
 CREATE TABLE IF NOT EXISTS plugin_cves
 (
-    plugin_id INTEGER NOT NULL,
-    cve       TEXT    NOT NULL,
+    plugin_id INTEGER      NOT NULL,
+
+    # cve strings doesn't have a defined length
+    # but primary key requires all participating columns to have fixed length
+    # 512 should be long enough
+    cve       VARCHAR(512) NOT NULL,
 
     CONSTRAINT pk_plugin_cve PRIMARY KEY (plugin_id, cve),
     CONSTRAINT fk_plugin_cve FOREIGN KEY (plugin_id) REFERENCES plugins (id)
