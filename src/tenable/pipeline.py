@@ -1,6 +1,7 @@
 from src.tenable.credentials import TenableCredentials
 from src.tenable.export_assets import export_tenable_assets
 from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
+from src.tenable.load_vulnerabilities import load_tenable_vulnerabilities
 from src.util.extract.api_export import *
 from src.util.transform.data_processor import *
 from src.util.load.database_loader import *
@@ -37,7 +38,7 @@ def tenable():
 
     # Extract
     logging.info("Starting data extraction...")
-    export_tenable_vulnerabilities(creds)
+    vuln_export_status = export_tenable_vulnerabilities(creds)
     logging.info("Vulnerability data extraction successful...")
     export_tenable_assets(creds)
     logging.info("Asset data extraction successful...")
@@ -51,7 +52,7 @@ def tenable():
 
     # Load
     logging.info("Starting data loading...")
-    load_data("vulnerabilities", "create_vuln_table.txt", "load_vuln_csv.txt")
+    load_tenable_vulnerabilities(vuln_export_status)
 
     logging.info("Program execution successful, exiting program.")
 

@@ -31,7 +31,7 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 """
 
 
-def load_vulnerabilities(export: VulnExportStatus):
+def load_tenable_vulnerabilities(export: VulnExportStatus):
     """Loads all vulnerabilities within the given export to the database"""
     conn = mariadb.connect(**CONN_PARAMS)
 

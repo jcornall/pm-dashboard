@@ -33,7 +33,7 @@ class VulnExportStatus:
         return f"{self.created}_{self.uuid}_{chunk_id}.json"
 
 
-def export_tenable_vulnerabilities(creds: TenableCredentials):
+def export_tenable_vulnerabilities(creds: TenableCredentials) -> VulnExportStatus:
     """
     Requests tennable to export all vulnerabilities, and then saves the data into JSON files.
     This will generate multiple JSON files containing vulnerabilities as Tenable returns them in chunks.
@@ -98,6 +98,8 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
 
     for t in threads:
         t.join()
+
+    return export_status
 
 
 def __save_single_vuln_chunk(
