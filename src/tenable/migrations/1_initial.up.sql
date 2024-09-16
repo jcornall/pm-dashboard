@@ -2,16 +2,16 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS vulnerabilities
 (
-    uuid                       UUID UNIQUE,
-    asset_uuid                 UUID      NOT NULL,
+    uuid                       VARCHAR(36) UNIQUE,
+    asset_uuid                 VARCHAR(36) NOT NULL,
     recast_reason              TEXT,
-    recast_rule_uuid           UUID,
-    scan_uuid                  UUID      NOT NULL,
-    severity                   TEXT      NOT NULL,
-    severity_id                INTEGER   NOT NULL,
-    severity_default_id        INTEGER   NOT NULL,
-    severity_modification_type TEXT      NOT NULL,
-    first_found                TIMESTAMP NOT NULL,
+    recast_rule_uuid           VARCHAR(36),
+    scan_uuid                  VARCHAR(36) NOT NULL,
+    severity                   TEXT        NOT NULL,
+    severity_id                INTEGER     NOT NULL,
+    severity_default_id        INTEGER     NOT NULL,
+    severity_modification_type TEXT        NOT NULL,
+    first_found                TIMESTAMP   NOT NULL,
     last_fixed                 TIMESTAMP,
     last_found                 TIMESTAMP,
     indexed                    TIMESTAMP,
@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
 
 CREATE TABLE IF NOT EXISTS assets
 (
-    uuid                         UUID UNIQUE PRIMARY KEY,
-    agent_uuid                   UUID,
-    bios_uuid                    UUID,
+    uuid                         VARCHAR(36) UNIQUE PRIMARY KEY,
+    agent_uuid                   VARCHAR(36),
+    bios_uuid                    VARCHAR(36),
     device_type                  TEXT,
     fqdn                         TEXT,
     hostname                     TEXT,
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS assets
 
 CREATE TABLE IF NOT EXISTS asset_os
 (
-    asset_uuid       UUID NOT NULL,
-    operating_system TEXT NOT NULL,
+    asset_uuid       VARCHAR(36) NOT NULL,
+    operating_system TEXT        NOT NULL,
 
     CONSTRAINT pk_asset_os PRIMARY KEY (asset_uuid, operating_system),
     CONSTRAINT fk_asset_os FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
@@ -58,19 +58,19 @@ CREATE TABLE IF NOT EXISTS asset_os
 
 CREATE TABLE IF NOT EXISTS scans
 (
-    uuid          UUID      NOT NULL,
-    schedule_uuid UUID      NOT NULL,
-    started_at    TIMESTAMP NOT NULL,
+    uuid          VARCHAR(36) NOT NULL,
+    schedule_uuid VARCHAR(36) NOT NULL,
+    started_at    TIMESTAMP   NOT NULL,
 
     CONSTRAINT pk_scan PRIMARY KEY (uuid)
 );
 
 CREATE TABLE IF NOT EXISTS vulnerability_ports
 (
-    vulnerability_uuid UUID    NOT NULL,
-    port               INTEGER NOT NULL,
-    protocol           TEXT    NOT NULL,
-    service            TEXT    NOT NULL,
+    vulnerability_uuid VARCHAR(36) NOT NULL,
+    port               INTEGER     NOT NULL,
+    protocol           TEXT        NOT NULL,
+    service            TEXT        NOT NULL,
 
     CONSTRAINT fk_vuln_port FOREIGN KEY (vulnerability_uuid) REFERENCES vulnerabilities (uuid)
         ON DELETE CASCADE
