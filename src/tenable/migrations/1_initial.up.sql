@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS vulnerability
+CREATE TABLE IF NOT EXISTS vulnerabilities
 (
     uuid                       UUID UNIQUE,
     asset_uuid                 UUID      NOT NULL,
@@ -17,15 +17,15 @@ CREATE TABLE IF NOT EXISTS vulnerability
     source                     TEXT,
 
     CONSTRAINT pk_vulnerability PRIMARY KEY (uuid),
-    CONSTRAINT fk_vuln_asset FOREIGN KEY (asset_uuid) REFERENCES asset (uuid)
+    CONSTRAINT fk_vuln_asset FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE NO ACTION
         ON UPDATE CASCADE,
-    CONSTRAINT fk_vuln_scan FOREIGN KEY (scan_uuid) REFERENCES scan (uuid)
+    CONSTRAINT fk_vuln_scan FOREIGN KEY (scan_uuid) REFERENCES scans (uuid)
         ON DELETE NO ACTION
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS asset
+CREATE TABLE IF NOT EXISTS assets
 (
     uuid                         UUID UNIQUE PRIMARY KEY,
     agent_uuid                   UUID,
@@ -49,12 +49,12 @@ CREATE TABLE IF NOT EXISTS asset_os
     operating_system TEXT NOT NULL,
 
     CONSTRAINT pk_asset_os PRIMARY KEY (asset_uuid, operating_system),
-    CONSTRAINT fk_asset_os FOREIGN KEY (asset_uuid) REFERENCES asset (uuid)
+    CONSTRAINT fk_asset_os FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS scan
+CREATE TABLE IF NOT EXISTS scans
 (
     uuid          UUID      NOT NULL,
     schedule_uuid UUID      NOT NULL,
@@ -63,19 +63,19 @@ CREATE TABLE IF NOT EXISTS scan
     CONSTRAINT pk_scan PRIMARY KEY (uuid)
 );
 
-CREATE TABLE IF NOT EXISTS vulnerability_port
+CREATE TABLE IF NOT EXISTS vulnerability_ports
 (
     vulnerability_uuid UUID    NOT NULL,
     port               INTEGER NOT NULL,
     protocol           TEXT    NOT NULL,
     service            TEXT    NOT NULL,
 
-    CONSTRAINT fk_vuln_port FOREIGN KEY (vulnerability_uuid) REFERENCES vulnerability (uuid)
+    CONSTRAINT fk_vuln_port FOREIGN KEY (vulnerability_uuid) REFERENCES vulnerabilities (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin
+CREATE TABLE IF NOT EXISTS plugins
 (
     id                           INTEGER NOT NULL,
     canvas_package               TEXT,
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS plugin
     CONSTRAINT pk_plugin PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS plugin_vpr
+CREATE TABLE IF NOT EXISTS plugin_vprs
 (
     id        SERIAL,
     plugin_id INTEGER NOT NULL,
@@ -129,12 +129,12 @@ CREATE TABLE IF NOT EXISTS plugin_vpr
     updated   TIMESTAMP,
 
     CONSTRAINT pk_plugin_vpr PRIMARY KEY (id),
-    CONSTRAINT fk_plugin_vpr FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_vpr FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_cvss_vector
+CREATE TABLE IF NOT EXISTS plugin_cvss_vectors
 (
     id                     SERIAL,
     plugin_id              INTEGER NOT NULL,
@@ -147,12 +147,12 @@ CREATE TABLE IF NOT EXISTS plugin_cvss_vector
     raw                    TEXT,
 
     CONSTRAINT pk_plugin_cvss_vector PRIMARY KEY (id),
-    CONSTRAINT fk_plugin_cvss_vector FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_cvss_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_cvss3_vector
+CREATE TABLE IF NOT EXISTS plugin_cvss3_vectors
 (
 
     id                     SERIAL,
@@ -166,12 +166,12 @@ CREATE TABLE IF NOT EXISTS plugin_cvss3_vector
     raw                    TEXT,
 
     CONSTRAINT pk_plugin_cvss3_vector PRIMARY KEY (id),
-    CONSTRAINT fk_plugin_cvss3_vector FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_cvss3_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_cvss_temporal_vector
+CREATE TABLE IF NOT EXISTS plugin_cvss_temporal_vectors
 (
     id                SERIAL,
     plugin_id         INTEGER NOT NULL,
@@ -182,12 +182,12 @@ CREATE TABLE IF NOT EXISTS plugin_cvss_temporal_vector
 
 
     CONSTRAINT pk_plugin_cvss_temporal_vector PRIMARY KEY (id),
-    CONSTRAINT fk_plugin_cvss_temporal_vector FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_cvss_temporal_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_cvss3_temporal_vector
+CREATE TABLE IF NOT EXISTS plugin_cvss3_temporal_vectors
 (
     id                SERIAL,
     plugin_id         INTEGER NOT NULL,
@@ -197,40 +197,40 @@ CREATE TABLE IF NOT EXISTS plugin_cvss3_temporal_vector
     raw               TEXT,
 
     CONSTRAINT pk_plugin_cvss3_temporal_vector PRIMARY KEY (id),
-    CONSTRAINT fk_plugin_cvss3_temporal_vector FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_cvss3_temporal_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_bugtraq
+CREATE TABLE IF NOT EXISTS plugin_bugtraqs
 (
     plugin_id  INTEGER NOT NULL,
     bugtraq_id INTEGER NOT NULL,
 
     CONSTRAINT pk_plugin_bugtraq PRIMARY KEY (plugin_id, bugtraq_id),
-    CONSTRAINT fk_plugin_bugtraq FOREIGN KEY (bugtraq_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_bugtraq FOREIGN KEY (bugtraq_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_cpe
+CREATE TABLE IF NOT EXISTS plugin_cpes
 (
     plugin_id INTEGER NOT NULL,
     cpe       TEXT    NOT NULL,
 
     CONSTRAINT pk_plugin_cpe PRIMARY KEY (plugin_id, cpe),
-    CONSTRAINT fk_plugin_cpe FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_cpe FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS plugin_cve
+CREATE TABLE IF NOT EXISTS plugin_cves
 (
     plugin_id INTEGER NOT NULL,
     cve       TEXT    NOT NULL,
 
     CONSTRAINT pk_plugin_cve PRIMARY KEY (plugin_id, cve),
-    CONSTRAINT fk_plugin_cve FOREIGN KEY (plugin_id) REFERENCES plugin (id)
+    CONSTRAINT fk_plugin_cve FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 )
