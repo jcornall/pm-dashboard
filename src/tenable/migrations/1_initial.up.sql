@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
 
 CREATE TABLE IF NOT EXISTS asset_os
 (
-    asset_uuid       VARCHAR(36) NOT NULL,
-    operating_system TEXT        NOT NULL,
+    asset_uuid       VARCHAR(36)  NOT NULL,
+    operating_system VARCHAR(255) NOT NULL,
 
     CONSTRAINT pk_asset_os PRIMARY KEY (asset_uuid, operating_system),
     CONSTRAINT fk_asset_os FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
