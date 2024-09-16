@@ -1,5 +1,32 @@
 BEGIN;
 
+CREATE TABLE IF NOT EXISTS assets
+(
+    uuid                         VARCHAR(36) UNIQUE PRIMARY KEY,
+    agent_uuid                   VARCHAR(36),
+    bios_uuid                    VARCHAR(36),
+    device_type                  TEXT,
+    fqdn                         TEXT,
+    hostname                     TEXT,
+    ipv4                         TEXT,
+    ipv6                         TEXT,
+    last_authenticated_results   TIMESTAMP,
+    last_unauthenticated_results TIMESTAMP,
+    mac_address                  TEXT,
+    netbios_name                 TEXT,
+    network_id                   TEXT,
+    tracked                      BOOL
+);
+
+CREATE TABLE IF NOT EXISTS scans
+(
+    uuid          VARCHAR(36) NOT NULL,
+    schedule_uuid VARCHAR(36) NOT NULL,
+    started_at    TIMESTAMP   NOT NULL,
+
+    CONSTRAINT pk_scan PRIMARY KEY (uuid)
+);
+
 CREATE TABLE IF NOT EXISTS vulnerabilities
 (
     uuid                       VARCHAR(36) UNIQUE,
@@ -27,24 +54,6 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS assets
-(
-    uuid                         VARCHAR(36) UNIQUE PRIMARY KEY,
-    agent_uuid                   VARCHAR(36),
-    bios_uuid                    VARCHAR(36),
-    device_type                  TEXT,
-    fqdn                         TEXT,
-    hostname                     TEXT,
-    ipv4                         TEXT,
-    ipv6                         TEXT,
-    last_authenticated_results   TIMESTAMP,
-    last_unauthenticated_results TIMESTAMP,
-    mac_address                  TEXT,
-    netbios_name                 TEXT,
-    network_id                   TEXT,
-    tracked                      BOOL
-);
-
 CREATE TABLE IF NOT EXISTS asset_os
 (
     asset_uuid       VARCHAR(36) NOT NULL,
@@ -54,15 +63,6 @@ CREATE TABLE IF NOT EXISTS asset_os
     CONSTRAINT fk_asset_os FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS scans
-(
-    uuid          VARCHAR(36) NOT NULL,
-    schedule_uuid VARCHAR(36) NOT NULL,
-    started_at    TIMESTAMP   NOT NULL,
-
-    CONSTRAINT pk_scan PRIMARY KEY (uuid)
 );
 
 CREATE TABLE IF NOT EXISTS vulnerability_ports
