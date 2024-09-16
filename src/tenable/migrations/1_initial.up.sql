@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE IF NOT EXISTS vulnerabilities
 (
     uuid                       UUID UNIQUE,
@@ -233,4 +235,6 @@ CREATE TABLE IF NOT EXISTS plugin_cves
     CONSTRAINT fk_plugin_cve FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-)
+);
+
+COMMIT;
