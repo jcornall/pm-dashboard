@@ -64,17 +64,6 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
     for vuln in json_data:
         vuln_id = uuid7()
 
-        port_info = vuln["port"]
-        cursor.execute(
-            __INSERT_VULN_PORT_SQL,
-            [
-                vuln_id,
-                port_info.get("port"),
-                port_info.get("protocol"),
-                port_info.get("service"),
-            ],
-        )
-
         scan_info = vuln["scan"]
         cursor.execute(
             __INSERT_SCAN_SQL,
@@ -120,5 +109,16 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
                 vuln.get("indexed"),
                 vuln.get("state"),
                 vuln.get("source"),
+            ],
+        )
+
+        port_info = vuln["port"]
+        cursor.execute(
+            __INSERT_VULN_PORT_SQL,
+            [
+                vuln_id,
+                port_info.get("port"),
+                port_info.get("protocol"),
+                port_info.get("service"),
             ],
         )
