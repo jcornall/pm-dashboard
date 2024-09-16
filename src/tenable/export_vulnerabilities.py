@@ -28,6 +28,10 @@ class VulnExportStatus:
     num_assets_per_chunk: int
     created: int
 
+    def chunk_file_name(self, chunk_id: int) -> str:
+        """Returns the name of the file that stores the data of the chunk with the given chunk id."""
+        return f"{self.created}_{self.uuid}_{chunk_id}.json"
+
 
 def export_tenable_vulnerabilities(creds: TenableCredentials):
     """
@@ -126,7 +130,7 @@ def __save_single_vuln_chunk(
             f"catatrophic failure: tenable returned an empty response when downloing chunk "
         )
 
-    file_name = f"{current_export.created}_{current_export.uuid}_{chunk_id}.json"
+    file_name = current_export.chunk_file_name(chunk_id)
     with open(VULN_EXPORT_DIR / file_name, "w") as f:
         json.dump(res_json, f, ensure_ascii=False, indent=4)
 
