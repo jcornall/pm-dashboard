@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS vulnerability_ports
     vulnerability_uuid VARCHAR(36) NOT NULL,
     port               INTEGER     NOT NULL,
     protocol           TEXT        NOT NULL,
-    service            TEXT        NOT NULL,
+    service            TEXT,
 
     CONSTRAINT fk_vuln_port FOREIGN KEY (vulnerability_uuid) REFERENCES vulnerabilities (uuid)
         ON DELETE CASCADE

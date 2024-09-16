@@ -54,10 +54,8 @@ def load_tenable_vulnerabilities(export: VulnExportStatus):
                     f"chunk {chunk_id} of vuln_export {export.uuid} loaded successfully."
                 )
             except Exception as e:
-                logging.error(
-                    f"failed to load vuln_export {export.uuid} chunk {chunk_id} into database. skipping this chunk. error: {e}"
-                )
                 conn.rollback()
+                raise e
 
 
 def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
@@ -69,7 +67,12 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
         port_info = vuln["port"]
         cursor.execute(
             __INSERT_VULN_PORT_SQL,
-            [vuln_id, port_info["port"], port_info["protocol", port_info["service"]]],
+            [
+                vuln_id,
+                port_info.get("port"),
+                port_info.get("protocol"),
+                port_info.get("service"),
+            ],
         )
 
         scan_info = vuln["scan"]
