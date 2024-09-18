@@ -8,26 +8,40 @@ from src.tenable.export_vulnerabilities import VulnExportStatus
 __INSERT_VULN_PORT_SQL = """
 INSERT INTO vulnerability_ports
   (vulnerability_uuid, port, protocol, service)
-VALUES (?,?,?,?);
+VALUES (?,?,?,?)
+ON DUPLICATE KEY UPDATE port=port;
 """
 
 __INSERT_SCAN_SQL = """
 INSERT INTO scans
   (uuid, schedule_uuid, started_at)
-VALUES (?,?,?);
+VALUES (?, ?, STR_TO_DATE(?, "%Y-%m-%dT%T.%fZ"))
+ON DUPLICATE KEY update uuid=uuid;
 """
 
 __INSERT_ASSET_SQL = """
 INSERT INTO assets
   (uuid, agent_uuid, bios_uuid, device_type, fqdn, hostname, ipv4, ipv6, last_authenticated_results, last_unauthenticated_results, mac_address, netbios_name, network_id, tracked)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-ON DUPLICATE KEY uuid=uuid; # do nothing when there is an existing entry for asset with the same id
+VALUES (
+  ?,?,?,?,?,?,?,?,
+  STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
+  STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
+  ?,?,?,?
+)
+ON DUPLICATE KEY UPDATE uuid=uuid; # do nothing when there is an existing entry for asset with the same id
 """
 
 __INSERT_VULN_SQL = """
 INSERT INTO vulnerabilities
   (uuid, asset_uuid, recast_reason, recast_rule_uuid, scan_uuid, severity, severity_id, severity_default_id, severity_modification_type, first_found, last_fixed, last_found, indexed, state, source)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+VALUES (
+  ?,?,?,?,?,?,?,?,?,
+  STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
+  STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
+  STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
+  STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
+  ?,?
+);
 """
 
 
