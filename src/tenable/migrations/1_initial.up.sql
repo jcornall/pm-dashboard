@@ -85,7 +85,6 @@ CREATE TABLE IF NOT EXISTS plugins
     checks_for_malware           BOOL,
     cvss3_base_score             FLOAT,
     cvss3_temporal_score         FLOAT,
-    cvss3_vector                 FLOAT,
     cvss_base_score              FLOAT,
     cvss_temporal_score          FLOAT,
     d2_elliot_name               TEXT,
@@ -125,12 +124,11 @@ CREATE TABLE IF NOT EXISTS plugins
 
 CREATE TABLE IF NOT EXISTS plugin_vprs
 (
-    id        SERIAL,
     plugin_id INTEGER NOT NULL,
     score     FLOAT,
     updated   DATETIME,
 
-    CONSTRAINT pk_plugin_vpr PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_vpr PRIMARY KEY (plugin_id),
     CONSTRAINT fk_plugin_vpr FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
