@@ -89,12 +89,6 @@ VALUES (?, ?, STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"))
 ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
-__INSERT_PLUGIN_BUGTRAQ = """
-INSERT INTO plugin_bugtraqs(plugin_id, bugtraq_id)
-VALUES (?, ?)
-ON DUPLICATE KEY plugin_id=plugin_id;
-"""
-
 
 def load_tenable_vulnerabilities(export: VulnExportStatus):
     """Loads all vulnerabilities within the given export to the database"""

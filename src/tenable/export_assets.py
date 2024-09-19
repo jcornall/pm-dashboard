@@ -21,6 +21,10 @@ class AssetExportStatus:
     status: str
     chunks_available: list[int]
 
+    def chunk_file_name(self, chunk_id: int) -> str:
+        """Returns the name of the file that stores the data of the chunk with the given chunk id."""
+        return f"{self.created}_{self.uuid}_{chunk_id}.json"
+
 
 def export_tenable_assets(creds: TenableCredentials):
     """
