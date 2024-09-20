@@ -1,6 +1,5 @@
 import json
 import logging
-from re import S
 import mariadb
 from uuid_extensions import uuid7
 from src.config.constants import CONN_PARAMS, VULN_EXPORT_DIR
@@ -20,16 +19,16 @@ VALUES (?, ?, STR_TO_DATE(?, "%Y-%m-%dT%T.%fZ"))
 ON DUPLICATE KEY update uuid=uuid;
 """
 
-__INSERT_ASSET_SQL = """
-INSERT INTO assets
-  (uuid, agent_uuid, bios_uuid, device_type, fqdn, hostname, ipv4, ipv6, last_authenticated_results, last_unauthenticated_results, mac_address, netbios_name, network_id, tracked)
+__INSERT_ASSET_INFO_SQL = """
+INSERT INTO vulnerability_asset_infos
+  (asset_uuid, agent_uuid, bios_uuid, device_type, fqdn, hostname, ipv4, ipv6, last_authenticated_results, last_unauthenticated_results, mac_address, netbios_name, network_id, tracked)
 VALUES (
   ?,?,?,?,?,?,?,?,
   STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
   STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
   ?,?,?,?
 )
-ON DUPLICATE KEY UPDATE uuid=uuid; # do nothing when there is an existing entry for asset with the same id
+ON DUPLICATE KEY UPDATE asset_uuid=asset_uuid;
 """
 
 __INSERT_VULN_SQL = """
@@ -90,9 +89,10 @@ ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
 
-def load_tenable_vulnerabilities(export: VulnExportStatus):
+def load_tenable_vulnerabilities(export: VulnExportStatus, to: mariadb.Connection):
     """Loads all vulnerabilities within the given export to the database"""
-    conn = mariadb.connect(**CONN_PARAMS)
+
+    conn = to
 
     for chunk_id in export.chunks_available:
         with open(VULN_EXPORT_DIR / export.chunk_file_name(chunk_id), "r") as f:
@@ -131,7 +131,7 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
 
         asset = vuln["asset"]
         cursor.execute(
-            __INSERT_ASSET_SQL,
+            __INSERT_ASSET_INFO_SQL,
             [
                 asset.get("uuid"),
                 asset.get("agent_uuid"),
@@ -296,50 +296,24 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
 
         bid = plugin.get("bid")
         if bid and len(bid) > 0:
-            stmt = """INSERT INTO plugin_bugtraqs(plugin_id, bugtraq_id) VALUES """
-            values = []
-            for i, id in enumerate(bid):
-                placeholder = ""
-                if i:
-                    placeholder = ",(?,?)"
-                else:
-                    placeholder = "(?,?)"
-
-                stmt += placeholder
-                values.append(plugin_id)
-                values.append(id)
-            stmt += " ON DUPLICATE KEY UPDATE plugin_id=plugin_id;"
-
-            cursor.execute(stmt, values)
+            cursor.executemany(
+                "INSERT INTO plugin_bugtraqs(plugin_id, bugtraq_id) VALUES (?,?) "
+                "ON DUPLICATE KEY UPDATE plugin_id=plugin_id;",
+                [(plugin_id, id) for id in bid],
+            )
 
         cpes = plugin.get("cpe")
         if cpes and len(cpes) > 0:
-            stmt = """INSERT INTO plugin_cpes(plugin_id, cpe) VALUES """
-            values = []
-            for i, cpe in enumerate(cpes):
-                placeholder = ""
-                if i:
-                    placeholder = ",(?,?)"
-                else:
-                    placeholder = "(?,?)"
-
-                stmt += placeholder
-                values.append(plugin_id)
-                values.append(cpe)
-            stmt += " ON DUPLICATE KEY UPDATE plugin_id=plugin_id;"
+            cursor.executemany(
+                "INSERT INTO plugin_cpes(plugin_id, cpe) VALUES (?,?) "
+                "ON DUPLICATE KEY UPDATE plugin_id=plugin_id;",
+                [(plugin_id, cpe) for cpe in cpes],
+            )
 
         cves = plugin.get("cve")
         if cves and len(cves) > 0:
-            stmt = """INSERT INTO plugin_cves(plugin_id, cve) VALUES """
-            values = []
-            for i, cve in enumerate(cves):
-                placeholder = ""
-                if i:
-                    placeholder = ",(?,?)"
-                else:
-                    placeholder = "(?,?)"
-
-                stmt += placeholder
-                values.append(plugin_id)
-                values.append(cve)
-            stmt += " ON DUPLICATE KEY UPDATE plugin_id=plugin_id;"
+            cursor.executemany(
+                "INSERT INTO plugin_cves(plugin_id, cve) VALUES (?,?) "
+                "ON DUPLICATE KEY UPDATE plugin_id=plugin_id;",
+                [(plugin_id, cve) for cve in cves],
+            )

@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS asset_installed_softwares
 CREATE TABLE IF NOT EXISTS asset_ipv4_addresses
 (
     asset_uuid VARCHAR(255) NOT NULL,
-    ipv4       CHAR(15)     NOT NULL,
+    ipv4       VARCHAR(15)  NOT NULL,
 
     CONSTRAINT pk_asset_ipv4 PRIMARY KEY (asset_uuid, ipv4),
     CONSTRAINT fk_asset_ipv4 FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS asset_ipv4_addresses
 CREATE TABLE IF NOT EXISTS asset_ipv6_addresses
 (
     asset_uuid VARCHAR(255) NOT NULL,
-    ipv6       CHAR(38)     NOT NULL,
+    ipv6       VARCHAR(39)  NOT NULL,
 
     CONSTRAINT pk_asset_ipv6 PRIMARY KEY (asset_uuid, ipv6),
     CONSTRAINT fk_asset_ipv6 FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
@@ -254,6 +254,29 @@ CREATE TABLE IF NOT EXISTS scans
     started_at    DATETIME     NOT NULL,
 
     CONSTRAINT pk_scan PRIMARY KEY (uuid)
+);
+
+CREATE TABLE IF NOT EXISTS vulnerability_asset_infos
+(
+    asset_uuid                   VARCHAR(255),
+    agent_uuid                   VARCHAR(255),
+    bios_uuid                    VARCHAR(255),
+    device_type                  TEXT,
+    fqdn                         TEXT,
+    hostname                     TEXT,
+    ipv4                         TEXT,
+    ipv6                         TEXT,
+    last_authenticated_results   DATETIME,
+    last_unauthenticated_results DATETIME,
+    mac_address                  TEXT,
+    netbios_name                 TEXT,
+    network_id                   TEXT,
+    tracked                      BOOL,
+
+    CONSTRAINT pk_vulnerability_asset_infos PRIMARY KEY (asset_uuid),
+    CONSTRAINT fk_vulnerability_asset_infos FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS vulnerabilities
