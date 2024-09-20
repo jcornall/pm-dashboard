@@ -2,7 +2,7 @@ import json
 import logging
 import mariadb
 from uuid_extensions import uuid7
-from src.config.constants import CONN_PARAMS, VULN_EXPORT_DIR
+from src.config.constants import VULN_EXPORT_DIR
 from src.tenable.export_vulnerabilities import VulnExportStatus
 
 __INSERT_VULN_PORT_SQL = """
@@ -33,9 +33,9 @@ ON DUPLICATE KEY UPDATE asset_uuid=asset_uuid;
 
 __INSERT_VULN_SQL = """
 INSERT INTO vulnerabilities
-  (uuid, asset_uuid, recast_reason, recast_rule_uuid, scan_uuid, severity, severity_id, severity_default_id, severity_modification_type, first_found, last_fixed, last_found, indexed, state, source)
+  (uuid, asset_uuid, plugin_id, recast_reason, recast_rule_uuid, scan_uuid, severity, severity_id, severity_default_id, severity_modification_type, first_found, last_fixed, last_found, indexed, state, source)
 VALUES (
-  ?,?,?,?,?,?,?,?,?,
+  ?,?,?,?,?,?,?,?,?,?,
   STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
   STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
   STR_TO_DATE(?, "%Y-%m-%dT%T%.%#Z"),
@@ -147,38 +147,6 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
                 asset.get("netbios_name"),
                 asset.get("network_id"),
                 asset.get("tracked"),
-            ],
-        )
-
-        cursor.execute(
-            __INSERT_VULN_SQL,
-            [
-                vuln_id,
-                asset.get("uuid"),
-                vuln.get("recast_reason"),
-                vuln.get("recast_rule_uuid"),
-                scan_info.get("uuid"),
-                vuln.get("severity"),
-                vuln.get("severity_id"),
-                vuln.get("severity_default_id"),
-                vuln.get("severity_modification_type"),
-                vuln.get("first_found"),
-                vuln.get("last_fixed"),
-                vuln.get("last_found"),
-                vuln.get("indexed"),
-                vuln.get("state"),
-                vuln.get("source"),
-            ],
-        )
-
-        port_info = vuln["port"]
-        cursor.execute(
-            __INSERT_VULN_PORT_SQL,
-            [
-                vuln_id,
-                port_info.get("port"),
-                port_info.get("protocol"),
-                port_info.get("service"),
             ],
         )
 
@@ -317,3 +285,36 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
                 "ON DUPLICATE KEY UPDATE plugin_id=plugin_id;",
                 [(plugin_id, cve) for cve in cves],
             )
+
+        cursor.execute(
+            __INSERT_VULN_SQL,
+            [
+                vuln_id,
+                asset.get("uuid"),
+                plugin_id,
+                vuln.get("recast_reason"),
+                vuln.get("recast_rule_uuid"),
+                scan_info.get("uuid"),
+                vuln.get("severity"),
+                vuln.get("severity_id"),
+                vuln.get("severity_default_id"),
+                vuln.get("severity_modification_type"),
+                vuln.get("first_found"),
+                vuln.get("last_fixed"),
+                vuln.get("last_found"),
+                vuln.get("indexed"),
+                vuln.get("state"),
+                vuln.get("source"),
+            ],
+        )
+
+        port_info = vuln["port"]
+        cursor.execute(
+            __INSERT_VULN_PORT_SQL,
+            [
+                vuln_id,
+                port_info.get("port"),
+                port_info.get("protocol"),
+                port_info.get("service"),
+            ],
+        )

@@ -256,68 +256,6 @@ CREATE TABLE IF NOT EXISTS scans
     CONSTRAINT pk_scan PRIMARY KEY (uuid)
 );
 
-CREATE TABLE IF NOT EXISTS vulnerability_asset_infos
-(
-    asset_uuid                   VARCHAR(255),
-    agent_uuid                   VARCHAR(255),
-    bios_uuid                    VARCHAR(255),
-    device_type                  TEXT,
-    fqdn                         TEXT,
-    hostname                     TEXT,
-    ipv4                         TEXT,
-    ipv6                         TEXT,
-    last_authenticated_results   DATETIME,
-    last_unauthenticated_results DATETIME,
-    mac_address                  TEXT,
-    netbios_name                 TEXT,
-    network_id                   TEXT,
-    tracked                      BOOL,
-
-    CONSTRAINT pk_vulnerability_asset_infos PRIMARY KEY (asset_uuid),
-    CONSTRAINT fk_vulnerability_asset_infos FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION
-);
-
-CREATE TABLE IF NOT EXISTS vulnerabilities
-(
-    uuid                       VARCHAR(255) UNIQUE,
-    asset_uuid                 VARCHAR(255) NOT NULL,
-    recast_reason              TEXT,
-    recast_rule_uuid           VARCHAR(255),
-    scan_uuid                  VARCHAR(255) NOT NULL,
-    severity                   TEXT         NOT NULL,
-    severity_id                INTEGER      NOT NULL,
-    severity_default_id        INTEGER      NOT NULL,
-    severity_modification_type TEXT         NOT NULL,
-    first_found                DATETIME     NOT NULL,
-    last_fixed                 DATETIME,
-    last_found                 DATETIME,
-    indexed                    DATETIME,
-    state                      TEXT,
-    source                     TEXT,
-
-    CONSTRAINT pk_vulnerability PRIMARY KEY (uuid),
-    CONSTRAINT fk_vuln_asset FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
-        ON DELETE NO ACTION
-        ON UPDATE CASCADE,
-    CONSTRAINT fk_vuln_scan FOREIGN KEY (scan_uuid) REFERENCES scans (uuid)
-        ON DELETE NO ACTION
-        ON UPDATE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS vulnerability_ports
-(
-    vulnerability_uuid VARCHAR(255) NOT NULL,
-    port               INTEGER      NOT NULL,
-    protocol           TEXT         NOT NULL,
-    service            TEXT,
-
-    CONSTRAINT fk_vuln_port FOREIGN KEY (vulnerability_uuid) REFERENCES vulnerabilities (uuid)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS plugins
 (
     id                           INTEGER NOT NULL,
@@ -361,6 +299,73 @@ CREATE TABLE IF NOT EXISTS plugins
     vuln_publication_date        DATETIME,
 
     CONSTRAINT pk_plugin PRIMARY KEY (id)
+);
+
+
+CREATE TABLE IF NOT EXISTS vulnerability_asset_infos
+(
+    asset_uuid                   VARCHAR(255),
+    agent_uuid                   VARCHAR(255),
+    bios_uuid                    VARCHAR(255),
+    device_type                  TEXT,
+    fqdn                         TEXT,
+    hostname                     TEXT,
+    ipv4                         TEXT,
+    ipv6                         TEXT,
+    last_authenticated_results   DATETIME,
+    last_unauthenticated_results DATETIME,
+    mac_address                  TEXT,
+    netbios_name                 TEXT,
+    network_id                   TEXT,
+    tracked                      BOOL,
+
+    CONSTRAINT pk_vulnerability_asset_infos PRIMARY KEY (asset_uuid),
+    CONSTRAINT fk_vulnerability_asset_infos FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS vulnerabilities
+(
+    uuid                       VARCHAR(255) UNIQUE,
+    asset_uuid                 VARCHAR(255) NOT NULL,
+    plugin_id                  INTEGER      NOT NULL,
+    recast_reason              TEXT,
+    recast_rule_uuid           VARCHAR(255),
+    scan_uuid                  VARCHAR(255) NOT NULL,
+    severity                   TEXT         NOT NULL,
+    severity_id                INTEGER      NOT NULL,
+    severity_default_id        INTEGER      NOT NULL,
+    severity_modification_type TEXT         NOT NULL,
+    first_found                DATETIME     NOT NULL,
+    last_fixed                 DATETIME,
+    last_found                 DATETIME,
+    indexed                    DATETIME,
+    state                      TEXT,
+    source                     TEXT,
+
+    CONSTRAINT pk_vulnerability PRIMARY KEY (uuid),
+    CONSTRAINT fk_vuln_asset FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
+        ON DELETE NO ACTION
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_vuln_scan FOREIGN KEY (scan_uuid) REFERENCES scans (uuid)
+        ON DELETE NO ACTION
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_vuln_plugin FOREIGN KEY (plugin_id) REFERENCES plugins (id)
+        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS vulnerability_ports
+(
+    vulnerability_uuid VARCHAR(255) NOT NULL,
+    port               INTEGER      NOT NULL,
+    protocol           TEXT         NOT NULL,
+    service            TEXT,
+
+    CONSTRAINT fk_vuln_port FOREIGN KEY (vulnerability_uuid) REFERENCES vulnerabilities (uuid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS plugin_vprs
