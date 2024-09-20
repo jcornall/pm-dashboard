@@ -1,6 +1,8 @@
+from threading import Thread
 from src.tenable.credentials import TenableCredentials
 from src.tenable.export_assets import export_tenable_assets
 from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
+from src.tenable.load_assets import load_tenable_assets
 from src.tenable.load_vulnerabilities import load_tenable_vulnerabilities
 from src.util.extract.api_export import *
 from src.util.transform.data_processor import *
@@ -22,6 +24,8 @@ def tenable():
         secret_key=os.getenv("TENABLE_SECRET_KEY"),
     )
 
+    db = mariadb.connect(**CONN_PARAMS)
+
     # Setup
     print(f"Current Working Directory: {Path.cwd()}")
     set_up_logger()
@@ -36,48 +40,27 @@ def tenable():
     set_up_file_structure()
     logging.info("File structure setup successful.")
 
-    # Extract
-    logging.info("Starting data extraction...")
-    vuln_export_status = export_tenable_vulnerabilities(creds)
-    logging.info("Vulnerability data extraction successful...")
-    export_tenable_assets(creds)
-    logging.info("Asset data extraction successful...")
+    t1 = Thread(target=__process_vulnerabilities, args=(creds, db))
+    t2 = Thread(target=__process_assets, args=(creds, db))
 
-    # Transform
-    logging.info("Starting data transformation...")
-    purge_dir(PROCESSED_DIR)
-    process_data(VULN_EXPORT_DIR)
-    process_data(ASSET_EXPORT_DIR)
-    logging.info("Data transformation successful.")
+    t1.start()
+    t2.start()
 
-    # Load
-    logging.info("Starting data loading...")
-    load_tenable_vulnerabilities(vuln_export_status)
+    t1.join()
+    t2.join()
 
     logging.info("Program execution successful, exiting program.")
 
 
-def process_data(file_path):
-    """Sequence DataProcessor calls to DataProcessor."""
-    data_processor = DataProcessor(file_path)
-    data_processor.transform_data(
-        data_processor.dir_path, data_processor.header_file, data_processor.export_type
-    )
-    # configure_data_processor(data_processor)
-    return 0
+def __process_vulnerabilities(creds: TenableCredentials, db: mariadb.Connection):
+    logging.info("Exporting vulnerabilities...")
+    export = export_tenable_vulnerabilities(creds)
+    logging.info("Loading exported vulnerabilities into database...")
+    load_tenable_vulnerabilities(export, to=db)
 
 
-def configure_data_processor(data_processor):
-    """Configure the DataProcessor by generating new YAML files containing all JSON data headers."""
-    generate_header_yaml(data_processor)
-
-
-def load_data(table, create_statement, load_statement):
-    """Load the data into a MariaDB database."""
-    database_loader = DatabaseLoader(table, CONN_PARAMS)
-    database_loader.drop_table(database_loader.cursor, "tenable", table)
-    database_loader.create_table(database_loader.cursor, create_statement)
-    database_loader.load_csv(database_loader.cursor, load_statement)
-    database_loader.conn.commit()
-    database_loader.cursor.close()
-    database_loader.close_connection()
+def __process_assets(creds: TenableCredentials, db: mariadb.Connection):
+    logging.info("Exporting assets...")
+    export = export_tenable_assets(creds)
+    logging.info("Loading exported assets into database...")
+    load_tenable_assets(export, to=db)
