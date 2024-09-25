@@ -53,11 +53,10 @@ CREATE TABLE IF NOT EXISTS assets
 
 CREATE TABLE IF NOT EXISTS asset_installed_softwares
 (
-    id           SERIAL       NOT NULL,
     asset_uuid   VARCHAR(255) NOT NULL,
-    software_cpe TEXT         NOT NULL,
+    software_cpe VARCHAR(512) NOT NULL,
 
-    CONSTRAINT pk_asset_installed_softwares PRIMARY KEY (id),
+    CONSTRAINT pk_asset_installed_softwares PRIMARY KEY (asset_uuid, software_cpe),
     CONSTRAINT fk_asset_installed_softwares FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -87,11 +86,10 @@ CREATE TABLE IF NOT EXISTS asset_ipv6_addresses
 
 CREATE TABLE IF NOT EXISTS asset_fqdns
 (
-    id         SERIAL       NOT NULL,
     asset_uuid VARCHAR(255) NOT NULL,
-    fqdn       TEXT         NOT NULL,
+    fqdn       VARCHAR(512) NOT NULL,
 
-    CONSTRAINT pk_asset_fqdns PRIMARY KEY (id),
+    CONSTRAINT pk_asset_fqdns PRIMARY KEY (asset_uuid, fqdn),
     CONSTRAINT fk_asset_fqdns FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -99,11 +97,10 @@ CREATE TABLE IF NOT EXISTS asset_fqdns
 
 CREATE TABLE IF NOT EXISTS asset_mac_addresses
 (
-    id          SERIAL       NOT NULL,
     asset_uuid  VARCHAR(255) NOT NULL,
-    mac_address TEXT(17)     NOT NULL,
+    mac_address CHAR(17)     NOT NULL,
 
-    CONSTRAINT pk_asset_mac_addresses PRIMARY KEY (id),
+    CONSTRAINT pk_asset_mac_addresses PRIMARY KEY (asset_uuid, mac_address),
     CONSTRAINT fk_asset_mac_addresses FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -111,11 +108,10 @@ CREATE TABLE IF NOT EXISTS asset_mac_addresses
 
 CREATE TABLE IF NOT EXISTS asset_netbios_names
 (
-    id           SERIAL       NOT NULL,
     asset_uuid   VARCHAR(255) NOT NULL,
-    netbios_name TEXT         NOT NULL,
+    netbios_name VARCHAR(512) NOT NULL,
 
-    CONSTRAINT pk_asset_netbios_names PRIMARY KEY (id),
+    CONSTRAINT pk_asset_netbios_names PRIMARY KEY (asset_uuid, netbios_name),
     CONSTRAINT fk_asset_netbios_names FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -123,11 +119,10 @@ CREATE TABLE IF NOT EXISTS asset_netbios_names
 
 CREATE TABLE IF NOT EXISTS asset_operating_systems
 (
-    id               SERIAL       NOT NULL,
     asset_uuid       VARCHAR(255) NOT NULL,
-    operating_system TEXT         NOT NULL,
+    operating_system VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_operating_systems PRIMARY KEY (id),
+    CONSTRAINT pk_asset_operating_systems PRIMARY KEY (asset_uuid, operating_system),
     CONSTRAINT fk_asset_operating_systems FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -135,11 +130,10 @@ CREATE TABLE IF NOT EXISTS asset_operating_systems
 
 CREATE TABLE IF NOT EXISTS asset_system_types
 (
-    id          SERIAL       NOT NULL,
     asset_uuid  VARCHAR(255) NOT NULL,
-    system_type TEXT         NOT NULL,
+    system_type VARCHAR(128) NOT NULL,
 
-    CONSTRAINT pk_asset_system_types PRIMARY KEY (id),
+    CONSTRAINT pk_asset_system_types PRIMARY KEY (asset_uuid, system_type),
     CONSTRAINT fk_asset_system_types FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -147,11 +141,10 @@ CREATE TABLE IF NOT EXISTS asset_system_types
 
 CREATE TABLE IF NOT EXISTS asset_hostnames
 (
-    id         SERIAL       NOT NULL,
     asset_uuid VARCHAR(255) NOT NULL,
-    hostname   TEXT         NOT NULL,
+    hostname   VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_hostnames PRIMARY KEY (id),
+    CONSTRAINT pk_asset_hostnames PRIMARY KEY (asset_uuid, hostname),
     CONSTRAINT fk_asset_hostnames FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -159,11 +152,10 @@ CREATE TABLE IF NOT EXISTS asset_hostnames
 
 CREATE TABLE IF NOT EXISTS asset_ssh_fingerprints
 (
-    id              SERIAL       NOT NULL,
     asset_uuid      VARCHAR(255) NOT NULL,
-    ssh_fingerprint TEXT         NOT NULL,
+    ssh_fingerprint VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_ssh_fingerprints PRIMARY KEY (id),
+    CONSTRAINT pk_asset_ssh_fingerprints PRIMARY KEY (asset_uuid, ssh_fingerprint),
     CONSTRAINT fk_asset_ssh_fingerprints FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -171,11 +163,10 @@ CREATE TABLE IF NOT EXISTS asset_ssh_fingerprints
 
 CREATE TABLE IF NOT EXISTS asset_qualys_asset_ids
 (
-    id              SERIAL       NOT NULL,
     asset_uuid      VARCHAR(255) NOT NULL,
-    qualys_asset_id TEXT         NOT NULL,
+    qualys_asset_id VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_qualys_asset_ids PRIMARY KEY (id),
+    CONSTRAINT pk_asset_qualys_asset_ids PRIMARY KEY (asset_uuid, qualys_asset_id),
     CONSTRAINT fk_asset_qualys_asset_ids FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -183,11 +174,10 @@ CREATE TABLE IF NOT EXISTS asset_qualys_asset_ids
 
 CREATE TABLE IF NOT EXISTS asset_qualys_host_ids
 (
-    id             SERIAL       NOT NULL,
     asset_uuid     VARCHAR(255) NOT NULL,
-    qualys_host_id TEXT         NOT NULL,
+    qualys_host_id VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_qualys_host_ids PRIMARY KEY (id),
+    CONSTRAINT pk_asset_qualys_host_ids PRIMARY KEY (asset_uuid, qualys_host_id),
     CONSTRAINT fk_asset_qualys_host_ids FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -195,11 +185,10 @@ CREATE TABLE IF NOT EXISTS asset_qualys_host_ids
 
 CREATE TABLE IF NOT EXISTS asset_manufacturer_tpm_ids
 (
-    id                  SERIAL       NOT NULL,
     asset_uuid          VARCHAR(255) NOT NULL,
-    manufacturer_tpm_id TEXT         NOT NULL,
+    manufacturer_tpm_id VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_manufacturer_tpm_id PRIMARY KEY (id),
+    CONSTRAINT pk_asset_manufacturer_tpm_id PRIMARY KEY (asset_uuid, manufacturer_tpm_id),
     CONSTRAINT fk_asset_manufacturer_tpm_id FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -207,11 +196,10 @@ CREATE TABLE IF NOT EXISTS asset_manufacturer_tpm_ids
 
 CREATE TABLE IF NOT EXISTS asset_symantec_ep_hardware_keys
 (
-    id                       SERIAL       NOT NULL,
     asset_uuid               VARCHAR(255) NOT NULL,
-    symantec_ep_hardware_key TEXT         NOT NULL,
+    symantec_ep_hardware_key VARCHAR(255) NOT NULL,
 
-    CONSTRAINT pk_asset_symantec_ep_hardware_keys PRIMARY KEY (id),
+    CONSTRAINT pk_asset_symantec_ep_hardware_keys PRIMARY KEY (asset_uuid, symantec_ep_hardware_key),
     CONSTRAINT fk_asset_symantec_ep_hardware_keys FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -219,13 +207,12 @@ CREATE TABLE IF NOT EXISTS asset_symantec_ep_hardware_keys
 
 CREATE TABLE IF NOT EXISTS asset_sources
 (
-    id         SERIAL       NOT NULL,
     asset_uuid VARCHAR(255) NOT NULL,
-    name       TEXT         NOT NULL,
+    name       VARCHAR(128) NOT NULL,
     first_seen DATETIME,
     last_seen  DATETIME,
 
-    CONSTRAINT pk_asset_sources PRIMARY KEY (id),
+    CONSTRAINT pk_asset_sources PRIMARY KEY (asset_uuid, name),
     CONSTRAINT fk_asset_sources FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -234,14 +221,13 @@ CREATE TABLE IF NOT EXISTS asset_sources
 
 CREATE TABLE IF NOT EXISTS asset_tags
 (
-    id         SERIAL       NOT NULL,
     asset_uuid VARCHAR(255) NOT NULL,
-    `key`      TEXT,
-    value      TEXT,
+    `key`      VARCHAR(128),
+    value      VARCHAR(128),
     added_by   TEXT,
     added_at   DATETIME,
 
-    CONSTRAINT pk_asset_tags PRIMARY KEY (id),
+    CONSTRAINT pk_asset_tags PRIMARY KEY (asset_uuid, `key`, value),
     CONSTRAINT fk_asset_tags FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -382,7 +368,6 @@ CREATE TABLE IF NOT EXISTS plugin_vprs
 
 CREATE TABLE IF NOT EXISTS plugin_cvss_vectors
 (
-    id                     SERIAL,
     plugin_id              INTEGER NOT NULL,
     access_vector          TEXT,
     access_complexity      TEXT,
@@ -392,7 +377,7 @@ CREATE TABLE IF NOT EXISTS plugin_cvss_vectors
     availability_impact    TEXT,
     raw                    TEXT,
 
-    CONSTRAINT pk_plugin_cvss_vector PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_cvss_vector PRIMARY KEY (plugin_id),
     CONSTRAINT fk_plugin_cvss_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -400,7 +385,6 @@ CREATE TABLE IF NOT EXISTS plugin_cvss_vectors
 
 CREATE TABLE IF NOT EXISTS plugin_cvss3_vectors
 (
-    id                     SERIAL,
     plugin_id              INTEGER NOT NULL,
     access_vector          TEXT,
     access_complexity      TEXT,
@@ -410,7 +394,7 @@ CREATE TABLE IF NOT EXISTS plugin_cvss3_vectors
     availability_impact    TEXT,
     raw                    TEXT,
 
-    CONSTRAINT pk_plugin_cvss3_vector PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_cvss3_vector PRIMARY KEY (plugin_id),
     CONSTRAINT fk_plugin_cvss3_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -418,7 +402,6 @@ CREATE TABLE IF NOT EXISTS plugin_cvss3_vectors
 
 CREATE TABLE IF NOT EXISTS plugin_cvss_temporal_vectors
 (
-    id                SERIAL,
     plugin_id         INTEGER NOT NULL,
     exploitability    TEXT,
     remediation_level TEXT,
@@ -426,7 +409,7 @@ CREATE TABLE IF NOT EXISTS plugin_cvss_temporal_vectors
     raw               TEXT,
 
 
-    CONSTRAINT pk_plugin_cvss_temporal_vector PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_cvss_temporal_vector PRIMARY KEY (plugin_id),
     CONSTRAINT fk_plugin_cvss_temporal_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -434,14 +417,13 @@ CREATE TABLE IF NOT EXISTS plugin_cvss_temporal_vectors
 
 CREATE TABLE IF NOT EXISTS plugin_cvss3_temporal_vectors
 (
-    id                SERIAL,
     plugin_id         INTEGER NOT NULL,
     exploitability    TEXT,
     remediation_level TEXT,
     report_confidence TEXT,
     raw               TEXT,
 
-    CONSTRAINT pk_plugin_cvss3_temporal_vector PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_cvss3_temporal_vector PRIMARY KEY (plugin_id),
     CONSTRAINT fk_plugin_cvss3_temporal_vector FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -460,11 +442,10 @@ CREATE TABLE IF NOT EXISTS plugin_bugtraqs
 
 CREATE TABLE IF NOT EXISTS plugin_cpes
 (
-    id        SERIAL  NOT NULL,
-    plugin_id INTEGER NOT NULL,
-    cpe       TEXT    NOT NULL,
+    plugin_id INTEGER      NOT NULL,
+    cpe       VARCHAR(512) NOT NULL,
 
-    CONSTRAINT pk_plugin_cpe PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_cpe PRIMARY KEY (plugin_id, cpe),
     CONSTRAINT fk_plugin_cpe FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -472,11 +453,10 @@ CREATE TABLE IF NOT EXISTS plugin_cpes
 
 CREATE TABLE IF NOT EXISTS plugin_cves
 (
-    id        SERIAL       NOT NULL,
     plugin_id INTEGER      NOT NULL,
     cve       VARCHAR(512) NOT NULL,
 
-    CONSTRAINT pk_plugin_cve PRIMARY KEY (id),
+    CONSTRAINT pk_plugin_cve PRIMARY KEY (plugin_id, cve),
     CONSTRAINT fk_plugin_cve FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE

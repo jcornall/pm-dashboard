@@ -63,23 +63,27 @@ ON DUPLICATE KEY UPDATE id=id;
 __INSERT_PLUGIN_CVSS3_VECTOR = """
 INSERT INTO plugin_cvss3_vectors(plugin_id, access_vector, access_complexity, authentication,
                                  confidentiality_impact, integrity_impact, availability_impact, raw)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
 __INSERT_PLUGIN_CVSS3_TEMPORAL_VECTOR = """
 INSERT INTO plugin_cvss3_temporal_vectors(plugin_id, exploitability, remediation_level, report_confidence, raw)
-VALUES (?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?)
+ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
 __INSERT_PLUGIN_CVSS_TEMPORAL_VECTOR = """
 INSERT INTO plugin_cvss_temporal_vectors(plugin_id, exploitability, remediation_level, report_confidence, raw)
-VALUES (?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?)
+ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
 __INSERT_PLUGIN_CVSS_VECTOR = """
 INSERT INTO plugin_cvss_vectors(plugin_id, access_vector, access_complexity, authentication,
                                  confidentiality_impact, integrity_impact, availability_impact, raw)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
 __INSERT_PLUGIN_VPR = """
