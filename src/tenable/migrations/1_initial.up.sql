@@ -314,6 +314,7 @@ CREATE TABLE IF NOT EXISTS vulnerability_asset_infos
 CREATE TABLE IF NOT EXISTS vulnerabilities
 (
     uuid                       VARCHAR(255) UNIQUE,
+    created_on                 DATETIME DEFAULT DATE(CURRENT_TIMESTAMP),
     asset_uuid                 VARCHAR(255) NOT NULL,
     plugin_id                  INTEGER      NOT NULL,
     recast_reason              TEXT,
