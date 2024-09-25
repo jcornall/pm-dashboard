@@ -88,16 +88,9 @@ def export_tenable_vulnerabilities(creds: TenableCredentials) -> VulnExportStatu
 
         logging.info(f"vuln_export {export_uuid} status: {export_status.status}...")
 
-    threads = []
     for chunk in export_status.chunks_available:
-        t = Thread(
-            target=__save_single_vuln_chunk, args=(api_keys, export_status, chunk)
-        )
-        threads.append(t)
-        t.start()
-
-    for t in threads:
-        t.join()
+        # cannot multithread here because there isn't enough memory for the vm
+        __save_single_vuln_chunk(api_keys, export_status, chunk)
 
     return export_status
 
