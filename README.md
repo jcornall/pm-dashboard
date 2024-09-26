@@ -49,3 +49,23 @@ To deactivate the virtual environment after program execution is complete, use t
 ```
 deactivate
 ```
+
+### Running database migrations
+
+Before the first run, the database must first be migrated. [golang-migrate](https://github.com/golang-migrate/migrate) is used to handle database migration. To run all the migrations for each database, make sure the `golang-migrate` binary is downloaded first by running `install.sh`. Then, run:
+
+```shell
+./golang-migrate/migrate -path ./src/<insert pmt name>/migrations -database "mysql://user:pass@tcp(domain:port)/<db-name>" up
+```
+
+where:
+
+- `<insert pmt name>` is the name of the patch management tool for which this migration is run, e.g. tenable
+- `user` is the username of the database
+- `pass` is the password used to identify the user
+- `domain` is the domain at which the MySQL/MariaDB instance is running
+- `port` is the port on which the DB is listening
+- `<db-name>` is the name of the database that holds data for a specific patch management tool, e.g. tenable
+
+Go to `docs/database.md` for further documentation on database.
+

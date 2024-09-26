@@ -23,7 +23,7 @@ class DatabaseLoader():
 
     def connect_to_database(self, connection_parameters):
         """Connect to MariaDB using the supplied credentials."""
-        logging.info(f"Connecting to {connection_parameters["host"]} as {connection_parameters["user"]}...")
+        logging.info(f"Connecting tos {connection_parameters["host"]} as {connection_parameters["user"]}...")
         try:
             conn = mariadb.connect(**connection_parameters)
             logging.info(f"Successfully connected to {connection_parameters["host"]}.")
@@ -62,8 +62,10 @@ class DatabaseLoader():
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("MariaDB table created.")
+            self.conn.commit()
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
+            self.conn.rollback()
 
     def create_view(self, cursor, file_path, sql_file):
         """Executes a CREATE TABLE statement."""
@@ -74,8 +76,10 @@ class DatabaseLoader():
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("MariaDB view created.")
+            self.conn.commit()
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
+            self.conn.rollback()
 
     def load_csv(self, cursor, file_path, sql_file):
         """Executes a LOAD DATA statement."""
@@ -86,8 +90,10 @@ class DatabaseLoader():
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("Data successfully loaded into MariaDB table.")
+            self.conn.commit()
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
+            self.conn.rollback()
 
     def insert_into_table(self, cursor, file_path, sql_file):
         """Executes an INSERT INTO statement."""
@@ -98,8 +104,10 @@ class DatabaseLoader():
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("Data successfully inserted into MariaDB table.")
+            self.conn.commit()
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
+            self.conn.rollback()
 
     def delete_from_table(self, cursor, file_path, sql_file):
         """Executes a DELETE FROM statement."""
@@ -110,8 +118,10 @@ class DatabaseLoader():
                 statement = file.read()
                 cursor.execute(statement)
             logging.info("Data successfully delete from MariaDB table.")
+            self.conn.commit()
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
+            self.conn.rollback()
 
     def select_count(self, cursor, file_path, sql_file):
         """Executes a SELECT * statement and logs a count of the results."""
@@ -124,8 +134,10 @@ class DatabaseLoader():
                 logging.info(f"{cursor.statement}")
                 logging.info(f"{cursor.rowcount}")
             logging.info("Data successfully selected from MariaDB table.")
+            self.conn.commit()
         except mariadb.Error as e:
             logging.warning(f"Error: {e}.")
+            self.conn.rollback()
 
     def close_connection(self):
         """Closes the connection to the MariaDB database."""
