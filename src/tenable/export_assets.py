@@ -21,8 +21,12 @@ class AssetExportStatus:
     status: str
     chunks_available: list[int]
 
+    def chunk_file_name(self, chunk_id: int) -> str:
+        """Returns the name of the file that stores the data of the chunk with the given chunk id."""
+        return f"{self.created}_{self.uuid}_{chunk_id}.json"
 
-def export_tenable_assets(creds: TenableCredentials):
+
+def export_tenable_assets(creds: TenableCredentials) -> AssetExportStatus:
     """
     Requests tennable to export all assets, and then saves the data into JSON files.
     This will generate multiple JSON files containing assets, as Tenable returns them in chunks.
@@ -89,6 +93,8 @@ def export_tenable_assets(creds: TenableCredentials):
     for t in threads:
         t.join()
 
+    return export_status
+
 
 def __save_single_assets_chunk(
     api_keys: str, current_export: AssetExportStatus, chunk_id: int
@@ -100,7 +106,7 @@ def __save_single_assets_chunk(
     while should_retry:
         response = requests.get(
             f"{TENABLE_API_URL}/assets/export/{current_export.uuid}/chunks/{chunk_id}",
-            headers={"accept": "application/octet-stream", "X-ApiKeys": api_keys},
+            headers={"accept": "application/json", "X-ApiKeys": api_keys},
         )
 
         if response.status_code == 429:

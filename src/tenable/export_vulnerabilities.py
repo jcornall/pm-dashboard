@@ -28,8 +28,12 @@ class VulnExportStatus:
     num_assets_per_chunk: int
     created: int
 
+    def chunk_file_name(self, chunk_id: int) -> str:
+        """Returns the name of the file that stores the data of the chunk with the given chunk id."""
+        return f"{self.created}_{self.uuid}_{chunk_id}.json"
 
-def export_tenable_vulnerabilities(creds: TenableCredentials):
+
+def export_tenable_vulnerabilities(creds: TenableCredentials) -> VulnExportStatus:
     """
     Requests tennable to export all vulnerabilities, and then saves the data into JSON files.
     This will generate multiple JSON files containing vulnerabilities as Tenable returns them in chunks.
@@ -84,16 +88,11 @@ def export_tenable_vulnerabilities(creds: TenableCredentials):
 
         logging.info(f"vuln_export {export_uuid} status: {export_status.status}...")
 
-    threads = []
     for chunk in export_status.chunks_available:
-        t = Thread(
-            target=__save_single_vuln_chunk, args=(api_keys, export_status, chunk)
-        )
-        threads.append(t)
-        t.start()
+        # cannot multithread here because there isn't enough memory for the vm
+        __save_single_vuln_chunk(api_keys, export_status, chunk)
 
-    for t in threads:
-        t.join()
+    return export_status
 
 
 def __save_single_vuln_chunk(
@@ -126,7 +125,7 @@ def __save_single_vuln_chunk(
             f"catatrophic failure: tenable returned an empty response when downloing chunk "
         )
 
-    file_name = f"{current_export.created}_{current_export.uuid}_{chunk_id}.json"
+    file_name = current_export.chunk_file_name(chunk_id)
     with open(VULN_EXPORT_DIR / file_name, "w") as f:
         json.dump(res_json, f, ensure_ascii=False, indent=4)
 
