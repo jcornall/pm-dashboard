@@ -11,6 +11,7 @@ def paginate(
     headers: dict[str, str],
     on_page_fetched: Callable[..., None],
     args: tuple[Any] = ((),),
+    max_workers: int = 30,
 ):
     first_page = __fetch_page(url, 1, headers)
     assert first_page is not None
@@ -20,7 +21,9 @@ def paginate(
         / first_page["message_response"]["limit"]
     )
 
-    with ThreadPoolExecutor(max_workers=30) as executor:
+    print("total pages:", total_pages)
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         executor.submit(on_page_fetched, first_page, args)
 
         # since the first page is already fetched, we need to fetch one less page
@@ -43,10 +46,14 @@ def __fetch_page(
     cb: Callable[..., None] | None = None,
     args: tuple[Any] = ((),),
 ):
-    res = requests.get(f"{url}", params={"page": page}, headers=headers)
-    page_json = res.json()
-    print(f"page {page} fetched")
-    if cb:
-        cb(page_json, page, *args)
-    else:
-        return page_json
+    try:
+        print(f"fetching {page}")
+        res = requests.get(f"{url}", params={"page": page}, headers=headers)
+        page_json = res.json()
+        print(f"calling cb for page {page}")
+        if cb:
+            cb(page_json, page, *args)
+        else:
+            return page_json
+    except Exception as e:
+        print(e)
