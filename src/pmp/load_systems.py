@@ -60,6 +60,8 @@ def __load_page_to_db(
             )
 
         cursor.executemany(__INSERT_SYSTEM_SQL, data)
+
+        conn.commit()
     except Exception as e:
         print(e)
         conn.rollback()
