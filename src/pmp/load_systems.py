@@ -28,6 +28,7 @@ def load_systems(pool: mariadb.ConnectionPool, access_token: str):
         headers={"Authorization": f"Bearer {access_token}"},
         on_page_fetched=__load_page_to_db,
         args=(pool,),
+        max_workers=2,
     )
 
 

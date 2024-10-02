@@ -6,13 +6,14 @@ from src.pmp.paginate import paginate
 from src.util.database import wait_for_pool_connection
 
 __INSERT_PATCH_SQL = """
-INSERT INTO patches(patch_id, installed_count, missing_count, severity, patch_name, patch_description)
-VALUES (?, ?, ?, ?, ?, ?)
+INSERT INTO patches(patch_id, installed_count, missing_count, severity, patch_name, patch_description, release_date)
+VALUES (?, ?, ?, ?, ?, ?, FROM_UNIXTIME(? / 1000))
 ON DUPLICATE KEY UPDATE installed_count   = ?,
                         missing_count     = ?,
                         severity          = ?,
                         patch_name        = ?,
-                        patch_description = ?;
+                        patch_description = ?,
+                        release_date = FROM_UNIXTIME(? / 1000);
 """
 
 __severity_enum_values = ("UNRATED", "LOW", "MODERATE", "IMPORTANT", "CRITICAL")
@@ -24,7 +25,7 @@ def load_patches(pool: mariadb.ConnectionPool, access_token: str):
         headers={"Authorization": f"Bearer {access_token}"},
         on_page_fetched=__load_page_to_db,
         args=(pool,),
-        max_workers=10,
+        max_workers=2,
     )
 
 
@@ -47,11 +48,13 @@ def __load_page_to_db(
                 __severity_enum_values[int(patch.get("severity"))],
                 patch.get("patch_name"),
                 patch.get("patch_description"),
+                int(patch.get("patch_released_time")),
                 int(patch.get("installed")),
                 int(patch.get("missing")),
                 __severity_enum_values[int(patch.get("severity"))],
                 patch.get("patch_name"),
                 patch.get("patch_description"),
+                int(patch.get("patch_released_time")),
             )
             for patch in page["message_response"]["allpatches"]
         ]

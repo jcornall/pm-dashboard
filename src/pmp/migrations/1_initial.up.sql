@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS patches
     severity          ENUM ('UNRATED', 'LOW', 'MODERATE', 'IMPORTANT', 'CRITICAL') NOT NULL,
     patch_name        TEXT                                                         NOT NULL,
     patch_description TEXT                                                         NOT NULL,
+    release_date      DATETIME                                                     NOT NULL,
 
     CONSTRAINT pk_patches PRIMARY KEY (patch_id)
 );
