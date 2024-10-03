@@ -2,11 +2,12 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS systems
 (
-    resource_id   BIGINT                                                         NOT NULL,
-    service_pack  TEXT,
-    health_status ENUM ('UNKNOWN', 'HEALTHY', 'VULNERABLE', 'HIGHLY_VULNERABLE') NOT NULL,
-    os_platform   TEXT                                                           NOT NULL,
-    os_name       TEXT                                                           NOT NULL,
+    resource_id      BIGINT                                                         NOT NULL,
+    service_pack     TEXT,
+    health_status    ENUM ('UNKNOWN', 'HEALTHY', 'VULNERABLE', 'HIGHLY_VULNERABLE') NOT NULL,
+    os_platform      TEXT                                                           NOT NULL,
+    os_name          TEXT                                                           NOT NULL,
+    requires_restart BOOL                                                           NOT NULL,
 
     CONSTRAINT pk_systems PRIMARY KEY (resource_id)
 );
