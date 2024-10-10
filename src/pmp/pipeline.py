@@ -13,20 +13,30 @@ from src.pmp.load_patches import load_patches
 from src.pmp.load_systems import load_systems
 
 
-def pmp():
+def pmp(db_params=None):
+    if db_params is None:
+        db_params = {}
+
     start = time()
 
     access_token = request_access_token()
 
+    final_db_params = {
+        "user": MARIADB_USER,
+        "password": MARIADB_PWD,
+        "host": MARIADB_HOST,
+        "port": MARIADB_PORT,
+        "database": "patch_manager_plus",
+        **db_params,
+    }
+
+    print(final_db_params)
+
     pool = mariadb.ConnectionPool(
-        user=MARIADB_USER,
-        password=MARIADB_PWD,
-        host=MARIADB_HOST,
-        port=MARIADB_PORT,
-        database="patch_manager_plus",
         pool_name="pmp-pool",
         pool_size=20,
         pool_validation_interval=250,
+        **final_db_params,
     )
 
     t0 = Thread(target=load_patches, args=(pool, access_token))
