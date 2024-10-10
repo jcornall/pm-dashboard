@@ -30,8 +30,6 @@ def pmp(db_params=None):
         **db_params,
     }
 
-    print(final_db_params)
-
     pool = mariadb.ConnectionPool(
         pool_name="pmp-pool",
         pool_size=20,
