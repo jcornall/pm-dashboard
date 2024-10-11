@@ -1,6 +1,4 @@
 import pytest
-import os
-import subprocess
 
 from src.config.constants import *
 from src.tenable.credentials import *

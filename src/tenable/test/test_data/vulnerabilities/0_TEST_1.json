@@ -1,0 +1,533 @@
+[
+    {
+        "asset": {
+            "agent_uuid": "79b7d9dda02e4858a129cfba69044ada",
+            "bios_uuid": "4c4c4544-0059-3410-8056-b2c04f365a32",
+            "device_type": "general-purpose",
+            "fqdn": "mcaddell62.fed.cclrc.ac.uk",
+            "hostname": "mcaddell62",
+            "uuid": "0006c2f6-c032-4396-b674-f698f3a7e1d3",
+            "ipv4": "148.79.215.196",
+            "last_authenticated_results": "2024-10-03T10:59:26.781Z",
+            "mac_address": "6c:2b:59:fa:41:d7",
+            "netbios_name": "MCADDELL62",
+            "operating_system": [
+                "Microsoft Windows 10 Enterprise Build 19045"
+            ],
+            "network_id": "57462c98-1f18-43cd-9ba5-96656695a53a",
+            "tracked": true
+        },
+        "plugin": {
+            "bid": [
+                207699
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": false,
+            "cpe": [
+                "cpe:/a:foxitsoftware:foxit_reader"
+            ],
+            "cvss3_base_score": 7.8,
+            "cvss3_temporal_score": 6.8,
+            "cvss3_temporal_vector": {
+                "exploitability": "Unproven",
+                "remediation_level": "Official Fix",
+                "report_confidence": "Confirmed",
+                "raw": "E:U/RL:O/RC:C"
+            },
+            "cvss3_vector": {
+                "access_complexity": "Low",
+                "access_vector": "Local",
+                "availability_impact": "High",
+                "confidentiality_impact": "High",
+                "integrity_impact": "High",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss_base_score": 6.8,
+            "cvss_temporal_score": 5.0,
+            "cvss_temporal_vector": {
+                "exploitability": "Unproven",
+                "remediation_level": "Official Fix",
+                "report_confidence": "Confirmed",
+                "raw": "E:U/RL:OF/RC:C"
+            },
+            "cvss_vector": {
+                "access_complexity": "Medium",
+                "access_vector": "Network",
+                "authentication": "None required",
+                "availability_impact": "Partial",
+                "confidentiality_impact": "Partial",
+                "integrity_impact": "Partial",
+                "raw": "AV:N/AC:M/Au:N/C:P/I:P/A:P"
+            },
+            "description": "According to its version, the Foxit PDF Reader application (previously named Foxit PhantomPDF) installed on the remote Windows host is prior to 2024.2.3. It is, therefore affected by multiple vulnerabilities:\n\n  - Foxit PDF Reader Doc Object Use-After-Free Information Disclosure Vulnerability. This vulnerability     allows remote attackers to disclose sensitive information on affected installations of Foxit PDF Reader.     User interaction is required to exploit this vulnerability in that the target must visit a malicious     page or open a malicious file. The specific flaw exists within the handling of Doc objects. The issue     results from the lack of validating the existence of an object prior to performing operations on the     object. An attacker can leverage this in conjunction with other vulnerabilities to execute arbitrary     code in the context of the current process. (CVE-2024-7722)\n\n  - Foxit PDF Reader AcroForm Use-After-Free Remote Code Execution Vulnerability. This vulnerability allows     remote attackers to execute arbitrary code on affected installations of Foxit PDF Reader. User     interaction is required to exploit this vulnerability in that the target must visit a malicious page or     open a malicious file. The specific flaw exists within the handling of AcroForms. The issue results from     the lack of validating the existence of an object prior to performing operations on the object. An     attacker can leverage this vulnerability to execute code in the context of the current process.     (CVE-2024-7723, CVE-2024-7724, CVE-2024-7725)\n\nNote that Nessus has not tested for this issue but has instead relied only on the application's self-reported version number.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploitability_ease": "No known exploits are available",
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "Windows",
+            "family_id": 7,
+            "has_patch": true,
+            "id": 207699,
+            "in_the_news": false,
+            "name": "Foxit PDF Reader < 2024.2.3 Multiple Vulnerabilities",
+            "patch_publication_date": "2024-08-03T00:00:00Z",
+            "modification_date": "2024-09-25T00:00:00Z",
+            "publication_date": "2024-09-24T00:00:00Z",
+            "risk_factor": "medium",
+            "see_also": [
+                "http://www.nessus.org/u?a27a3e57"
+            ],
+            "solution": "Upgrade to Foxit PDF Reader version 2024.2.3 or later",
+            "synopsis": "A PDF toolkit installed on the remote Windows host is affected by multiple vulnerabilities",
+            "unsupported_by_vendor": false,
+            "version": "1.2",
+            "vuln_publication_date": "2024-08-03T00:00:00Z",
+            "xrefs": [
+                {
+                    "type": "CVE",
+                    "id": "2024-7722"
+                },
+                {
+                    "type": "CVE",
+                    "id": "2024-7723"
+                },
+                {
+                    "type": "CVE",
+                    "id": "2024-7724"
+                },
+                {
+                    "type": "CVE",
+                    "id": "2024-7725"
+                }
+            ],
+            "vpr": {
+                "score": 6.7,
+                "drivers": {
+                    "age_of_vuln": {
+                        "lower_bound": 31,
+                        "upper_bound": 60
+                    },
+                    "exploit_code_maturity": "UNPROVEN",
+                    "cvss_impact_score_predicted": false,
+                    "cvss3_impact_score": 5.9,
+                    "threat_intensity_last28": "VERY_LOW",
+                    "threat_sources_last28": [
+                        "No recorded events"
+                    ],
+                    "product_coverage": "LOW"
+                },
+                "updated": "2024-09-21T06:04:37Z"
+            },
+            "cve": [
+                "CVE-2024-7722",
+                "CVE-2024-7723",
+                "CVE-2024-7724",
+                "CVE-2024-7725"
+            ],
+            "type": "local"
+        },
+        "port": {
+            "port": 445,
+            "protocol": "TCP"
+        },
+        "scan": {
+            "schedule_uuid": "template-05beaaef-8913-3272-e186-974f768c993be599cff857718dc0",
+            "started_at": "2024-10-03T10:03:03.904Z",
+            "uuid": "47eece6f-8020-4fcc-ab40-3e46e83deda1"
+        },
+        "severity": "high",
+        "severity_id": 3,
+        "severity_default_id": 2,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-09-25T11:10:05.653Z",
+        "last_fixed": "2024-10-03T10:59:26.781Z",
+        "last_found": "2024-09-27T10:41:57.830Z",
+        "state": "FIXED",
+        "indexed": "2024-10-03T10:59:32.318501Z",
+        "source": "AGENT"
+    },
+    {
+        "asset": {
+            "agent_uuid": "20773825a92e4441acf95740f0f6dd18",
+            "bios_uuid": "4c4c4544-004d-5810-8052-b3c04f324633",
+            "device_type": "general-purpose",
+            "fqdn": "lpta1089.fed.cclrc.ac.uk",
+            "hostname": "lpta1089",
+            "uuid": "000caf3f-0e17-42fb-8606-2720edfe9480",
+            "ipv4": "10.64.29.115",
+            "last_authenticated_results": "2024-10-03T11:04:58.322Z",
+            "mac_address": "04:56:e5:23:1a:40",
+            "netbios_name": "LPTA1089",
+            "operating_system": [
+                "Microsoft Windows 10 Enterprise Build 19045"
+            ],
+            "network_id": "2ecda157-3b75-41fd-9ad4-ab78591b8de9",
+            "tracked": true
+        },
+        "output": "\n  Path    : C:\\Program Files\\Google\\Chrome\\Application\n  Version : 129.0.6668.72\n\nNote that Nessus only looked in the registry for evidence of Google\nChrome. If there are multiple users on this host, you may wish to\nenable the 'Perform thorough tests' setting and re-scan. This will\ncause Nessus to scan each local user's directory for installs.\n\n",
+        "plugin": {
+            "bid": [
+                34196
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": false,
+            "cpe": [
+                "cpe:/a:google:chrome"
+            ],
+            "description": "Google Chrome, a web browser from Google, is installed on the remote Windows host.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "Windows",
+            "family_id": 7,
+            "has_patch": false,
+            "id": 34196,
+            "in_the_news": false,
+            "name": "Google Chrome Detection (Windows)",
+            "modification_date": "2022-10-10T00:00:00Z",
+            "publication_date": "2008-09-12T00:00:00Z",
+            "risk_factor": "info",
+            "see_also": [
+                "https://www.google.com/chrome/"
+            ],
+            "synopsis": "The remote Windows host contains a web browser.",
+            "unsupported_by_vendor": false,
+            "version": "1.26",
+            "xrefs": [
+                {
+                    "type": "IAVT",
+                    "id": "0001-T-0511"
+                }
+            ],
+            "type": "local"
+        },
+        "port": {
+            "port": 445,
+            "protocol": "TCP"
+        },
+        "scan": {
+            "schedule_uuid": "template-05beaaef-8913-3272-e186-974f768c993be599cff857718dc0",
+            "started_at": "2024-10-03T10:03:03.904Z",
+            "uuid": "47eece6f-8020-4fcc-ab40-3e46e83deda1"
+        },
+        "severity": "info",
+        "severity_id": 0,
+        "severity_default_id": 0,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-09-17T11:14:50.262Z",
+        "last_found": "2024-10-03T11:04:58.322Z",
+        "state": "OPEN",
+        "indexed": "2024-10-03T11:05:03.654425Z",
+        "source": "AGENT"
+    },
+    {
+        "asset": {
+            "agent_uuid": "7b1528780b944153ac3a2a80599f36b5",
+            "bios_uuid": "4c4c4544-0030-5310-804c-b7c04f543733",
+            "device_type": "general-purpose",
+            "fqdn": "ddast0065.fed.cclrc.ac.uk",
+            "hostname": "ddast0065",
+            "uuid": "00107856-b07b-4b9f-b258-2959fffb3003",
+            "ipv4": "192.168.56.1",
+            "last_authenticated_results": "2024-10-03T10:52:07.079Z",
+            "mac_address": "0a:00:27:00:00:12",
+            "netbios_name": "DDAST0065",
+            "operating_system": [
+                "Microsoft Windows 10 Enterprise Build 19045"
+            ],
+            "network_id": "57462c98-1f18-43cd-9ba5-96656695a53a",
+            "tracked": true
+        },
+        "output": "\nThe remote operating system matched the following CPE : \n\n  cpe:/o:microsoft:windows_10:::x64-enterprise -> Microsoft Windows 10\n\nFollowing application CPE's matched on the remote system : \n\n  cpe:/a:adobe:acrobat_reader:24.3.20112.0 -> Adobe Acrobat Reader\n  cpe:/a:apache:log4j -> Apache Software Foundation log4j\n  cpe:/a:apache:log4j:1.2.15 -> Apache Software Foundation log4j\n  cpe:/a:apache:log4j:2.17.1 -> Apache Software Foundation log4j\n  cpe:/a:citrix:online_plug-in:24.5.10.20 -> Citrix Online Plug-in\n  cpe:/a:citrix:receiver:24.5.10.10 -> Citrix Receiver\n  cpe:/a:dell:display_manager:2.3.1.14 -> Dell Display Manager\n  cpe:/a:dell:supportassist:5.5.1.16143 -> Dell SupportAssist\n  cpe:/a:git_for_windows_project:git_for_windows:2.45.2.0.1 -> Git for Windows Project Git for Windows\n  cpe:/a:google:chrome:129.0.6668.90 -> Google Chrome\n  cpe:/a:haxx:curl:8.7.0.0 -> Haxx Curl\n  cpe:/a:libreoffice:libreoffice:24.8.2.1 -> LibreOffice LibreOffice\n  cpe:/a:microsoft:.net_core:5.0.17.31213 -> Microsoft .NET Core\n  cpe:/a:microsoft:.net_core:6.0.33.33916 -> Microsoft .NET Core\n  cpe:/a:microsoft:.net_framework:4.8.1 -> Microsoft .NET Framework\n  cpe:/a:microsoft:.net_framework:4.8.9251.0 -> Microsoft .NET Framework\n  cpe:/a:microsoft:edge:129.0.2792.65 -> Microsoft Edge\n  cpe:/a:microsoft:excel:16.0.17830.20210 -> Microsoft Excel\n  cpe:/a:microsoft:excelcnv:16.0.17830.20210\n  cpe:/a:microsoft:ie:11.3636.19041.0 -> Microsoft Internet Explorer\n  cpe:/a:microsoft:internet_explorer:11.0.19041.4894 -> Microsoft Internet Explorer\n  cpe:/a:microsoft:office:365 -> Microsoft Office\n  cpe:/a:microsoft:office_compatibility_pack -> Microsoft Office Compatibility Pack Service Pack 2\n  cpe:/a:microsoft:office_compatibility_pack:16.0.17830.20210 -> Microsoft Office Compatibility Pack Service Pack 2\n  cpe:/a:microsoft:onenote:16.0.17830.20210 -> Microsoft OneNote\n  cpe:/a:microsoft:outlook:16.0.17830.20210 -> Microsoft Outlook\n  cpe:/a:microsoft:powerpoint:16.0.17830.20210 -> Microsoft PowerPoint\n  cpe:/a:microsoft:project:16.0.17830.20210 -> Microsoft Project\n  cpe:/a:microsoft:publisher:16.0.17830.20210 -> Microsoft Publisher\n  cpe:/a:microsoft:remote_desktop_connection:10.0.19041.4717 -> Microsoft Remote Desktop Connection\n  cpe:/a:microsoft:silverlight:5.1.50907.0 -> Microsoft Silverlight\n  cpe:/a:microsoft:teams:1.5.0.33362 -> Microsoft Teams\n  cpe:/a:microsoft:teams:1.6.0.33567 -> Microsoft Teams\n  cpe:/a:microsoft:teams:1.7.0.6058 -> Microsoft Teams\n  cpe:/a:microsoft:visio:16.0.17830.20210 -> Microsoft Visio\n  cpe:/a:microsoft:visio_viewer:16.0.17830.20210 -> Microsoft Visio Viewer\n  cpe:/a:microsoft:visioviewer:16.0.17830.20210\n  cpe:/a:microsoft:windows_app_store:0.1800.625.0\n  cpe:/a:microsoft:windows_app_store:1.1.1295.0\n  cpe:/a:microsoft:windows_app_store:1.1.1711.0\n  cpe:/a:microsoft:windows_app_store:1.1.451.0\n  cpe:/a:microsoft:windows_app_store:1.1.861.0\n  cpe:/a:microsoft:windows_app_store:1.100.5635.0\n  cpe:/a:microsoft:windows_app_store:1.13.0.18362\n  cpe:/a:microsoft:windows_app_store:1.14.1.19041\n  cpe:/a:microsoft:windows_app_store:1.2.2331.0\n  cpe:/a:microsoft:windows_app_store:1.21.13002.0\n  cpe:/a:microsoft:windows_app_store:1.23.1911.0\n  cpe:/a:microsoft:windows_app_store:1.24.10001.0\n  cpe:/a:microsoft:windows_app_store:1.2407.21972.0\n  cpe:/a:microsoft:windows_app_store:1.24081.102.0\n  cpe:/a:microsoft:windows_app_store:1.54.4001.0\n  cpe:/a:microsoft:windows_app_store:1.7.101.0\n  cpe:/a:microsoft:windows_app_store:1.7.27413.0\n  cpe:/a:microsoft:windows_app_store:1.7.27422.0\n  cpe:/a:microsoft:windows_app_store:10.0.18362.387\n  cpe:/a:microsoft:windows_app_store:10.0.19041.964\n  cpe:/a:microsoft:windows_app_store:10.0.2.1000\n  cpe:/a:microsoft:windows_app_store:10.0.23012.0\n  cpe:/a:microsoft:windows_app_store:10.1808.3.0\n  cpe:/a:microsoft:windows_app_store:10.2008.3001.0\n  cpe:/a:microsoft:windows_app_store:10.21.30024.0\n  cpe:/a:microsoft:windows_app_store:10.2103.28.0\n  cpe:/a:microsoft:windows_app_store:10.2202.100.0\n  cpe:/a:microsoft:windows_app_store:10.22091.10061.0\n  cpe:/a:microsoft:windows_app_store:10.2309.0.0\n  cpe:/a:microsoft:windows_app_store:10.2407.22431.0\n  cpe:/a:microsoft:windows_app_store:1000.18362.387.0\n  cpe:/a:microsoft:windows_app_store:1000.19041.964.0\n  cpe:/a:microsoft:windows_app_store:11.2403.4.0\n  cpe:/a:microsoft:windows_app_store:11.2405.2.0\n  cpe:/a:microsoft:windows_app_store:11.2406.59.0\n  cpe:/a:microsoft:windows_app_store:11.2408.4.0\n  cpe:/a:microsoft:windows_app_store:12.115.1001.0\n  cpe:/a:microsoft:windows_app_store:120.2212.3920.0\n  cpe:/a:microsoft:windows_app_store:14.0.29231.0\n  cpe:/a:microsoft:windows_app_store:14.0.30704.0\n  cpe:/a:microsoft:windows_app_store:14.3.45.0\n  cpe:/a:microsoft:windows_app_store:15.127.3200.0\n  cpe:/a:microsoft:windows_app_store:155.1.1088.0\n  cpe:/a:microsoft:windows_app_store:16001.14326.22008.0\n  cpe:/a:microsoft:windows_app_store:16005.14326.22054.0\n  cpe:/a:microsoft:windows_app_store:18.1.1041.0\n  cpe:/a:microsoft:windows_app_store:18.2409.1051.0\n  cpe:/a:microsoft:windows_app_store:19041.3.3.0\n  cpe:/a:microsoft:windows_app_store:19041.62.215.0\n  cpe:/a:microsoft:windows_app_store:2.0.54.0\n  cpe:/a:microsoft:windows_app_store:2.11906.6001.0\n  cpe:/a:microsoft:windows_app_store:2.1810.18004.0\n  cpe:/a:microsoft:windows_app_store:2.2.28604.0\n  cpe:/a:microsoft:windows_app_store:2.2.29512.0\n  cpe:/a:microsoft:windows_app_store:2.32002.13001.0\n  cpe:/a:microsoft:windows_app_store:2.4.18324.0\n  cpe:/a:microsoft:windows_app_store:2.42007.9001.0\n  cpe:/a:microsoft:windows_app_store:2.52012.2002.0\n  cpe:/a:microsoft:windows_app_store:2.62112.3002.0\n  cpe:/a:microsoft:windows_app_store:2000.21041.1051.0\n  cpe:/a:microsoft:windows_app_store:2000.777.2143.0\n  cpe:/a:microsoft:windows_app_store:2000.802.31.0\n  cpe:/a:microsoft:windows_app_store:2024.11070.11002.0\n  cpe:/a:microsoft:windows_app_store:2024.2408.1.0\n  cpe:/a:microsoft:windows_app_store:22408.1401.0.0\n  cpe:/a:microsoft:windows_app_store:22408.1401.6.0\n  cpe:/a:microsoft:windows_app_store:23.0.0.0\n  cpe:/a:microsoft:windows_app_store:2350.5.3.0\n  cpe:/a:microsoft:windows_app_store:24257.202.3122.9976\n  cpe:/a:microsoft:windows_app_store:3.3.791.0\n  cpe:/a:microsoft:windows_app_store:3000.934.1904.0\n  cpe:/a:microsoft:windows_app_store:4.1901.10241.1000\n  cpe:/a:microsoft:windows_app_store:4.20.9120.0\n  cpe:/a:microsoft:windows_app_store:4.2308.1005.0\n  cpe:/a:microsoft:windows_app_store:4.53.62621.0\n  cpe:/a:microsoft:windows_app_store:4000.1082.2259.0\n  cpe:/a:microsoft:windows_app_store:4000.1309.2056.0\n  cpe:/a:microsoft:windows_app_store:44.18362.387.0\n  cpe:/a:microsoft:windows_app_store:48.104.4001.0\n  cpe:/a:microsoft:windows_app_store:5.2011.3081.0\n  cpe:/a:microsoft:windows_app_store:5001.119.156.0\n  cpe:/a:microsoft:windows_app_store:5001.214.1843.0\n  cpe:/a:microsoft:windows_app_store:6.1.2.0\n  cpe:/a:microsoft:windows_app_store:6.2.1.0\n  cpe:/a:microsoft:windows_app_store:6.2408.2027.0\n  cpe:/a:microsoft:windows_app_store:6.3.4.0\n  cpe:/a:microsoft:windows_app_store:7.2208.15002.0\n  cpe:/a:microsoft:windows_app_store:7.224.9031.0\n  cpe:/a:microsoft:windows_app_store:7.2407.16012.0\n  cpe:/a:microsoft:windows_app_store:8.2212.15002.0\n  cpe:/a:microsoft:windows_app_store:94.0.992.31\n  cpe:/a:microsoft:windows_defender:4.18.1909.6 -> Microsoft Windows Defender\n  cpe:/a:microsoft:word:16.0.17830.20210 -> Microsoft Word\n  cpe:/a:microsoft:wordcnv:16.0.17830.20210\n  cpe:/a:mobatek:mobaxterm:23.6.0.5186 -> Mobatek MobaXterm Home Edition\n  cpe:/a:mozilla:firefox:130.0.1 -> Mozilla Firefox\n  cpe:/a:mozilla:mozilla:130.0.1 -> Mozilla Mozilla\n  cpe:/a:ni:labview:2015 -> National Instruments LabVIEW\n  cpe:/a:ni:labview:2022.3.1 -> National Instruments LabVIEW\n  cpe:/a:notepad-plus-plus:notepad%2b%2b:8.7.0.0 -> notepad-plus-plus Notepad++\n  cpe:/a:oracle:vm_virtualbox:7.1.2.164945 -> Oracle VM VirtualBox\n  cpe:/a:sophos:intercept_x_endpoint:2024.1.2.1.0 -> Sophos Intercept X Endpoint\n  cpe:/a:tenable:nessus_agent:10.7.3 -> Tenable Nessus Agent\n  cpe:/a:tracker-software:pdf-xchange_editor:10.4.1.389 -> Tracker Software PDF-XChange Editor\n  cpe:/a:vmware:player:17.0.2 -> VMWare Player\n  cpe:/a:winscp:winscp:6.3.5.14991 -> WinSCP\n  x-cpe:/a:microsoft:sccm_client:5.0.9122.1000\n",
+        "plugin": {
+            "bid": [
+                45590
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": false,
+            "cpe": [],
+            "description": "By using information obtained from a Nessus scan, this plugin reports CPE (Common Platform Enumeration) matches for various hardware and software products found on a host. \n\nNote that if an official CPE is not available for the product, this plugin computes the best possible CPE based on the information available from the scan.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "General",
+            "family_id": 23,
+            "has_patch": false,
+            "id": 45590,
+            "in_the_news": false,
+            "name": "Common Platform Enumeration (CPE)",
+            "modification_date": "2024-09-03T00:00:00Z",
+            "publication_date": "2010-04-21T00:00:00Z",
+            "risk_factor": "info",
+            "see_also": [
+                "http://cpe.mitre.org/",
+                "https://nvd.nist.gov/products/cpe"
+            ],
+            "synopsis": "It was possible to enumerate CPE names that matched on the remote system.",
+            "unsupported_by_vendor": false,
+            "version": "1.164",
+            "xrefs": [],
+            "type": "combined"
+        },
+        "port": {
+            "port": 0,
+            "protocol": "TCP"
+        },
+        "scan": {
+            "schedule_uuid": "template-05beaaef-8913-3272-e186-974f768c993be599cff857718dc0",
+            "started_at": "2024-10-03T10:03:03.904Z",
+            "uuid": "47eece6f-8020-4fcc-ab40-3e46e83deda1"
+        },
+        "severity": "info",
+        "severity_id": 0,
+        "severity_default_id": 0,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-09-16T10:56:25.115Z",
+        "last_found": "2024-10-03T10:52:07.079Z",
+        "state": "OPEN",
+        "indexed": "2024-10-03T10:52:17.027117Z",
+        "source": "AGENT"
+    },
+    {
+        "asset": {
+            "agent_uuid": "651f936a6a894fc7b6d7b96ebd218833",
+            "bios_uuid": "4c4c4544-0039-5710-8042-c2c04f513733",
+            "device_type": "general-purpose",
+            "fqdn": "dlshe0028.fed.cclrc.ac.uk",
+            "hostname": "dlshe0028",
+            "uuid": "0021b50b-8c14-4cdb-ba8f-7633368d9892",
+            "ipv4": "148.79.116.196",
+            "last_authenticated_results": "2024-10-03T10:38:48.543Z",
+            "mac_address": "74:78:27:11:7a:8e",
+            "netbios_name": "DLSHE0028",
+            "operating_system": [
+                "Microsoft Windows 10 Enterprise Build 19045"
+            ],
+            "network_id": "57462c98-1f18-43cd-9ba5-96656695a53a",
+            "tracked": true
+        },
+        "output": "Network Adapter Driver Description : Intel(R) Ethernet Connection (10) I219-V\nNetwork Adapter Driver Version     : 12.18.9.23\n\nNetwork Adapter Driver Description : Intel(R) Wi-Fi 6 AX201 160MHz\nNetwork Adapter Driver Version     : 22.250.10.1\n\nNetwork Adapter Driver Description : Realtek USB GbE Family Controller\nNetwork Adapter Driver Version     : 10.39.518.2020\n\nNetwork Adapter Driver Description : ASIX AX88179 USB 3.0 to Gigabit Ethernet Adapter\nNetwork Adapter Driver Version     : 1.16.27.321\n\nNetwork Adapter Driver Description : ASIX AX88179 USB 3.0 to Gigabit Ethernet Adapter\nNetwork Adapter Driver Version     : 2.20.8.0\n\n",
+        "plugin": {
+            "bid": [
+                103871
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": false,
+            "cpe": [],
+            "description": "Using the supplied credentials, this plugin enumerates and reports the installed network adapters on the remote Windows host.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "Windows",
+            "family_id": 7,
+            "has_patch": false,
+            "id": 103871,
+            "in_the_news": false,
+            "name": "Microsoft Windows Network Adapters",
+            "modification_date": "2022-02-01T00:00:00Z",
+            "publication_date": "2017-10-17T00:00:00Z",
+            "risk_factor": "info",
+            "solution": "Make sure that all of the installed network adapters agrees with your organization's acceptable use and security policies.",
+            "synopsis": "Identifies the network adapters installed on the remote host.",
+            "unsupported_by_vendor": false,
+            "version": "1.8",
+            "xrefs": [
+                {
+                    "type": "IAVT",
+                    "id": "0001-T-0758"
+                }
+            ],
+            "type": "local"
+        },
+        "port": {
+            "port": 445,
+            "protocol": "TCP"
+        },
+        "scan": {
+            "schedule_uuid": "template-05beaaef-8913-3272-e186-974f768c993be599cff857718dc0",
+            "started_at": "2024-10-03T10:03:03.904Z",
+            "uuid": "47eece6f-8020-4fcc-ab40-3e46e83deda1"
+        },
+        "severity": "info",
+        "severity_id": 0,
+        "severity_default_id": 0,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-10-01T11:09:57.142Z",
+        "last_found": "2024-10-03T10:38:48.543Z",
+        "state": "OPEN",
+        "indexed": "2024-10-03T10:38:52.926876Z",
+        "source": "AGENT"
+    },
+    {
+        "asset": {
+            "agent_uuid": "9a4347372c6f418d987ec7d77dd355ab",
+            "bios_uuid": "a065a4e3-02ad-edd6-78a6-c87f5406f622",
+            "device_type": "general-purpose",
+            "fqdn": "ddast0112.fed.cclrc.ac.uk",
+            "hostname": "ddast0112",
+            "uuid": "002e406a-7908-40f5-8cca-8fb536888bc8",
+            "ipv4": "148.79.100.184",
+            "ipv6": "fe80::1742:7edb:8d8b:204d",
+            "last_authenticated_results": "2024-10-03T11:09:09.429Z",
+            "mac_address": "c8:7f:54:06:f6:22",
+            "netbios_name": "DDAST0112",
+            "operating_system": [
+                "Microsoft Windows 10 Enterprise Build 19045"
+            ],
+            "network_id": "57462c98-1f18-43cd-9ba5-96656695a53a",
+            "tracked": true
+        },
+        "output": "\n  OS Name      : Microsoft Windows 10 22H2\n  Vendor       : Microsoft\n  Product      : Windows\n  Release      : 10 22H2\n  Edition      : Enterprise\n  Version      : 10.0.19045.4894\n  Role         : client\n  Kernel       : Windows NT 10.0\n  Architecture : x64\n  CPE v2.2     : cpe:/o:microsoft:windows_10_22h2:10.0.19045.4894:-\n  CPE v2.3     : cpe:2.3:o:microsoft:windows_10_22h2:10.0.19045.4894:-:*:*:enterprise:*:x64:*\n  Type         : local\n  Method       : SMB\n  Confidence   : 100\n",
+        "plugin": {
+            "bid": [
+                187318
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": false,
+            "cpe": [
+                "cpe:/o:microsoft:windows_server",
+                "cpe:/o:microsoft:windows"
+            ],
+            "description": "The remote host is running Microsoft Windows.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "Windows",
+            "family_id": 7,
+            "has_patch": false,
+            "id": 187318,
+            "in_the_news": false,
+            "name": "Microsoft Windows Installed",
+            "modification_date": "2024-10-03T00:00:00Z",
+            "publication_date": "2023-12-27T00:00:00Z",
+            "risk_factor": "info",
+            "see_also": [
+                "https://www.microsoft.com/en-us/windows",
+                "https://www.microsoft.com/en-us/windows-server"
+            ],
+            "synopsis": "The remote host is running Microsoft Windows.",
+            "unsupported_by_vendor": false,
+            "version": "1.3",
+            "xrefs": [],
+            "type": "local"
+        },
+        "port": {
+            "port": 0,
+            "protocol": "TCP"
+        },
+        "scan": {
+            "schedule_uuid": "template-05beaaef-8913-3272-e186-974f768c993be599cff857718dc0",
+            "started_at": "2024-10-03T10:03:03.904Z",
+            "uuid": "47eece6f-8020-4fcc-ab40-3e46e83deda1"
+        },
+        "severity": "info",
+        "severity_id": 0,
+        "severity_default_id": 0,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-09-16T10:51:20.902Z",
+        "last_found": "2024-10-03T11:09:09.429Z",
+        "state": "OPEN",
+        "indexed": "2024-10-03T11:09:17.930432Z",
+        "source": "AGENT"
+    },
+    {
+        "asset": {
+            "agent_uuid": "2f8014af218f4396a8b00f09dee713b5",
+            "bios_uuid": "4c4c4544-004a-3710-8058-b2c04f375433",
+            "device_type": "general-purpose",
+            "fqdn": "ddccr0007.fed.cclrc.ac.uk",
+            "hostname": "ddccr0007",
+            "uuid": "003bfd1f-5450-4e21-8046-b90b91aee21e",
+            "ipv4": "148.79.100.82",
+            "ipv6": "fe80::7db3:c3af:745b:9d5e",
+            "last_authenticated_results": "2024-10-03T11:05:36.993Z",
+            "mac_address": "00:be:43:8e:41:9f",
+            "netbios_name": "DDCCR0007",
+            "operating_system": [
+                "Microsoft Windows 10 Enterprise Build 19045"
+            ],
+            "network_id": "57462c98-1f18-43cd-9ba5-96656695a53a",
+            "tracked": true
+        },
+        "output": "Quick access\nC:\\Windows\\System32\\DriverStore\\FileRepository\\nv_dispig.inf_amd64_4527d0e4735c4756\nC:\\Windows\\System32\\DriverStore\\FileRepository\n\nExtended explorer typed paths report attached.\n",
+        "plugin": {
+            "bid": [
+                92418
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": false,
+            "cpe": [
+                "cpe:/o:microsoft:windows"
+            ],
+            "description": "Nessus was able to enumerate the directory paths that users visited by manually typing the full directory path into Windows Explorer. The generated folder list report contains folders local to the system, folders from past mounted network drives, and folders from mounted devices.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "Windows",
+            "family_id": 7,
+            "has_patch": false,
+            "id": 92418,
+            "in_the_news": false,
+            "name": "Windows Explorer Typed Paths",
+            "modification_date": "2018-11-15T00:00:00Z",
+            "publication_date": "2016-07-19T00:00:00Z",
+            "risk_factor": "info",
+            "see_also": [
+                "http://www.nessus.org/u?f92f6e9f"
+            ],
+            "synopsis": "Nessus was able to enumerate the directory paths that users visited by typing the full directory path into Windows Explorer.",
+            "unsupported_by_vendor": false,
+            "version": "1.6",
+            "xrefs": [],
+            "type": "local"
+        },
+        "port": {
+            "port": 0,
+            "protocol": "TCP"
+        },
+        "scan": {
+            "schedule_uuid": "template-05beaaef-8913-3272-e186-974f768c993be599cff857718dc0",
+            "started_at": "2024-10-03T10:03:03.904Z",
+            "uuid": "47eece6f-8020-4fcc-ab40-3e46e83deda1"
+        },
+        "severity": "info",
+        "severity_id": 0,
+        "severity_default_id": 0,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-09-18T10:51:21.926Z",
+        "last_found": "2024-10-03T11:05:36.993Z",
+        "state": "OPEN",
+        "indexed": "2024-10-03T11:05:41.608850Z",
+        "source": "AGENT"
+    }
+]
