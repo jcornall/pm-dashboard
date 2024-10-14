@@ -32,7 +32,7 @@ def load_systems(ctx: PmpPipelineContext):
         f"{PMP_API_URL}/api/1.4/patch/allsystems",
         headers={"Authorization": f"Bearer {ctx.access_token}"},
         on_page_fetched=__load_page_to_db,
-        args=(ctx.pool,),
+        args=(ctx,),
         max_workers=2,
     )
 
