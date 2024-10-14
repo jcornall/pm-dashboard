@@ -2,6 +2,7 @@ from typing import Any
 from mariadb import mariadb
 
 from src.pmp.constants import PMP_API_ABSENT_VALUE, PMP_API_URL
+from src.pmp.context import PmpPipelineContext
 from src.pmp.paginate import paginate
 from src.util.database import wait_for_pool_connection
 
@@ -23,21 +24,24 @@ __resource_health_status_enum_values = [
 ]
 
 
-def load_systems(pool: mariadb.ConnectionPool, access_token: str):
+def load_systems(ctx: PmpPipelineContext):
+    if ctx.logger:
+        ctx.logger.info("loading all system data into database using 2 workers.")
+
     paginate(
         f"{PMP_API_URL}/api/1.4/patch/allsystems",
-        headers={"Authorization": f"Bearer {access_token}"},
+        headers={"Authorization": f"Bearer {ctx.access_token}"},
         on_page_fetched=__load_page_to_db,
-        args=(pool,),
+        args=(ctx.pool,),
         max_workers=2,
     )
 
+    if ctx.logger:
+        ctx.logger.info("all system data loaded into database")
 
-def __load_page_to_db(
-    page: dict[str, Any], page_number: int, pool: mariadb.ConnectionPool
-):
-    conn = wait_for_pool_connection(pool)
-    last_row = None
+
+def __load_page_to_db(page: dict[str, Any], page_number: int, ctx: PmpPipelineContext):
+    conn = wait_for_pool_connection(ctx.pool)
     try:
         cursor = conn.cursor()
 
@@ -49,7 +53,6 @@ def __load_page_to_db(
             if not health_status_value or health_status_value == PMP_API_ABSENT_VALUE:
                 health_status_value = 0
 
-            last_row = system_info
             reboot_req_status = system_info.get(
                 "resourcetorebootdetails.reboot_req_status"
             )
@@ -78,8 +81,11 @@ def __load_page_to_db(
 
         conn.commit()
     except Exception as e:
-        print(e)
-        print("last row", last_row)
+        if ctx.logger:
+            ctx.logger.error(
+                f"an error occurred when loading system data to database at page {page_number}",
+                e,
+            )
         conn.rollback()
     finally:
         conn.close()

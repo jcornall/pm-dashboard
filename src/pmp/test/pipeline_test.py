@@ -28,7 +28,7 @@ def test_pipeline(mock_pmp_api):
         database="pmp_test",
     )
 
-    pmp(pool)
+    pmp(pool, logger=None)
 
     conn = wait_for_pool_connection(pool)
 
