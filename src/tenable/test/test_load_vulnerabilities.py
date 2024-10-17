@@ -30,6 +30,7 @@ TEST_CONN_PARAMS = {
 }
 
 # Test Data Filepath
+# TODO: Implement pyfakefs
 ASSET_EXPORT_TEST_DIR = Path(r"src") / "tenable" / "test" / "test_data" / "assets"
 VULN_EXPORT_TEST_DIR = Path(r"src") / "tenable" / "test" / "test_data" / "vulnerabilities"
 

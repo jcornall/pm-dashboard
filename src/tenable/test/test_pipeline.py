@@ -23,6 +23,7 @@ TEST_CONN_PARAMS = {
 
 @dataclass
 class MockThread:
+    # TODO: Remove thread mocking
     def start():
         pass
 
@@ -31,6 +32,7 @@ class MockThread:
 
 @pytest.fixture(autouse=True)
 def mock_thread():
+    # TODO: Remove thread mocking
     return MockThread()
 
 def test_tenable_success(mocker, mock_thread):

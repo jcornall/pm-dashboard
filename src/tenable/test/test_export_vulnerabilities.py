@@ -7,6 +7,7 @@ from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
 
 @dataclass
 class MockResponse:
+    # TODO: Remove once requests-mock implemented in conftest.py
     status_code: int
     json_data: dict
     text: str
@@ -16,6 +17,7 @@ class MockResponse:
 
 @dataclass
 class MockThread:
+    # TODO: Remove thread mocking
     def start():
         pass
 
@@ -36,6 +38,7 @@ def cred_object():
 
 @pytest.fixture(autouse=True)
 def post_response_success():
+    # TODO: Remove once requests-mock implemented in conftest.py
     return MockResponse(
         status_code=200, 
         json_data={"export_uuid": "EXPORT_UUID"}, 
@@ -44,6 +47,7 @@ def post_response_success():
 
 @pytest.fixture(autouse=True)
 def post_response_failure():
+    # TODO: Remove once requests-mock implemented in conftest.py
     return MockResponse(
         status_code=404, 
         json_data={"export_uuid": "EXPORT_UUID"}, 
@@ -52,7 +56,7 @@ def post_response_failure():
 
 @pytest.fixture(autouse=True)
 def get_response():
-
+    # TODO: Remove once requests-mock implemented in conftest.py
     return MockResponse(
         status_code=200, 
         json_data={
@@ -74,6 +78,7 @@ def get_response():
 
 @pytest.fixture(autouse=True)
 def mock_thread():
+    # TODO: Remove thread mocking
     return MockThread()
 
 def test_export_tenable_vulnerabilities_success(mocker, cred_object, post_response_success, get_response, mock_thread, mock_time):

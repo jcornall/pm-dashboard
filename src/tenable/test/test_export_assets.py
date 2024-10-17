@@ -1,12 +1,16 @@
 import pytest
+import requests
+import requests_mock
 from datetime import datetime
 from dataclasses import dataclass
 
+from src.tenable.constants import TENABLE_API_URL
 from src.tenable.credentials import TenableCredentials
 from src.tenable.export_assets import export_tenable_assets
 
 @dataclass
 class MockResponse:
+    # TODO: Remove once requests-mock implemented in conftest.py
     status_code: int
     json_data: dict
     text: str
@@ -16,6 +20,7 @@ class MockResponse:
 
 @dataclass
 class MockThread:
+    # TODO: Remove thread mocking
     def start():
         pass
 
@@ -35,15 +40,8 @@ def cred_object():
     )
 
 @pytest.fixture(autouse=True)
-def post_response_success():
-    return MockResponse(
-        status_code=200, 
-        json_data={"export_uuid": "EXPORT_UUID"}, 
-        text="TEXT"
-    )
-
-@pytest.fixture(autouse=True)
 def post_response_failure():
+    # TODO: Remove once requests-mock implemented in conftest.py
     return MockResponse(
         status_code=400, 
         json_data={"export_uuid": "EXPORT_UUID"}, 
@@ -51,8 +49,20 @@ def post_response_failure():
     )
 
 @pytest.fixture(autouse=True)
-def get_response():
-    return MockResponse(
+def mock_thread():
+    # TODO: Remove thread mocking
+    return MockThread()
+
+def test_export_tenable_assets_success(mocker, cred_object, requests_mock, mock_time):
+    requests_mock.post(
+        f"{TENABLE_API_URL}/assets/export", 
+        status_code=200, 
+        json_data={"export_uuid": "EXPORT_UUID"}, 
+        text="TEXT",
+    )
+
+    requests_mock.get(
+        f"{TENABLE_API_URL}/assets/export/{export_uuid}/status",
         status_code=200, 
         json_data={
             "status": "FINISHED", 
@@ -61,15 +71,9 @@ def get_response():
         text="TEXT"
     )
 
-@pytest.fixture(autouse=True)
-def mock_thread():
-    return MockThread()
-
-def test_export_tenable_assets_success(mocker, cred_object, post_response_success, get_response, mock_thread, mock_time):
     mocker.patch("requests.post", return_value=post_response_success) 
     mocker.patch("requests.get", return_value=get_response)
-    mocker.patch("threading.Thread", return_value=mock_thread)
-    mocker.patch("src.tenable.export_assets.__save_single_assets_chunk")
+    # mocker.patch("src.tenable.export_assets.__save_single_assets_chunk")
 
     export_status = export_tenable_assets(cred_object)
     assert export_status.created == int(mock_time)
