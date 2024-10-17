@@ -119,7 +119,7 @@ def __save_single_assets_chunk(
     if not res_json:
         # this should not happen, but if it does something catatrophic happened
         raise RuntimeError(
-            f"catatrophic failure: tenable returned an empty response when downloing chunk "
+            f"catatrophic failure: tenable returned an empty response when downloading chunk"
         )
 
     file_name = f"{current_export.created}_{current_export.uuid}_{chunk_id}.json"
