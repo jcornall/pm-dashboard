@@ -1,43 +1,13 @@
 import pytest
 import subprocess
-import os
-from dotenv import load_dotenv
 from mariadb import mariadb
 from pathlib import Path
 
-from src.config.constants import ENV_PATH
 from src.tenable.export_vulnerabilities import VulnExportStatus
 from src.tenable.export_assets import AssetExportStatus
 from src.tenable.load_vulnerabilities import load_tenable_vulnerabilities
 from src.tenable.load_assets import load_tenable_assets
-
-
-# Keys
-load_dotenv(dotenv_path=ENV_PATH)
-TEST_MARIADB_USER = os.getenv("TEST_MARIADB_USER")
-TEST_MARIADB_PWD = os.getenv("TEST_MARIADB_PWD")
-TEST_MARIADB_HOST = os.getenv("TEST_MARIADB_HOST")
-TEST_MARIADB_PORT = int(os.getenv("TEST_MARIADB_PORT"))
-TEST_MARIADB_DB = os.getenv("TEST_MARIADB_DB")
-
-# MariaDB Connection Parameters
-TEST_CONN_PARAMS = {
-    "user":TEST_MARIADB_USER,
-    "password":TEST_MARIADB_PWD,
-    "host":TEST_MARIADB_HOST,
-    "port":TEST_MARIADB_PORT,
-    "database":TEST_MARIADB_DB
-}
-
-# Test Data Filepath
-# TODO: Implement pyfakefs
-ASSET_EXPORT_TEST_DIR = Path(r"src") / "tenable" / "test" / "test_data" / "assets"
-VULN_EXPORT_TEST_DIR = Path(r"src") / "tenable" / "test" / "test_data" / "vulnerabilities"
-
-# DB Migrations
-MIGRATION_UP = ["./golang-migrate/migrate", "-path", "./src/tenable/migrations", "-database", "mysql://test:test@tcp(localhost:3306)/testdb", "up"]
-MIGRATION_DROP = ["./golang-migrate/migrate", "-path", "./src/tenable/migrations", "-database", "mysql://test:test@tcp(localhost:3306)/testdb", "drop"]
-
+from src.tenable.test.conftest import *
 
 @pytest.fixture(autouse=True)
 def db_migration():
