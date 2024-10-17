@@ -7,29 +7,13 @@ from datetime import datetime
 from dataclasses import dataclass
 
 from src.tenable.constants import TENABLE_API_URL
-from src.tenable.credentials import TenableCredentials
 from src.tenable.export_assets import export_tenable_assets
 from src.tenable.test.conftest import ASSET_EXPORT_TEST_DIR
 from src.config.constants import ASSET_EXPORT_DIR
 from src.config.extract_config import set_up_file_structure
 
-@pytest.fixture(autouse=True)
-def mock_time():
-    now = datetime.today()
-    return now.timestamp()
-
-@pytest.fixture(autouse=True)
-def cred_object():
-    return TenableCredentials(
-        access_key="ACCESS_KEY", 
-        secret_key="SECRET_KEY"
-    )
-
-@pytest.fixture(autouse=True)
-def fake_filesystem(fs):
-    yield fs
-
 def test_export_tenable_assets_success(fake_filesystem, cred_object, requests_mock, mock_time):
+    set_up_file_structure()
     requests_mock.post(
         f"{TENABLE_API_URL}/assets/export", 
         status_code=200, 
@@ -56,9 +40,8 @@ def test_export_tenable_assets_success(fake_filesystem, cred_object, requests_mo
         text=json_string, 
     )
 
-    set_up_file_structure()
-
     export_status = export_tenable_assets(cred_object)
+    
     assert export_status.created == int(mock_time)
     assert export_status.uuid == "EXPORT_UUID"
     assert export_status.status == "FINISHED"
@@ -74,18 +57,3 @@ def test_export_tenable_assets_post_response_failure(cred_object, requests_mock)
 
     with pytest.raises(RuntimeError):
         export_tenable_assets(cred_object)
-
-# def test_export_tenable_assets_get_response_failure(cred_object, requests_mock, mock_time):
-#     requests_mock.post(
-#         f"{TENABLE_API_URL}/assets/export", 
-#         status_code=200, 
-#         json={"export_uuid": "EXPORT_UUID"}, 
-#     )
-
-#     requests_mock.get(
-#         f"{TENABLE_API_URL}/assets/export/EXPORT_UUID/status",
-#         status_code=403
-#     )
-
-#     with pytest.raises(RuntimeError):
-#         export_tenable_assets(cred_object)

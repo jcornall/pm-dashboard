@@ -1,65 +1,29 @@
 import pytest
+import requests
+import requests_mock
+import os
+from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass
 
-from src.tenable.credentials import TenableCredentials
+from src.tenable.constants import TENABLE_API_URL
 from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
+from src.tenable.test.conftest import VULN_EXPORT_TEST_DIR
+from src.config.constants import VULN_EXPORT_DIR
+from src.config.extract_config import set_up_file_structure
 
-@dataclass
-class MockResponse:
-    # TODO: Remove once requests-mock implemented in conftest.py
-    status_code: int
-    json_data: dict
-    text: str
-
-    def json(self):
-        return self.json_data
-
-@dataclass
-class MockThread:
-    # TODO: Remove thread mocking
-    def start():
-        pass
-
-    def join():
-        pass
-
-@pytest.fixture(autouse=True)
-def mock_time():
-    now = datetime.today()
-    return now.timestamp()
-
-@pytest.fixture(autouse=True)
-def cred_object():
-    return TenableCredentials(
-        access_key="ACCESS_KEY", 
-        secret_key="SECRET_KEY"
-    )
-
-@pytest.fixture(autouse=True)
-def post_response_success():
-    # TODO: Remove once requests-mock implemented in conftest.py
-    return MockResponse(
+def test_export_tenable_vulnerabilities_success(fake_filesystem, cred_object, requests_mock, mock_time):
+    set_up_file_structure()
+    requests_mock.post(
+        f"{TENABLE_API_URL}/vulns/export", 
         status_code=200, 
-        json_data={"export_uuid": "EXPORT_UUID"}, 
-        text="TEXT"
+        json={"export_uuid": "EXPORT_UUID"}, 
     )
 
-@pytest.fixture(autouse=True)
-def post_response_failure():
-    # TODO: Remove once requests-mock implemented in conftest.py
-    return MockResponse(
-        status_code=404, 
-        json_data={"export_uuid": "EXPORT_UUID"}, 
-        text="TEXT"
-    )
-
-@pytest.fixture(autouse=True)
-def get_response():
-    # TODO: Remove once requests-mock implemented in conftest.py
-    return MockResponse(
+    requests_mock.get(
+        f"{TENABLE_API_URL}/vulns/export/EXPORT_UUID/status",
         status_code=200, 
-        json_data={
+        json={
             "uuid": "EXPORT_UUID",
             "chunks_failed": [],
             "chunks_cancelled": [],
@@ -71,23 +35,23 @@ def get_response():
             "num_assets_per_chunk": 100,
             "status": "FINISHED", 
             "chunks_available": [1],
-            "created": int(datetime.now().timestamp())
+            "created": int(mock_time)
         }, 
-        text="TEXT"
     )
 
-@pytest.fixture(autouse=True)
-def mock_thread():
-    # TODO: Remove thread mocking
-    return MockThread()
+    fake_filesystem.pause()
+    with open(VULN_EXPORT_TEST_DIR / "0_TEST_1.json", "r") as data:
+        json_string = data.read()
+    fake_filesystem.resume()
 
-def test_export_tenable_vulnerabilities_success(mocker, cred_object, post_response_success, get_response, mock_thread, mock_time):
-    mocker.patch("requests.post", return_value=post_response_success) 
-    mocker.patch("requests.get", return_value=get_response)
-    mocker.patch("threading.Thread", return_value=mock_thread)
-    mocker.patch("src.tenable.export_vulnerabilities.__save_single_vuln_chunk")
+    requests_mock.get(
+        f"{TENABLE_API_URL}/vulns/export/EXPORT_UUID/chunks/1",
+        status_code=200, 
+        text=json_string, 
+    )
 
     export_status = export_tenable_vulnerabilities(cred_object)
+
     assert export_status.uuid == "EXPORT_UUID"
     assert export_status.status == "FINISHED"
     assert export_status.chunks_available == [1]
@@ -100,8 +64,15 @@ def test_export_tenable_vulnerabilities_success(mocker, cred_object, post_respon
     assert export_status.num_assets_per_chunk == 100
     assert export_status.created == int(mock_time)
 
-def test_export_tenable_assets_failure(mocker, cred_object, post_response_failure):
-    mocker.patch("requests.post", return_value=post_response_failure)
+    assert os.path.exists(VULN_EXPORT_DIR / f"{export_status.created}_{export_status.uuid}_1.json")
+
+
+def test_export_tenable_assets_post_failure(cred_object, requests_mock):
+    requests_mock.post(
+            f"{TENABLE_API_URL}/vulns/export", 
+            status_code=403 
+        )
+
     with pytest.raises(RuntimeError):
         export_tenable_vulnerabilities(cred_object)
 
