@@ -2,15 +2,16 @@ import pytest
 import requests
 import requests_mock
 import os
-from pathlib import Path
-from datetime import datetime
-from dataclasses import dataclass
 
 from src.tenable.constants import TENABLE_API_URL
 from src.tenable.export_assets import export_tenable_assets
 from src.tenable.test.conftest import ASSET_EXPORT_TEST_DIR
 from src.config.constants import ASSET_EXPORT_DIR
 from src.config.extract_config import set_up_file_structure
+
+@pytest.fixture(autouse=True)
+def fake_filesystem(fs):
+    yield fs
 
 def test_export_tenable_assets_success(fake_filesystem, cred_object, requests_mock, mock_time):
     set_up_file_structure()
@@ -41,7 +42,7 @@ def test_export_tenable_assets_success(fake_filesystem, cred_object, requests_mo
     )
 
     export_status = export_tenable_assets(cred_object)
-    
+
     assert export_status.created == int(mock_time)
     assert export_status.uuid == "EXPORT_UUID"
     assert export_status.status == "FINISHED"

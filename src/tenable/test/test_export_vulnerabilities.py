@@ -2,15 +2,16 @@ import pytest
 import requests
 import requests_mock
 import os
-from pathlib import Path
-from datetime import datetime
-from dataclasses import dataclass
 
 from src.tenable.constants import TENABLE_API_URL
 from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
 from src.tenable.test.conftest import VULN_EXPORT_TEST_DIR
 from src.config.constants import VULN_EXPORT_DIR
 from src.config.extract_config import set_up_file_structure
+
+@pytest.fixture(autouse=True)
+def fake_filesystem(fs):
+    yield fs
 
 def test_export_tenable_vulnerabilities_success(fake_filesystem, cred_object, requests_mock, mock_time):
     set_up_file_structure()
@@ -75,4 +76,3 @@ def test_export_tenable_assets_post_failure(cred_object, requests_mock):
 
     with pytest.raises(RuntimeError):
         export_tenable_vulnerabilities(cred_object)
-
