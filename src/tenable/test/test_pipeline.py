@@ -1,50 +1,60 @@
 import pytest
-from datetime import datetime
-from dataclasses import dataclass
-
+import subprocess
+from pathlib import Path
 from src.tenable.pipeline import *
-
-# Keys
-load_dotenv(dotenv_path=ENV_PATH)
-TEST_MARIADB_USER = os.getenv("TEST_MARIADB_USER")
-TEST_MARIADB_PWD = os.getenv("TEST_MARIADB_PWD")
-TEST_MARIADB_HOST = os.getenv("TEST_MARIADB_HOST")
-TEST_MARIADB_PORT = int(os.getenv("TEST_MARIADB_PORT"))
-TEST_MARIADB_DB = os.getenv("TEST_MARIADB_DB")
-
-# MariaDB Connection Parameters
-TEST_CONN_PARAMS = {
-    "user":TEST_MARIADB_USER,
-    "password":TEST_MARIADB_PWD,
-    "host":TEST_MARIADB_HOST,
-    "port":TEST_MARIADB_PORT,
-    "database":TEST_MARIADB_DB
-}
-
-@dataclass
-class MockThread:
-    # TODO: Remove thread mocking
-    def start():
-        pass
-
-    def join():
-        pass
+from src.tenable.test.conftest import TEST_ASSET_EXPORT_DIR
+from src.tenable.test.conftest import (
+    TEST_ASSET_EXPORT_DIR,
+    TEST_VULN_EXPORT_DIR,
+    TEST_MARIADB_USER,
+    TEST_MARIADB_PWD,
+    TEST_MARIADB_HOST,
+    TEST_MARIADB_PORT,
+    TEST_MARIADB_DB,
+    MIGRATION
+)
 
 @pytest.fixture(autouse=True)
-def mock_thread():
-    # TODO: Remove thread mocking
-    return MockThread()
+def fake_filesystem(fs):
+    yield fs
 
-def test_tenable_success(mocker, mock_thread):
-    mocker.patch("mariadb.connect") 
-    mocker.patch("src.config.logger_config.set_up_logger")
-    mocker.patch("src.config.extract_config.purge_old_files")
-    mocker.patch("src.config.extract_config.purge_empty_dirs")
-    mocker.patch("src.config.extract_config.set_up_file_structure")
-    mocker.patch("src.config.extract_config.set_up_dir")
-    mocker.patch("src.config.extract_config.set_up_subdir")
-    mocker.patch("threading.Thread", return_value=mock_thread)
-    mocker.patch("src.tenable.pipeline.__process_vulnerabilities")
-    mocker.patch("src.tenable.pipeline.__process_assets")
+@pytest.fixture(autouse=True)
+def create_testdb():
+    conn_params = {
+        "user":TEST_MARIADB_USER,
+        "password":TEST_MARIADB_PWD,
+        "host":TEST_MARIADB_HOST,
+        "port":TEST_MARIADB_PORT,
+    }
+    conn = mariadb.connect(**conn_params)
+    conn.begin()
+    cursor = conn.cursor()
+    cursor.execute("CREATE DATABASE IF NOT EXISTS testdb;")
+    conn.commit()
+    subprocess.run(MIGRATION)
+    yield
+    conn.begin()
+    cursor = conn.cursor()
+    cursor.execute("DROP DATABASE IF EXISTS testdb;")
+    conn.commit()
+
+
+def test_tenable_success(fs, mocker):
+    conn_params = {
+        "user":TEST_MARIADB_USER,
+        "password":TEST_MARIADB_PWD,
+        "host":TEST_MARIADB_HOST,
+        "port":TEST_MARIADB_PORT,
+        "database":TEST_MARIADB_DB
+    }
+    conn = mariadb.connect(**conn_params)
+    mocker.patch("mariadb.connect", return_value=conn)
+
+    fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")
+    fs.add_real_file(TEST_VULN_EXPORT_DIR / "0_TEST_1.json")
+    mocker.patch("src.tenable.load_assets.ASSET_EXPORT_DIR", TEST_ASSET_EXPORT_DIR)
+    mocker.patch("src.tenable.export_assets.AssetExportStatus.chunk_file_name", return_value="0_TEST_1.json")
+    mocker.patch("src.tenable.load_vulnerabilities.VULN_EXPORT_DIR", TEST_VULN_EXPORT_DIR)
+    mocker.patch("src.tenable.export_vulnerabilities.VulnExportStatus.chunk_file_name", return_value="0_TEST_1.json")
 
     tenable()
