@@ -24,8 +24,6 @@ def tenable():
         secret_key=os.getenv("TENABLE_SECRET_KEY"),
     )
 
-    db = mariadb.connect(**CONN_PARAMS)
-
     # Setup
     print(f"Current Working Directory: {Path.cwd()}")
     set_up_logger()
@@ -40,8 +38,8 @@ def tenable():
     set_up_file_structure()
     logging.info("File structure setup successful.")
 
-    t1 = Thread(target=__process_vulnerabilities, args=(creds, db))
-    t2 = Thread(target=__process_assets, args=(creds, db))
+    t1 = Thread(target=__process_vulnerabilities, args=(creds,))
+    t2 = Thread(target=__process_assets, args=(creds,))
 
     t1.start()
     t2.start()
@@ -52,15 +50,15 @@ def tenable():
     logging.info("Program execution successful, exiting program.")
 
 
-def __process_vulnerabilities(creds: TenableCredentials, db: mariadb.Connection):
+def __process_vulnerabilities(creds: TenableCredentials):
     logging.info("Exporting vulnerabilities...")
     export = export_tenable_vulnerabilities(creds)
     logging.info("Loading exported vulnerabilities into database...")
-    load_tenable_vulnerabilities(export, to=db)
+    load_tenable_vulnerabilities(export)
 
 
-def __process_assets(creds: TenableCredentials, db: mariadb.Connection):
+def __process_assets(creds: TenableCredentials):
     logging.info("Exporting assets...")
     export = export_tenable_assets(creds)
     logging.info("Loading exported assets into database...")
-    load_tenable_assets(export, to=db)
+    load_tenable_assets(export)
