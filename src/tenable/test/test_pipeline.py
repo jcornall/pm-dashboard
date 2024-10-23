@@ -36,7 +36,8 @@ def create_testdb(fs, mocker, asset_export_status):
     conn = mariadb.connect(**TEST_CONN_PARAMS)
     fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")
     mocker.patch("src.tenable.load_assets.ASSET_EXPORT_DIR", TEST_ASSET_EXPORT_DIR)
-    load_tenable_assets(asset_export_status, conn)
+    mocker.patch("src.tenable.load_assets.CONN_PARAMS", TEST_CONN_PARAMS)
+    load_tenable_assets(asset_export_status)
     conn.commit()
     yield
     conn.begin()
@@ -46,7 +47,7 @@ def create_testdb(fs, mocker, asset_export_status):
 
 
 def test_tenable_success(fs, mocker):
-    mocker.patch("src.tenable.pipeline.CONN_PARAMS", TEST_CONN_PARAMS)
+    mocker.patch("src.tenable.load_vulnerabilities.CONN_PARAMS", TEST_CONN_PARAMS)
 
     fs.add_real_file(TEST_VULN_EXPORT_DIR / "0_TEST_1.json")
     fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_0.json")
