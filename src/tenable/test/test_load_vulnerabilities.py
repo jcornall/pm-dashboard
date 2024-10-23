@@ -17,7 +17,7 @@ def create_testdb(fs, mocker, asset_export_status):
     subprocess.run(MIGRATION)
 
     conn = mariadb.connect(**TEST_CONN_PARAMS_DB)
-    fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")
+    fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")  # Test asset data is loaded early so that load_vulnerabilities can reference asset_uuids as a foreign key
     mocker.patch("src.tenable.load_assets.ASSET_EXPORT_DIR", TEST_ASSET_EXPORT_DIR)
     mocker.patch("src.tenable.load_assets.CONN_PARAMS", TEST_CONN_PARAMS_DB)
     load_tenable_assets(asset_export_status)
