@@ -9,14 +9,14 @@ from src.tenable.test.conftest import (
     TEST_MARIADB_PWD,
     TEST_MARIADB_HOST,
     TEST_MARIADB_PORT,
-    TEST_MARIADB_DB,
+    TEST_CONN_PARAMS,
     MIGRATION
 )
 from src.tenable.load_assets import load_tenable_assets
 from src.tenable.load_vulnerabilities import load_tenable_vulnerabilities
 
 @pytest.fixture(autouse=True)
-def create_testdb():
+def create_testdb(fs, mocker, asset_export_status):
     conn_params = {
         "user":TEST_MARIADB_USER,
         "password":TEST_MARIADB_PWD,
@@ -29,27 +29,22 @@ def create_testdb():
     cursor.execute("CREATE DATABASE IF NOT EXISTS testdb;")
     conn.commit()
     subprocess.run(MIGRATION)
+    conn = mariadb.connect(**TEST_CONN_PARAMS)
+    fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")
+    mocker.patch("src.tenable.load_assets.ASSET_EXPORT_DIR", TEST_ASSET_EXPORT_DIR)
+    load_tenable_assets(asset_export_status, conn)
+    conn.commit()
     yield
     conn.begin()
     cursor = conn.cursor()
     cursor.execute("DROP DATABASE IF EXISTS testdb;")
     conn.commit()
 
-def test_load_tenable_assets_success(fs, mocker, asset_export_status, vuln_export_status):
-    conn_params = {
-        "user":TEST_MARIADB_USER,
-        "password":TEST_MARIADB_PWD,
-        "host":TEST_MARIADB_HOST,
-        "port":TEST_MARIADB_PORT,
-        "database":TEST_MARIADB_DB
-    }
-    conn = mariadb.connect(**conn_params)
+def test_load_tenable_assets_success(fs, mocker, vuln_export_status):
+    conn = mariadb.connect(**TEST_CONN_PARAMS)
 
-    fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")
     fs.add_real_file(TEST_VULN_EXPORT_DIR / "0_TEST_1.json")
-    mocker.patch("src.tenable.load_assets.ASSET_EXPORT_DIR", TEST_ASSET_EXPORT_DIR)
     mocker.patch("src.tenable.load_vulnerabilities.VULN_EXPORT_DIR", TEST_VULN_EXPORT_DIR)
-    load_tenable_assets(asset_export_status, conn)
     load_tenable_vulnerabilities(vuln_export_status, conn)
 
     try:

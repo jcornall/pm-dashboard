@@ -38,7 +38,7 @@ def tenable():
     logging.info("Empty data directory purge successful...")
     logging.info("Data extraction successful.")
     set_up_file_structure()
-    print("File structure setup successful.")
+    logging.info("File structure setup successful.")
 
     t1 = Thread(target=__process_vulnerabilities, args=(creds, db))
     t2 = Thread(target=__process_assets, args=(creds, db))
@@ -49,18 +49,18 @@ def tenable():
     t1.join()
     t2.join()
 
-    print("Program execution successful, exiting program.")
+    logging.info("Program execution successful, exiting program.")
 
 
 def __process_vulnerabilities(creds: TenableCredentials, db: mariadb.Connection):
-    print("Exporting vulnerabilities...")
+    logging.info("Exporting vulnerabilities...")
     export = export_tenable_vulnerabilities(creds)
-    print("Loading exported vulnerabilities into database...")
+    logging.info("Loading exported vulnerabilities into database...")
     load_tenable_vulnerabilities(export, to=db)
 
 
 def __process_assets(creds: TenableCredentials, db: mariadb.Connection):
-    print("Exporting assets...")
+    logging.info("Exporting assets...")
     export = export_tenable_assets(creds)
-    print("Loading exported assets into database...")
+    logging.info("Loading exported assets into database...")
     load_tenable_assets(export, to=db)
