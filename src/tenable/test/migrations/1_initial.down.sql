@@ -1,0 +1,34 @@
+BEGIN;
+
+DROP TABLE IF EXISTS testdb.asset_fqdns;
+DROP TABLE IF EXISTS testdb.asset_hostnames;
+DROP TABLE IF EXISTS testdb.asset_installed_softwares;
+DROP TABLE IF EXISTS testdb.asset_ipv4_addresses;
+DROP TABLE IF EXISTS testdb.asset_ipv6_addresses;
+DROP TABLE IF EXISTS testdb.asset_mac_addresses;
+DROP TABLE IF EXISTS testdb.asset_manufacturer_tpm_ids;
+DROP TABLE IF EXISTS testdb.asset_netbios_names;
+DROP TABLE IF EXISTS testdb.asset_operating_systems;
+DROP TABLE IF EXISTS testdb.asset_qualys_asset_ids;
+DROP TABLE IF EXISTS testdb.asset_qualys_host_ids;
+DROP TABLE IF EXISTS testdb.asset_sources;
+DROP TABLE IF EXISTS testdb.asset_ssh_fingerprints;
+DROP TABLE IF EXISTS testdb.asset_symantec_ep_hardware_keys;
+DROP TABLE IF EXISTS testdb.asset_system_types;
+DROP TABLE IF EXISTS testdb.asset_tags;
+DROP TABLE IF EXISTS testdb.assets;
+DROP TABLE IF EXISTS testdb.plugin_bugtraqs;
+DROP TABLE IF EXISTS testdb.plugin_cpes;
+DROP TABLE IF EXISTS testdb.plugin_cves;
+DROP TABLE IF EXISTS testdb.plugin_cvss3_temporal_vectors;
+DROP TABLE IF EXISTS testdb.plugin_cvss3_vectors;
+DROP TABLE IF EXISTS testdb.plugin_cvss_temporal_vectors;
+DROP TABLE IF EXISTS testdb.plugin_cvss_vectors;
+DROP TABLE IF EXISTS testdb.plugin_vprs;
+DROP TABLE IF EXISTS testdb.plugins;
+DROP TABLE IF EXISTS testdb.scans;
+DROP TABLE IF EXISTS testdb.vulnerabilities;
+DROP TABLE IF EXISTS testdb.vulnerability_asset_infos;
+DROP TABLE IF EXISTS testdb.vulnerability_ports;
+
+COMMIT;

@@ -1,0 +1,1090 @@
+[
+    {
+        "id": "e8bea0be-2eea-400c-8b76-9430a483f00a",
+        "has_agent": false,
+        "has_plugin_results": false,
+        "created_at": "2023-02-08T07:34:21.376Z",
+        "terminated_at": "2024-02-16T12:33:23.376Z",
+        "terminated_by": "d479dac2-8af4-4a23-a8b0-9a9be1c40d4b",
+        "updated_at": "2023-11-15T04:41:10.376Z",
+        "deleted_at": "2023-12-14T09:14:53.376Z",
+        "deleted_by": "e8bea0be-2eea-400c-8b76-9430a483f00a",
+        "first_seen": "2023-12-16T10:56:13.376Z",
+        "last_seen": "2023-11-24T11:49:24.376Z",
+        "first_scan_time": "2024-02-20T13:43:57.376Z",
+        "last_scan_time": "2023-11-17T11:22:01.376Z",
+        "last_authenticated_scan_date": "2023-12-18T08:00:29.376Z",
+        "last_licensed_scan_date": "2023-11-07T06:43:22.376Z",
+        "last_scan_id": "c03e7ddd-df83-4779-b5f9-ffe834709d15",
+        "last_schedule_ids": "9a28e730-7225-4010-adbb-5de5318b0c31",
+        "azure_vm_id": "2a1ded11-dfae-4ea9-a608-767000b1e774",
+        "azure_resource_id": "d2c9a44f-47c8-4d16-82f9-d625cf7f2a70",
+        "gcp_project_id": "bac645cc-68e7-4c60-90c9-2b3a4010c66e",
+        "gcp_zone": "Zone E",
+        "gcp_instance_id": "25c93601-43bc-42a9-8f85-451f57437283",
+        "aws_ec2_instance_ami_id": "af4d1ab0-4fee-4622-b293-78ba17fc90e3",
+        "aws_ec2_instance_id": "f3f1c45d-7db2-4852-bbd9-f48d2c789407",
+        "agent_uuid": "f28e5163-1df5-4a03-9d28-a909b020d95c",
+        "bios_uuid": "4a685f25-9be5-4ad1-bd55-4fd93fa8a249",
+        "network_id": "5e251198-e669-41f4-b636-2fd9957ff8af",
+        "network_name": "CyberTech",
+        "aws_owner_id": "d1aebad2-7dc4-4921-ae38-f6e383a1c1c5",
+        "aws_availability_zone": "Zone D",
+        "aws_region": "UK-LN",
+        "aws_vpc_id": "7f3a96b3-c1fe-4f98-a5db-925bc21b856d",
+        "aws_ec2_instance_group_name": "group4",
+        "aws_ec2_instance_state_name": "terminated",
+        "aws_ec2_instance_type": "c4.xlarge",
+        "aws_subnet_id": "49ada103-cbbc-40f7-bdcb-4dfa051411ad",
+        "aws_ec2_product_code": "BB-995-DK",
+        "aws_ec2_name": "analytics-service",
+        "mcafee_epo_guid": "45005623-afe6-40f6-9e8f-7ed09b7d4470",
+        "mcafee_epo_agent_guid": "5b67312f-c52b-4478-9828-75185a0c8022",
+        "servicenow_sysid": "963b1784-d939-49c5-98f8-c99764663435",
+        "bigfix_asset_id": "0eec2d18-58be-45b6-a5a9-036f2c66036f",
+        "agent_names": [
+            "com.fakeapp2",
+            "com.fakeapp10",
+            "com.fakeapp6"
+        ],
+        "installed_software": [
+            "SW4321"
+        ],
+        "ipv4s": [
+            "192.0.2.1",
+            "203.0.113.1",
+            "198.51.100.1"
+        ],
+        "ipv6s": [
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+        ],
+        "fqdns": [
+            "sandboxsite.org"
+        ],
+        "mac_addresses": [
+            "12:34:56:78:90:AB",
+            "11:22:33:44:55:66",
+            "A1:B2:C3:D4:E5:F6"
+        ],
+        "netbios_names": [
+            "COMP1",
+            "WORKSTATION3"
+        ],
+        "operating_systems": [
+            "iOS 13"
+        ],
+        "system_types": [
+            "cloud"
+        ],
+        "ssh_fingerprints": [
+            "k1:l2:m3:n4:o5:p6:q7:r8:s9:t0",
+            "u1:v2:w3:x4:y5:z6:a7:b8:c9:d0"
+        ],
+        "qualys_asset_ids": [
+            "MNBVCX987",
+            "LKJHGF654",
+            "9876543210"
+        ],
+        "qualys_host_ids": [
+            "QH4567",
+            "QH9012",
+            "QH7890"
+        ],
+        "manufacturer_tpm_ids": [
+            "TPM6789"
+        ],
+        "symantec_ep_hardware_keys": [
+            "key3",
+            "key10",
+            "key9"
+        ],
+        "sources": [
+            {
+                "name": "CodeMaster",
+                "first_seen": "2024-01-09T14:07:47.376Z",
+                "last_seen": "2024-08-27T19:41:11.376Z"
+            },
+            {
+                "name": "CodeMaster",
+                "first_seen": "2024-09-15T17:13:23.376Z",
+                "last_seen": "2024-03-01T16:45:58.376Z"
+            }
+        ],
+        "tags": [
+            {
+                "uuid": "2363470c-fe77-438b-ac22-a636d229f290",
+                "key": "key2",
+                "value": "Debian 10",
+                "added_by": null,
+                "added_at": "2024-01-14T13:41:25.376Z"
+            },
+            {
+                "uuid": "534e1598-0dd1-45d4-bdcd-86fd66f863df",
+                "key": "key5",
+                "value": "Ubuntu 18.04",
+                "added_by": null,
+                "added_at": "2023-12-04T13:52:48.376Z"
+            },
+            {
+                "uuid": "b399f426-0358-4e69-bcc9-fe1259a9c7c5",
+                "key": "key1",
+                "value": "FreeBSD 12",
+                "added_by": null,
+                "added_at": "2023-11-17T22:17:28.376Z"
+            },
+            {
+                "uuid": "22f22378-87a9-4b06-a69c-0f7f34f7cf53",
+                "key": "key2",
+                "value": "Ubuntu 18.04",
+                "added_by": null,
+                "added_at": "2024-05-18T09:07:55.376Z"
+            },
+            {
+                "uuid": "4564fd6d-203a-420d-a6da-2d2e147b02de",
+                "key": "key5",
+                "value": "MacOS Mojave",
+                "added_by": null,
+                "added_at": "2024-08-14T00:12:41.376Z"
+            }
+        ],
+        "network_interfaces": [
+            {
+                "name": "eth0",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "MacOS Mojave",
+                    "Windows 10"
+                ],
+                "mac_addresses": [
+                    "A7-10-E8-CB-52-95",
+                    "65-AB-B3-10-29-4B",
+                    "91-73-76-28-51-61"
+                ],
+                "ipv4s": [
+                    "Debian 10",
+                    "iOS 12",
+                    "Fedora 30"
+                ],
+                "ipv6s": [
+                    "Chrome OS",
+                    "Android Pie",
+                    "Fedora 30"
+                ]
+            },
+            {
+                "name": "eth0",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "MacOS Mojave"
+                ],
+                "mac_addresses": [
+                    "BA-E2-B9-B4-94-1A",
+                    "3D-1B-9C-6E-F9-E2"
+                ],
+                "ipv4s": [
+                    "MacOS Mojave",
+                    "Android Pie"
+                ],
+                "ipv6s": [
+                    "MacOS Mojave"
+                ]
+            },
+            {
+                "name": "ens33",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Fedora 30"
+                ],
+                "mac_addresses": [
+                    "D5-26-E3-B1-43-DE",
+                    "A5-78-19-FE-8C-19"
+                ],
+                "ipv4s": [
+                    "Chrome OS",
+                    "iOS 12"
+                ],
+                "ipv6s": [
+                    "MacOS Mojave"
+                ]
+            },
+            {
+                "name": "lo",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Ubuntu 18.04"
+                ],
+                "mac_addresses": [
+                    "44-2D-E7-33-5D-F1",
+                    "78-AF-F7-9C-F9-0D",
+                    "F9-BD-FE-54-2A-DD"
+                ],
+                "ipv4s": [
+                    "MacOS Mojave"
+                ],
+                "ipv6s": [
+                    "FreeBSD 12"
+                ]
+            },
+            {
+                "name": "lo",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Chrome OS",
+                    "Windows 10",
+                    "Android Pie"
+                ],
+                "mac_addresses": [
+                    "DC-85-05-3A-5E-81",
+                    "0D-CA-37-C8-45-E5"
+                ],
+                "ipv4s": [
+                    "Windows 10",
+                    "MacOS Mojave"
+                ],
+                "ipv6s": [
+                    "iOS 12"
+                ]
+            }
+        ],
+        "open_ports": [
+            61011
+        ],
+        "acr_score": 7,
+        "exposure_score": 285
+    },
+    {
+        "id": "0eb6b889-c4fb-4837-a0e5-efa0df5f543e",
+        "has_agent": false,
+        "has_plugin_results": true,
+        "created_at": "2022-03-19T10:38:56.376Z",
+        "terminated_at": "2024-09-06T03:15:26.376Z",
+        "terminated_by": "667e496f-5d3b-469e-a1f1-a5ce15234877",
+        "updated_at": "2024-02-14T17:12:22.376Z",
+        "deleted_at": "2023-10-25T13:33:19.376Z",
+        "deleted_by": "0eb6b889-c4fb-4837-a0e5-efa0df5f543e",
+        "first_seen": "2024-01-13T10:05:31.376Z",
+        "last_seen": "2024-07-20T21:54:50.376Z",
+        "first_scan_time": "2024-04-24T01:11:13.376Z",
+        "last_scan_time": "2024-07-10T21:59:16.376Z",
+        "last_authenticated_scan_date": "2023-11-04T16:33:32.376Z",
+        "last_licensed_scan_date": "2024-02-01T17:30:41.376Z",
+        "last_scan_id": "1b89f836-8756-4f5a-87e9-a27cc7d2c2b1",
+        "last_schedule_ids": "df71fab3-1c29-46df-9d83-cc10b7d1bd8e",
+        "azure_vm_id": "112d6ede-410d-4448-bd20-5a690dba29d7",
+        "azure_resource_id": "59c4d614-2e2e-487d-9d3e-ab5ebb3acdb5",
+        "gcp_project_id": "56c13eb0-247f-4d68-a86f-07f9d6dbe699",
+        "gcp_zone": "Zone B",
+        "gcp_instance_id": "5bbf1e7d-b837-462b-ba1f-92d399584d4a",
+        "aws_ec2_instance_ami_id": "23b1190e-d139-4330-bd24-bcd9a748795f",
+        "aws_ec2_instance_id": "cb59aca1-99fc-4c03-91af-eb49cfc83d72",
+        "agent_uuid": "22d2965b-617d-4f50-b0aa-848c40de36e2",
+        "bios_uuid": "a2b71532-5af1-41be-b307-9f6cc73230bb",
+        "network_id": "48776945-e6ba-48a6-bc4f-81ad404ae462",
+        "network_name": "DataMasters",
+        "aws_owner_id": "d855f376-2160-47b2-91ab-c22c6d2d7c59",
+        "aws_availability_zone": "Zone B",
+        "aws_region": "JP-TK",
+        "aws_vpc_id": "1e3b3139-1aa8-4001-96fa-ad9f197b8a52",
+        "aws_ec2_instance_group_name": "group1",
+        "aws_ec2_instance_state_name": "pending",
+        "aws_ec2_instance_type": "r5.2xlarge",
+        "aws_subnet_id": "363239fb-c194-479f-b5c7-0f041ac23d77",
+        "aws_ec2_product_code": "EN-157-CX",
+        "aws_ec2_name": "analytics-service",
+        "mcafee_epo_guid": "8be7e1d8-3ff6-4d8e-9ac3-484de3afae84",
+        "mcafee_epo_agent_guid": "a5122d51-b2fb-4596-89f5-7917e0066749",
+        "servicenow_sysid": "b993f527-2315-4795-95e6-ab21a6328afc",
+        "bigfix_asset_id": "892fb785-b69d-42ac-9c07-840157e40a80",
+        "agent_names": [
+            "com.fakeapp1"
+        ],
+        "installed_software": [
+            "SW8765"
+        ],
+        "ipv4s": [
+            "192.0.2.1"
+        ],
+        "ipv6s": [
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+        ],
+        "fqdns": [
+            "sandboxsite.org",
+            "sandbox.io"
+        ],
+        "mac_addresses": [
+            "AA:BB:CC:DD:EE:FF"
+        ],
+        "netbios_names": [
+            "COMP1"
+        ],
+        "operating_systems": [
+            "Fedora 33",
+            "iOS 14",
+            "iOS 13"
+        ],
+        "system_types": [
+            "CRM",
+            "security"
+        ],
+        "ssh_fingerprints": [
+            "k1:l2:m3:n4:o5:p6:q7:r8:s9:t0",
+            "u1:v2:w3:x4:y5:z6:a7:b8:c9:d0"
+        ],
+        "qualys_asset_ids": [
+            "ABCDEFG123",
+            "1234567890"
+        ],
+        "qualys_host_ids": [
+            "QH1234",
+            "QH4567"
+        ],
+        "manufacturer_tpm_ids": [
+            "TPM2345",
+            "TPM9101"
+        ],
+        "symantec_ep_hardware_keys": [
+            "key8",
+            "key2"
+        ],
+        "sources": [
+            {
+                "name": "TechNinja",
+                "first_seen": "2024-01-20T14:24:31.376Z",
+                "last_seen": "2024-04-04T11:36:24.376Z"
+            }
+        ],
+        "tags": [
+            {
+                "uuid": "30dc8413-79dd-4f1e-8728-51032989a484",
+                "key": "key4",
+                "value": "Debian 10",
+                "added_by": null,
+                "added_at": "2024-10-03T23:38:29.376Z"
+            }
+        ],
+        "network_interfaces": [
+            {
+                "name": "ens33",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "MacOS Mojave",
+                    "Debian 10"
+                ],
+                "mac_addresses": [
+                    "68-4B-28-F5-D0-CC",
+                    "C0-F4-7F-65-3D-8D",
+                    "73-50-6B-27-CD-6D"
+                ],
+                "ipv4s": [
+                    "FreeBSD 12",
+                    "Android Pie",
+                    "Fedora 30"
+                ],
+                "ipv6s": [
+                    "iOS 12",
+                    "FreeBSD 12",
+                    "Chrome OS"
+                ]
+            }
+        ],
+        "open_ports": [
+            22498
+        ],
+        "acr_score": 1,
+        "exposure_score": 479
+    },
+    {
+        "id": "117cb67b-114f-4860-bc3d-5fbc8f0746c9",
+        "has_agent": true,
+        "has_plugin_results": false,
+        "created_at": "2023-07-27T19:45:28.376Z",
+        "terminated_at": "2024-07-30T07:00:40.376Z",
+        "terminated_by": "4c9c5bb4-0512-483b-845c-efbde71b2a19",
+        "updated_at": "2024-08-13T07:09:59.376Z",
+        "deleted_at": "2024-09-09T08:30:06.376Z",
+        "deleted_by": "117cb67b-114f-4860-bc3d-5fbc8f0746c9",
+        "first_seen": "2024-06-24T17:01:35.376Z",
+        "last_seen": "2024-02-12T01:39:23.376Z",
+        "first_scan_time": "2024-09-14T17:57:26.376Z",
+        "last_scan_time": "2024-06-04T23:04:21.376Z",
+        "last_authenticated_scan_date": "2024-02-07T20:53:09.376Z",
+        "last_licensed_scan_date": "2024-05-28T19:47:27.376Z",
+        "last_scan_id": "2058a0f9-0bdb-4a57-b739-e3d9434b8ccf",
+        "last_schedule_ids": "b462f7b6-f766-4f53-ac85-60eaa24ed644",
+        "azure_vm_id": "8e7cbd4e-1188-4f29-a4fe-6c057c3ad3a0",
+        "azure_resource_id": "bd0ecaa6-83d9-4679-8b0b-2641aa0c837f",
+        "gcp_project_id": "fffc42d6-4474-4bea-8683-22bdcf18ccd5",
+        "gcp_zone": "Zone D",
+        "gcp_instance_id": "33524f79-a8f4-469f-ad24-442ffc7e1b53",
+        "aws_ec2_instance_ami_id": "0e712870-98c0-440f-83a9-407e444e8e96",
+        "aws_ec2_instance_id": "81d3a406-7e49-425b-a5a8-65d38ef3aea8",
+        "agent_uuid": "15e44406-4442-4d8d-8d61-2b9b516c120a",
+        "bios_uuid": "c7405798-709e-4a69-9cd6-23636e69efe6",
+        "network_id": "b6d7d37d-20f2-465d-9784-a9df3af33013",
+        "network_name": "NetworkPros",
+        "aws_owner_id": "ad2f355b-b0f1-4d0a-a1e1-70a0443c6b05",
+        "aws_availability_zone": "Zone A",
+        "aws_region": "US-NY",
+        "aws_vpc_id": "65950d73-71d1-4f9c-8dd7-c028a5431c87",
+        "aws_ec2_instance_group_name": "group4",
+        "aws_ec2_instance_state_name": "running",
+        "aws_ec2_instance_type": "r5.2xlarge",
+        "aws_subnet_id": "7d8bb364-473c-4d4f-91e7-b5ef0e1fae4e",
+        "aws_ec2_product_code": "NY-450-KK",
+        "aws_ec2_name": "user-service",
+        "mcafee_epo_guid": "44488ac1-3252-4260-a7ef-f53debb21830",
+        "mcafee_epo_agent_guid": "42858128-e686-4c05-8f6f-e3b8ad05ab52",
+        "servicenow_sysid": "e043b3cc-97ef-407d-bd3f-2d58a637fbdc",
+        "bigfix_asset_id": "7e83e84c-381c-4d1c-91be-7d1a0e097ddd",
+        "agent_names": [
+            "com.fakeapp6"
+        ],
+        "installed_software": [
+            "SW9876"
+        ],
+        "ipv4s": [
+            "100.64.0.1",
+            "192.168.0.100"
+        ],
+        "ipv6s": [
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+        ],
+        "fqdns": [
+            "testsite.io",
+            "sandboxsite.org",
+            "dummy.net"
+        ],
+        "mac_addresses": [
+            "11:22:33:44:55:66"
+        ],
+        "netbios_names": [
+            "COMP1",
+            "LAPTOP5",
+            "ROUTER7"
+        ],
+        "operating_systems": [
+            "Android Pie",
+            "Windows 10"
+        ],
+        "system_types": [
+            "ERP",
+            "web development",
+            "networking"
+        ],
+        "ssh_fingerprints": [
+            "k1:l2:m3:n4:o5:p6:q7:r8:s9:t0",
+            "u1:v2:w3:x4:y5:z6:a7:b8:c9:d0"
+        ],
+        "qualys_asset_ids": [
+            "MNBVCX987",
+            "0987654321",
+            "QWERTY123"
+        ],
+        "qualys_host_ids": [
+            "QH0123",
+            "QH8901"
+        ],
+        "manufacturer_tpm_ids": [
+            "TPM2345",
+            "TPM1357"
+        ],
+        "symantec_ep_hardware_keys": [
+            "key3",
+            "key7"
+        ],
+        "sources": [
+            {
+                "name": "TechNinja",
+                "first_seen": "2024-08-30T11:46:44.376Z",
+                "last_seen": "2024-01-21T21:05:37.376Z"
+            },
+            {
+                "name": "DataWizard",
+                "first_seen": "2024-06-03T13:23:07.376Z",
+                "last_seen": "2024-07-12T11:03:46.376Z"
+            },
+            {
+                "name": "AlphaBot",
+                "first_seen": "2024-06-01T18:21:18.376Z",
+                "last_seen": "2024-09-15T02:09:26.376Z"
+            },
+            {
+                "name": "CodeMaster",
+                "first_seen": "2023-12-03T09:19:18.376Z",
+                "last_seen": "2024-01-20T00:19:30.376Z"
+            },
+            {
+                "name": "CodeMaster",
+                "first_seen": "2024-07-05T02:46:40.376Z",
+                "last_seen": "2024-03-06T23:50:04.376Z"
+            }
+        ],
+        "tags": [
+            {
+                "uuid": "e0e7b7f4-64de-4684-a2b3-f126c9f04987",
+                "key": "key1",
+                "value": "FreeBSD 12",
+                "added_by": null,
+                "added_at": "2023-11-29T13:40:09.376Z"
+            },
+            {
+                "uuid": "1eb6e3d6-4132-44a4-9e41-cc3fa81a0578",
+                "key": "key1",
+                "value": "Chrome OS",
+                "added_by": null,
+                "added_at": "2024-01-13T00:19:19.376Z"
+            },
+            {
+                "uuid": "de841eeb-415f-42f8-9612-c24249fce370",
+                "key": "key3",
+                "value": "FreeBSD 12",
+                "added_by": null,
+                "added_at": "2024-02-24T13:21:50.376Z"
+            },
+            {
+                "uuid": "ca894739-b97f-4f31-b618-74f8db1b54ac",
+                "key": "key4",
+                "value": "Ubuntu 18.04",
+                "added_by": null,
+                "added_at": "2024-04-30T03:50:29.376Z"
+            }
+        ],
+        "network_interfaces": [
+            {
+                "name": "enp0s3",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "FreeBSD 12",
+                    "iOS 12",
+                    "Android Pie"
+                ],
+                "mac_addresses": [
+                    "38-47-3B-D6-3A-4D",
+                    "73-16-3D-9A-17-63",
+                    "81-EB-C9-F1-8B-48"
+                ],
+                "ipv4s": [
+                    "Android Pie",
+                    "FreeBSD 12",
+                    "iOS 12"
+                ],
+                "ipv6s": [
+                    "Chrome OS"
+                ]
+            },
+            {
+                "name": "enp0s3",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "iOS 12",
+                    "Android Pie"
+                ],
+                "mac_addresses": [
+                    "0D-AB-39-1D-B2-B0",
+                    "4F-2D-7E-18-29-2F",
+                    "23-7D-D2-59-87-E2"
+                ],
+                "ipv4s": [
+                    "FreeBSD 12",
+                    "Arch Linux",
+                    "Windows 10"
+                ],
+                "ipv6s": [
+                    "Fedora 30",
+                    "Ubuntu 18.04",
+                    "FreeBSD 12"
+                ]
+            },
+            {
+                "name": "ens33",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "MacOS Mojave",
+                    "Debian 10"
+                ],
+                "mac_addresses": [
+                    "6D-DB-2E-FA-51-D9",
+                    "4A-94-FA-32-68-8A"
+                ],
+                "ipv4s": [
+                    "Chrome OS",
+                    "Debian 10"
+                ],
+                "ipv6s": [
+                    "Fedora 30"
+                ]
+            },
+            {
+                "name": "lo",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "MacOS Mojave"
+                ],
+                "mac_addresses": [
+                    "1C-24-1E-FB-36-E8"
+                ],
+                "ipv4s": [
+                    "MacOS Mojave"
+                ],
+                "ipv6s": [
+                    "Arch Linux"
+                ]
+            }
+        ],
+        "open_ports": [
+            1522
+        ],
+        "acr_score": 1,
+        "exposure_score": 695
+    },
+    {
+        "id": "fd974b14-e57d-458d-8f06-358d6b1eee18",
+        "has_agent": false,
+        "has_plugin_results": false,
+        "created_at": "2022-09-17T17:15:11.376Z",
+        "terminated_at": "2024-08-26T14:38:41.376Z",
+        "terminated_by": "7cd60b52-c1a8-4bbb-9be9-00e5a52f4b9c",
+        "updated_at": "2024-08-08T17:30:03.376Z",
+        "deleted_at": "2024-09-07T04:04:54.376Z",
+        "deleted_by": "fd974b14-e57d-458d-8f06-358d6b1eee18",
+        "first_seen": "2023-10-20T01:23:58.376Z",
+        "last_seen": "2024-09-07T23:47:53.376Z",
+        "first_scan_time": "2024-01-13T11:04:55.376Z",
+        "last_scan_time": "2024-10-10T03:05:29.376Z",
+        "last_authenticated_scan_date": "2024-07-29T14:46:40.376Z",
+        "last_licensed_scan_date": "2024-09-01T10:26:10.376Z",
+        "last_scan_id": "d0518645-4695-4201-ad5c-f2ab57795e1b",
+        "last_schedule_ids": "98221f4b-9ca1-4e55-a17b-e6fbda4ae318",
+        "azure_vm_id": "274a0d49-48bd-4459-bcd8-7f8e9a4e9873",
+        "azure_resource_id": "cf2f6eb0-077b-4ad7-b5a2-6459e18485bd",
+        "gcp_project_id": "5c53d4b2-3f9b-441c-b62d-e740332ba67e",
+        "gcp_zone": "Zone C",
+        "gcp_instance_id": "bb6dab13-9d92-4e77-b727-a4b499391f3e",
+        "aws_ec2_instance_ami_id": "a13aef10-1512-4ea1-a8d0-348b144cfa4f",
+        "aws_ec2_instance_id": "90796c3a-b6a4-4a7f-b5df-f666d8a8946e",
+        "agent_uuid": "a0c56b3a-d539-4348-b716-2b8ae6fa3ae8",
+        "bios_uuid": "4f795c23-59ca-4bc7-bdfc-e3f7ff814d84",
+        "network_id": "35fd6c25-6839-4db7-b47d-c7cdc3b97f4f",
+        "network_name": "CyberTech",
+        "aws_owner_id": "71aab012-a33f-459c-8d2b-9e3eb1ea078b",
+        "aws_availability_zone": "Zone E",
+        "aws_region": "AU-NSW",
+        "aws_vpc_id": "307e0edb-618e-44a6-a981-2dee246d2a20",
+        "aws_ec2_instance_group_name": "group1",
+        "aws_ec2_instance_state_name": "terminated",
+        "aws_ec2_instance_type": "r5.2xlarge",
+        "aws_subnet_id": "f15ff956-a173-4ee3-935a-1b0150df35e4",
+        "aws_ec2_product_code": "PL-099-LH",
+        "aws_ec2_name": "payment-service",
+        "mcafee_epo_guid": "e09a5982-bdcc-4bb5-b82d-72ff24ac8a54",
+        "mcafee_epo_agent_guid": "ed47c48c-0fe3-42dd-ac2d-480e9c0c6f39",
+        "servicenow_sysid": "c1694386-6145-40cf-842a-103a5e292e67",
+        "bigfix_asset_id": "0b0f9fd5-4123-4764-8c44-cb2461b483e6",
+        "agent_names": [
+            "com.fakeapp5",
+            "com.fakeapp3"
+        ],
+        "installed_software": [
+            "SW6543",
+            "SW8765"
+        ],
+        "ipv4s": [
+            "10.10.10.10",
+            "100.64.0.1",
+            "203.0.113.1"
+        ],
+        "ipv6s": [
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+        ],
+        "fqdns": [
+            "sandbox.io"
+        ],
+        "mac_addresses": [
+            "00:1A:2B:3C:4D:5E"
+        ],
+        "netbios_names": [
+            "PC4",
+            "NAS8",
+            "COMP1"
+        ],
+        "operating_systems": [
+            "Ubuntu 20.04",
+            "iOS 13"
+        ],
+        "system_types": [
+            "web development",
+            "IoT",
+            "CRM"
+        ],
+        "ssh_fingerprints": [
+            "u1:v2:w3:x4:y5:z6:a7:b8:c9:d0",
+            "o1:p2:q3:r4:s5:t6:u7:v8:w9:x0",
+            "e1:f2:g3:h4:i5:j6:k7:l8:m9:n0"
+        ],
+        "qualys_asset_ids": [
+            "9876543210"
+        ],
+        "qualys_host_ids": [
+            "QH6789"
+        ],
+        "manufacturer_tpm_ids": [
+            "TPM2468"
+        ],
+        "symantec_ep_hardware_keys": [
+            "key9"
+        ],
+        "sources": [
+            {
+                "name": "TechNinja",
+                "first_seen": "2024-02-10T09:49:42.376Z",
+                "last_seen": "2024-03-09T18:06:44.376Z"
+            },
+            {
+                "name": "TechNinja",
+                "first_seen": "2024-07-04T03:52:50.376Z",
+                "last_seen": "2023-12-28T15:28:25.376Z"
+            },
+            {
+                "name": "DataWizard",
+                "first_seen": "2024-08-02T16:30:07.376Z",
+                "last_seen": "2024-06-13T01:35:03.376Z"
+            },
+            {
+                "name": "AlphaBot",
+                "first_seen": "2024-07-11T16:34:02.376Z",
+                "last_seen": "2024-03-25T17:20:00.376Z"
+            },
+            {
+                "name": "DataWizard",
+                "first_seen": "2024-09-12T14:21:45.376Z",
+                "last_seen": "2023-10-30T09:41:55.376Z"
+            }
+        ],
+        "tags": [
+            {
+                "uuid": "bdfb7fbb-7292-4465-9a38-7a0a2b18104f",
+                "key": "key2",
+                "value": "Fedora 30",
+                "added_by": null,
+                "added_at": "2024-09-21T13:34:00.376Z"
+            },
+            {
+                "uuid": "52a79974-1809-4599-a2f0-e9294058fab9",
+                "key": "key3",
+                "value": "Fedora 30",
+                "added_by": null,
+                "added_at": "2024-02-27T14:18:47.376Z"
+            },
+            {
+                "uuid": "b202ccb9-74c8-44fd-9fa5-0285ae2dd48b",
+                "key": "key5",
+                "value": "Arch Linux",
+                "added_by": null,
+                "added_at": "2024-03-01T02:05:43.376Z"
+            }
+        ],
+        "network_interfaces": [
+            {
+                "name": "enp0s3",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Android Pie",
+                    "Fedora 30"
+                ],
+                "mac_addresses": [
+                    "D8-73-6F-66-CE-7F"
+                ],
+                "ipv4s": [
+                    "Chrome OS",
+                    "Fedora 30"
+                ],
+                "ipv6s": [
+                    "Android Pie",
+                    "iOS 12",
+                    "FreeBSD 12"
+                ]
+            },
+            {
+                "name": "ens33",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Ubuntu 18.04"
+                ],
+                "mac_addresses": [
+                    "9D-E9-6C-F8-55-13",
+                    "C8-CF-6C-3C-D8-84",
+                    "A0-3D-C3-70-00-BF"
+                ],
+                "ipv4s": [
+                    "Arch Linux"
+                ],
+                "ipv6s": [
+                    "Fedora 30"
+                ]
+            },
+            {
+                "name": "wlan0",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "MacOS Mojave"
+                ],
+                "mac_addresses": [
+                    "1B-21-6C-5D-33-CD",
+                    "5D-56-5B-F4-BD-73",
+                    "73-04-C1-98-E1-2C"
+                ],
+                "ipv4s": [
+                    "Android Pie",
+                    "Chrome OS",
+                    "Ubuntu 18.04"
+                ],
+                "ipv6s": [
+                    "MacOS Mojave",
+                    "Android Pie"
+                ]
+            },
+            {
+                "name": "ens33",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Debian 10"
+                ],
+                "mac_addresses": [
+                    "0D-97-14-24-B0-4E",
+                    "EE-EE-FC-F5-28-DE"
+                ],
+                "ipv4s": [
+                    "iOS 12",
+                    "Windows 10"
+                ],
+                "ipv6s": [
+                    "Android Pie",
+                    "MacOS Mojave",
+                    "iOS 12"
+                ]
+            }
+        ],
+        "open_ports": [
+            59576
+        ],
+        "acr_score": 1,
+        "exposure_score": 933
+    },
+    {
+        "id": "34e048ad-e61b-4f6d-94b2-2f0fb802f0f8",
+        "has_agent": false,
+        "has_plugin_results": true,
+        "created_at": "2022-12-20T07:29:41.376Z",
+        "terminated_at": "2024-08-16T08:52:40.376Z",
+        "terminated_by": "5bf62048-5de4-4b7a-a848-3d1374575205",
+        "updated_at": "2023-11-17T11:04:54.376Z",
+        "deleted_at": "2024-04-23T09:46:41.376Z",
+        "deleted_by": "34e048ad-e61b-4f6d-94b2-2f0fb802f0f8",
+        "first_seen": "2024-02-14T09:56:13.376Z",
+        "last_seen": "2023-11-11T21:51:47.376Z",
+        "first_scan_time": "2024-10-10T19:53:44.376Z",
+        "last_scan_time": "2023-12-06T10:45:26.376Z",
+        "last_authenticated_scan_date": "2023-11-07T07:32:10.376Z",
+        "last_licensed_scan_date": "2024-08-01T13:12:19.376Z",
+        "last_scan_id": "8290123a-868b-4989-bde9-018ef1aa5eaf",
+        "last_schedule_ids": "0e5db03e-c162-4e8c-8f0f-06f11a2f6e59",
+        "azure_vm_id": "402da2c3-0f49-4a0b-a3cc-db83fcaeccc9",
+        "azure_resource_id": "b6fd8928-3474-4b9b-bca2-cca866366dfd",
+        "gcp_project_id": "3b0724ce-3b74-4894-8225-312c3d956076",
+        "gcp_zone": "Zone B",
+        "gcp_instance_id": "7d855ca6-2082-4acc-a9bf-c58f2cb3e1c9",
+        "aws_ec2_instance_ami_id": "d9c9e25f-9887-43d4-a81d-e7f1bc99926d",
+        "aws_ec2_instance_id": "5fb72d88-2c73-49ac-a48a-869369c3b1d1",
+        "agent_uuid": "a9ab374f-31bc-42ad-b25f-fe28b56d55f5",
+        "bios_uuid": "c5301c61-447c-4b42-b7ef-80264d818073",
+        "network_id": "3d4fa6fd-5bca-4e70-8ba7-189540ecc42e",
+        "network_name": "TechSolutions",
+        "aws_owner_id": "657524d1-da26-496f-b647-5f8c5a2b202d",
+        "aws_availability_zone": "Zone C",
+        "aws_region": "JP-TK",
+        "aws_vpc_id": "97fe6e1a-62d4-4f63-aa3d-90cfbf8f603a",
+        "aws_ec2_instance_group_name": "group1",
+        "aws_ec2_instance_state_name": "pending",
+        "aws_ec2_instance_type": "c4.xlarge",
+        "aws_subnet_id": "e88c480e-61c5-4463-aebd-745bb1185df3",
+        "aws_ec2_product_code": "BX-264-CI",
+        "aws_ec2_name": "notification-service",
+        "mcafee_epo_guid": "bdb91ba4-2531-4fff-a106-1cb4251bf595",
+        "mcafee_epo_agent_guid": "1ae2577c-b3d8-4cbd-8ab4-239e60842473",
+        "servicenow_sysid": "db92a08f-1ac3-47e8-89f7-cda58ac0448c",
+        "bigfix_asset_id": "a49ce3dc-0ffa-4f74-a1ac-9e6f09d0611d",
+        "agent_names": [
+            "com.fakeapp5",
+            "com.fakeapp3",
+            "com.fakeapp4"
+        ],
+        "installed_software": [
+            "SW1357",
+            "SW4321"
+        ],
+        "ipv4s": [
+            "192.0.2.1",
+            "198.51.100.1",
+            "10.10.10.10"
+        ],
+        "ipv6s": [
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+        ],
+        "fqdns": [
+            "example.com"
+        ],
+        "mac_addresses": [
+            "A1:B2:C3:D4:E5:F6"
+        ],
+        "netbios_names": [
+            "PRINTER6",
+            "SERVER2"
+        ],
+        "operating_systems": [
+            "iOS 13",
+            "Android Pie",
+            "MacOS Mojave"
+        ],
+        "system_types": [
+            "AI"
+        ],
+        "ssh_fingerprints": [
+            "u1:v2:w3:x4:y5:z6:a7:b8:c9:d0",
+            "e1:f2:g3:h4:i5:j6:k7:l8:m9:n0",
+            "k1:l2:m3:n4:o5:p6:q7:r8:s9:t0"
+        ],
+        "qualys_asset_ids": [
+            "QWERTY123",
+            "0987654321"
+        ],
+        "qualys_host_ids": [
+            "QH7890",
+            "QH5678",
+            "QH4567"
+        ],
+        "manufacturer_tpm_ids": [
+            "TPM2345"
+        ],
+        "symantec_ep_hardware_keys": [
+            "key7"
+        ],
+        "sources": [
+            {
+                "name": "AlphaBot",
+                "first_seen": "2023-11-01T17:03:16.376Z",
+                "last_seen": "2024-03-07T14:50:11.376Z"
+            },
+            {
+                "name": "CodeMaster",
+                "first_seen": "2024-08-16T18:22:27.376Z",
+                "last_seen": "2023-12-29T14:19:26.376Z"
+            },
+            {
+                "name": "DataWizard",
+                "first_seen": "2024-02-02T22:20:06.376Z",
+                "last_seen": "2024-06-15T21:30:38.376Z"
+            },
+            {
+                "name": "DataWizard",
+                "first_seen": "2024-01-27T11:31:54.376Z",
+                "last_seen": "2024-06-21T19:38:34.376Z"
+            }
+        ],
+        "tags": [
+            {
+                "uuid": "a54f4b30-6ca5-4e57-8a18-4daba0a75bfe",
+                "key": "key4",
+                "value": "Windows 10",
+                "added_by": null,
+                "added_at": "2024-04-13T23:07:36.376Z"
+            }
+        ],
+        "network_interfaces": [
+            {
+                "name": "wlan0",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Android Pie",
+                    "Windows 10",
+                    "FreeBSD 12"
+                ],
+                "mac_addresses": [
+                    "0D-E4-9E-76-5A-FD"
+                ],
+                "ipv4s": [
+                    "FreeBSD 12"
+                ],
+                "ipv6s": [
+                    "MacOS Mojave"
+                ]
+            },
+            {
+                "name": "ens33",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Windows 10",
+                    "FreeBSD 12",
+                    "Ubuntu 18.04"
+                ],
+                "mac_addresses": [
+                    "3D-02-17-6C-B7-06",
+                    "8D-1D-F5-D5-2F-02",
+                    "0F-E4-CF-C1-E5-D1"
+                ],
+                "ipv4s": [
+                    "Ubuntu 18.04",
+                    "FreeBSD 12"
+                ],
+                "ipv6s": [
+                    "Debian 10",
+                    "iOS 12"
+                ]
+            },
+            {
+                "name": "enp0s3",
+                "virtual": null,
+                "aliased": null,
+                "fqdns": [
+                    "Arch Linux",
+                    "Debian 10"
+                ],
+                "mac_addresses": [
+                    "9B-59-33-29-8C-8C"
+                ],
+                "ipv4s": [
+                    "Fedora 30"
+                ],
+                "ipv6s": [
+                    "Ubuntu 18.04"
+                ]
+            }
+        ],
+        "open_ports": [
+            36879
+        ],
+        "acr_score": 9,
+        "exposure_score": 951
+    }
+]
