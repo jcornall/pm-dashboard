@@ -1,1 +1,0 @@
-SELECT * FROM vuln_timeseries;

@@ -3,7 +3,7 @@
 """This module contains methods to set up and configure the Python logging functionality.
 """
 
-from src.config.constants import *
+from src.config.constants import LOGS_DIR, EXPORT_LOG_DIR, FORMATTED_DATE, FORMATTED_TIME
 import logging
 import os
 

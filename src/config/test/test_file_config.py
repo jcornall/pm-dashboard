@@ -3,8 +3,7 @@ import os
 from datetime import datetime, timedelta
 
 from src.config.constants import *
-
-from src.config.extract_config import purge_empty_dirs, purge_old_files, set_up_file_structure
+from src.config.file_config import purge_empty_dirs, purge_old_files, set_up_file_structure
 
 TEST_DIR = "tmp"
 

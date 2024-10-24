@@ -4,7 +4,7 @@ import os
 from src.tenable.constants import TENABLE_API_URL
 from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
 from src.config.constants import VULN_EXPORT_DIR
-from src.config.extract_config import set_up_file_structure
+from src.config.file_config import set_up_file_structure
 
 @pytest.fixture(autouse=True)
 def fake_filesystem(fs):

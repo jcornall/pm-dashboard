@@ -9,7 +9,7 @@ from src.util.transform.data_processor import *
 from src.util.load.database_loader import *
 from src.config.transform_config import *
 from src.config.constants import *
-from src.config.extract_config import *
+from src.config.file_config import *
 from src.config.logger_config import *
 
 
