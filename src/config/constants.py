@@ -9,7 +9,6 @@ import datetime as dt
 import time
 import os
 
-
 # Date & Time
 CURRENT = dt.datetime.now()
 FORMATTED_DATE = CURRENT.strftime("%Y%m%d")

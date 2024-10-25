@@ -1,6 +1,8 @@
 import pytest
 import subprocess
 from pathlib import Path
+from mariadb import mariadb
+
 from src.tenable.pipeline import *
 from src.tenable.test.conftest import TEST_ASSET_EXPORT_DIR
 from src.tenable.test.conftest import TEST_ASSET_EXPORT_DIR, TEST_VULN_EXPORT_DIR, TEST_CONN_PARAMS, TEST_CONN_PARAMS_DB, MIGRATION

@@ -9,7 +9,6 @@ import logging
 import os
 import datetime as dt
 
-
 def set_up_file_structure():
     """Sequence method calls to set up the data file structure."""
     set_up_dir(DATA_DIR)
