@@ -103,7 +103,8 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
         installed_software = asset.get("installed_software")
         if installed_software and len(installed_software) > 0:
             cursor.executemany(
-                "INSERT INTO asset_installed_softwares(asset_uuid, software_cpe) VALUES (?,?);",
+                "INSERT INTO asset_installed_softwares(asset_uuid, software_cpe) VALUES (?,?) "
+                "ON DUPLICATE KEY UPDATE asset_uuid=asset_uuid;",
                 [(asset_uuid, cpe) for cpe in installed_software],
             )
 
