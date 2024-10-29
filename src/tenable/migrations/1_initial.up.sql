@@ -341,7 +341,7 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
     CONSTRAINT fk_vuln_plugin FOREIGN KEY (plugin_id) REFERENCES plugins (id)
         ON DELETE NO ACTION
         ON UPDATE CASCADE
-);
+) WITH SYSTEM VERSIONING;
 
 CREATE TABLE IF NOT EXISTS vulnerability_ports
 (
