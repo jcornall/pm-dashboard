@@ -42,3 +42,15 @@ def test_load_tenable_assets_success(fs, mocker, asset_export_status):
             record = record[0]
         assert record in [None, 1]
     conn.commit()
+
+def test_load_tenable_assets_update(fs, mocker, asset_export_status):
+    fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_1.json")
+    mocker.patch("src.tenable.load_assets.ASSET_EXPORT_DIR", TEST_ASSET_EXPORT_DIR)
+    mocker.patch("src.tenable.load_assets.CONN_PARAMS", TEST_CONN_PARAMS_DB)
+    load_tenable_assets(asset_export_status)
+    
+    try:
+        load_tenable_assets(asset_export_status)
+    except Exception as e:
+        assert False, f"Error: {e}"
+    

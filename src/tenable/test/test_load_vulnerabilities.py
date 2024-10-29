@@ -30,7 +30,7 @@ def create_testdb(fs, mocker, asset_export_status):
     cursor.execute("DROP DATABASE IF EXISTS testdb;")
     conn.commit()
 
-def test_load_tenable_assets_success(fs, mocker, vuln_export_status):
+def test_load_tenable_vulnerabilities_success(fs, mocker, vuln_export_status):
     fs.add_real_file(TEST_VULN_EXPORT_DIR / "0_TEST_1.json")
     mocker.patch("src.tenable.load_vulnerabilities.VULN_EXPORT_DIR", TEST_VULN_EXPORT_DIR)
     mocker.patch("src.tenable.load_vulnerabilities.CONN_PARAMS", TEST_CONN_PARAMS_DB)
@@ -50,3 +50,14 @@ def test_load_tenable_assets_success(fs, mocker, vuln_export_status):
             record = record[0]
         assert record in [None, 1]
     conn.commit()
+
+def test_load_tenable_vulnerabilities_update(fs, mocker, vuln_export_status):
+    fs.add_real_file(TEST_VULN_EXPORT_DIR / "0_TEST_1.json")
+    mocker.patch("src.tenable.load_vulnerabilities.VULN_EXPORT_DIR", TEST_VULN_EXPORT_DIR)
+    mocker.patch("src.tenable.load_vulnerabilities.CONN_PARAMS", TEST_CONN_PARAMS_DB)
+    load_tenable_vulnerabilities(vuln_export_status)
+
+    try:
+        load_tenable_vulnerabilities(vuln_export_status)
+    except Exception as e:
+        assert False, f"Error: {e}"
