@@ -25,12 +25,12 @@ pip install -r requirements.txt
 Linux users can set up the virtual environment and dependencies by navigating to the project directory and executing the install.sh shell script with the following command:
 
 ```
-source ./install.sh
+./install.sh
 ```
 
 ## Execution
 
-### Windows
+### Linux
 
 Activate the virtual environment with the following command:
 
