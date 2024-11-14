@@ -331,6 +331,12 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
     state                      TEXT,
     source                     TEXT,
 
+    INDEX idx_created_on (created_on),
+    INDEX idx_source (source(2)),
+    INDEX idx_severity (severity(2)),
+    INDEX idx_state (state(2)),
+    INDEX idx_severity_modification_type (severity_modification_type(2)),
+
     CONSTRAINT pk_vulnerability PRIMARY KEY (uuid),
     CONSTRAINT fk_vuln_asset FOREIGN KEY (asset_uuid) REFERENCES assets (uuid)
         ON DELETE NO ACTION
@@ -346,7 +352,8 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
 ALTER TABLE vulnerabilities ADD COLUMN ts TIMESTAMP(6) GENERATED ALWAYS AS ROW START,
                             ADD COLUMN te TIMESTAMP(6) GENERATED ALWAYS AS ROW END,
                             ADD COLUMN ts_date DATE,
-                            ADD PERIOD FOR SYSTEM_TIME(ts, te);
+                            ADD PERIOD FOR SYSTEM_TIME(ts, te)
+                            ADD SYSTEM VERSIONING;
 
 CREATE TABLE IF NOT EXISTS vulnerability_ports
 (
