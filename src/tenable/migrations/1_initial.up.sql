@@ -352,7 +352,7 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
 ALTER TABLE vulnerabilities ADD COLUMN ts TIMESTAMP(6) GENERATED ALWAYS AS ROW START,
                             ADD COLUMN te TIMESTAMP(6) GENERATED ALWAYS AS ROW END,
                             ADD COLUMN ts_date DATE,
-                            ADD PERIOD FOR SYSTEM_TIME(ts, te)
+                            ADD PERIOD FOR SYSTEM_TIME(ts, te),
                             ADD SYSTEM VERSIONING;
 
 CREATE TABLE IF NOT EXISTS vulnerability_ports
