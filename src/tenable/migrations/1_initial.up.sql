@@ -343,6 +343,11 @@ CREATE TABLE IF NOT EXISTS vulnerabilities
         ON UPDATE CASCADE
 );
 
+ALTER TABLE vulnerabilities ADD COLUMN ts TIMESTAMP(6) GENERATED ALWAYS AS ROW START,
+                            ADD COLUMN te TIMESTAMP(6) GENERATED ALWAYS AS ROW END,
+                            ADD COLUMN ts_date DATE,
+                            ADD PERIOD FOR SYSTEM_TIME(ts, te);
+
 CREATE TABLE IF NOT EXISTS vulnerability_ports
 (
     vulnerability_uuid VARCHAR(255) NOT NULL,
