@@ -1,5 +1,6 @@
 import json
-from mariadb import mariadb
+import mariadb
+
 from src.config.constants import ASSET_EXPORT_DIR, CONN_PARAMS
 from src.tenable.export_assets import AssetExportStatus
 
@@ -22,8 +23,10 @@ VALUES (?, ?, STR_TO_DATE(?, "%Y-%m-%dT%T.%fZ"), STR_TO_DATE(?, "%Y-%m-%dT%T.%fZ
 ON DUPLICATE KEY UPDATE uuid=uuid;"""
 
 
-def load_tenable_assets(export: AssetExportStatus):
-    conn = mariadb.connect(**CONN_PARAMS)
+def load_tenable_assets(export: AssetExportStatus, pool: mariadb.ConnectionPool):
+    """Loads all assets within the given export to the database"""
+
+    conn = pool.get_connection()
 
     for chunk_id in export.chunks_available:
         with open(ASSET_EXPORT_DIR / export.chunk_file_name(chunk_id)) as f:
