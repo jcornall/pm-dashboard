@@ -1,15 +1,13 @@
 from threading import Thread
+import mariadb
+
 from src.tenable.credentials import TenableCredentials
 from src.tenable.export_assets import export_tenable_assets
 from src.tenable.export_vulnerabilities import export_tenable_vulnerabilities
 from src.tenable.load_assets import load_tenable_assets
 from src.tenable.load_vulnerabilities import load_tenable_vulnerabilities
-from src.util.extract.api_export import *
-from src.util.transform.data_processor import *
-from src.util.load.database_loader import *
-from src.config.transform_config import *
 from src.config.constants import *
-from src.config.extract_config import *
+from src.config.file_config import *
 from src.config.logger_config import *
 
 
@@ -23,8 +21,6 @@ def tenable():
         access_key=os.getenv("TENABLE_ACCESS_KEY"),
         secret_key=os.getenv("TENABLE_SECRET_KEY"),
     )
-
-    db = mariadb.connect(**CONN_PARAMS)
 
     # Setup
     print(f"Current Working Directory: {Path.cwd()}")
@@ -40,8 +36,10 @@ def tenable():
     set_up_file_structure()
     logging.info("File structure setup successful.")
 
-    t1 = Thread(target=__process_vulnerabilities, args=(creds, db))
-    t2 = Thread(target=__process_assets, args=(creds, db))
+    pool = mariadb.ConnectionPool(pool_name="tenable", pool_size=5, **CONN_PARAMS)
+
+    t1 = Thread(target=__process_vulnerabilities, args=(creds, pool))
+    t2 = Thread(target=__process_assets, args=(creds, pool))
 
     t1.start()
     t2.start()
@@ -52,15 +50,15 @@ def tenable():
     logging.info("Program execution successful, exiting program.")
 
 
-def __process_vulnerabilities(creds: TenableCredentials, db: mariadb.Connection):
+def __process_vulnerabilities(creds: TenableCredentials, db: mariadb.ConnectionPool):
     logging.info("Exporting vulnerabilities...")
     export = export_tenable_vulnerabilities(creds)
     logging.info("Loading exported vulnerabilities into database...")
-    load_tenable_vulnerabilities(export, to=db)
+    load_tenable_vulnerabilities(export, db)
 
 
-def __process_assets(creds: TenableCredentials, db: mariadb.Connection):
+def __process_assets(creds: TenableCredentials, db: mariadb.ConnectionPool):
     logging.info("Exporting assets...")
     export = export_tenable_assets(creds)
     logging.info("Loading exported assets into database...")
-    load_tenable_assets(export, to=db)
+    load_tenable_assets(export, db)

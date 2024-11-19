@@ -1,8 +1,9 @@
 import json
 import logging
 import mariadb
+
 from uuid_extensions import uuid7
-from src.config.constants import VULN_EXPORT_DIR
+from src.config.constants import VULN_EXPORT_DIR, CONN_PARAMS
 from src.tenable.export_vulnerabilities import VulnExportStatus
 
 __INSERT_VULN_PORT_SQL = """
@@ -93,10 +94,10 @@ ON DUPLICATE KEY UPDATE plugin_id=plugin_id;
 """
 
 
-def load_tenable_vulnerabilities(export: VulnExportStatus, to: mariadb.Connection):
+def load_tenable_vulnerabilities(export: VulnExportStatus, pool: mariadb.ConnectionPool):
     """Loads all vulnerabilities within the given export to the database"""
 
-    conn = to
+    conn = pool.get_connection()
 
     for chunk_id in export.chunks_available:
         with open(VULN_EXPORT_DIR / export.chunk_file_name(chunk_id), "r") as f:

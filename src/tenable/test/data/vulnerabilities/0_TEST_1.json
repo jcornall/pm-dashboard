@@ -1,0 +1,703 @@
+[
+    {
+        "asset": {
+            "agent_uuid": "552ef5a0-3947-447e-8468-3f70a3f4e599",
+            "bios_uuid": "bbba6c7a-a25d-4a43-afb8-da7ea0dee0bb",
+            "device_type": "laptop",
+            "fqdn": "https://tumblr.com/purus/phasellus/in/felis/donec/semper/sapien.png?ut=turpis&blandit=donec&non=posuere&interdum=metus&in=vitae&ante=ipsum&vestibulum=aliquam&ante=non&ipsum=mauris",
+            "hostname": "sUMKw-985",
+            "uuid": "cfb33d7c-a22e-4850-a5e8-c0a131c83edf",
+            "ipv4": "230.183.33.37",
+            "last_authenticated_results": "2023-12-06T14:50:34.376Z",
+            "mac_address": "22-4D-1A-6A-4E-A0",
+            "netbios_name": "AsR-522",
+            "operating_system": [
+                "iOS 14"
+            ],
+            "network_id": "9adb5e30-83d5-4125-8371-90056076321f",
+            "tracked": false
+        },
+        "plugin": {
+            "bid": [
+                332354
+            ],
+            "checks_for_default_account": true,
+            "checks_for_malware": true,
+            "cpe": [
+                "FQP-28599"
+            ],
+            "cvss3_base_score": 1.7,
+            "cvss3_temporal_score": 2.6,
+            "cvss3_temporal_vector": {
+                "exploitability": "critical",
+                "remediation_level": "low",
+                "report_confidence": "confirmed",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:M"
+            },
+            "cvss3_vector": {
+                "access_complexity": "high",
+                "access_vector": "Network",
+                "availability_impact": "substantial",
+                "confidentiality_impact": "significant",
+                "integrity_impact": "moderate",
+                "raw": "AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss_base_score": 0.4,
+            "cvss_temporal_score": 8.6,
+            "cvss_temporal_vector": {
+                "exploitability": "high",
+                "remediation_level": "significant",
+                "report_confidence": "low",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:M/I:H/A:H"
+            },
+            "cvss_vector": {
+                "access_complexity": "very high",
+                "access_vector": "system_remote",
+                "authentication": "CERTIFICATE",
+                "availability_impact": "SEVERE",
+                "confidentiality_impact": "HIGH",
+                "integrity_impact": "SIGNIFICANT",
+                "raw": "AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "description": "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.",
+            "exploit_available": false,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": true,
+            "exploit_framework_d2_elliot": true,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": true,
+            "exploitability_ease": "Praesent blandit.",
+            "exploited_by_malware": true,
+            "exploited_by_nessus": true,
+            "family": "MacOS",
+            "family_id": 4,
+            "has_patch": false,
+            "id": 332354,
+            "in_the_news": true,
+            "name": "SecurityPlugin",
+            "patch_publication_date": "2024-02-07T22:20:35.376Z",
+            "modification_date": "2024-03-07T23:40:35.376Z",
+            "publication_date": "2023-12-12T19:48:33.376Z",
+            "risk_factor": "medium",
+            "see_also": [
+                "http://tiny.cc/fermentum/justo/nec.xml?vel=at&ipsum=velit&praesent=vivamus&blandit=vel&lacinia=nulla&erat=eget&vestibulum=eros&sed=elementum&magna=pellentesque&at=quisque&nunc=porta&commodo=volutpat&placerat=erat&praesent=quisque&blandit=erat&nam=eros&nulla=viverra&integer=eget&pede=congue&justo=eget&lacinia=semper&eget=rutrum&tincidunt=nulla&eget=nunc&tempus=purus&vel=phasellus&pede=in&morbi=felis&porttitor=donec&lorem=semper&id=sapien&ligula=a&suspendisse=libero&ornare=nam&consequat=dui&lectus=proin&in=leo&est=odio&risus=porttitor&auctor=id&sed=consequat&tristique=in&in=consequat&tempus=ut&sit=nulla&amet=sed&sem=accumsan&fusce=felis&consequat=ut&nulla=at&nisl=dolor&nunc=quis&nisl=odio&duis=consequat&bibendum=varius&felis=integer&sed=ac&interdum=leo&venenatis=pellentesque&turpis=ultrices&enim=mattis&blandit=odio&mi=donec&in=vitae&porttitor=nisi&pede=nam&justo=ultrices&eu=libero&massa=non&donec=mattis&dapibus=pulvinar&duis=nulla&at=pede&velit=ullamcorper&eu=augue&est=a&congue=suscipit&elementum=nulla&in=elit&hac=ac&habitasse=nulla&platea=sed&dictumst=vel&morbi=enim&vestibulum=sit&velit=amet&id=nunc&pretium=viverra&iaculis=dapibus&diam=nulla&erat=suscipit"
+            ],
+            "solution": "Etiam faucibus cursus urna.",
+            "synopsis": "Integer ac neque.",
+            "unsupported_by_vendor": true,
+            "version": "5.0.1",
+            "vuln_publication_date": "2024-09-26T22:46:48.376Z",
+            "xrefs": [
+                [
+                    {
+                        "type": "CVE",
+                        "id": "2024-2222"
+                    },
+                    {
+                        "type": "CVE",
+                        "id": "2024-1111"
+                    },
+                    {
+                        "type": "CVE",
+                        "id": "2024-3333"
+                    }
+                ]
+            ],
+            "vpr": {
+                "score": 3.2,
+                "drivers": {
+                    "age_of_vuln": {
+                        "lower_bound": 58,
+                        "upper_bound": 82
+                    },
+                    "exploit_code_maturity": "critical",
+                    "cvss_impact_score_predicted": false,
+                    "cvss3_impact_score": 4.6,
+                    "threat_intensity_last28": "LOW",
+                    "threat_sources_last28": [
+                        "Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue."
+                    ],
+                    "product_coverage": "MEDIUM"
+                },
+                "updated": "2023-10-17T16:52:30.376Z"
+            },
+            "cve": [
+                "CVE-3818-454866",
+                "CVE-0198-230518",
+                "CVE-3842-7022697"
+            ],
+            "type": "remote"
+        },
+        "port": {
+            "port": 512,
+            "protocol": "FTP"
+        },
+        "scan": {
+            "schedule_uuid": "508f1080-8c26-4a1b-900a-574906df0f7b",
+            "started_at": "2024-08-21T10:42:57.376Z",
+            "uuid": "e78ca0fb-cd3e-4e81-a5d2-ae4be33eb11f"
+        },
+        "severity": "medium",
+        "severity_id": 1,
+        "severity_default_id": 2,
+        "severity_modification_type": "PATCH",
+        "first_found": "2024-06-29T16:31:50.376Z",
+        "last_fixed": "2024-02-08T01:41:48.376Z",
+        "last_found": "2023-12-17T22:34:29.376Z",
+        "state": "PENDING",
+        "indexed": "2024-02-11T13:57:58.376Z",
+        "source": "EMAIL"
+    },
+    {
+        "asset": {
+            "agent_uuid": "092efab2-a4bc-49a9-9121-a2fe238c93ad",
+            "bios_uuid": "cd6075cb-3d85-4698-98e9-1cf45d5b098f",
+            "device_type": "laptop",
+            "fqdn": "https://narod.ru/maecenas/ut/massa/quis.js?ultrices=sem&libero=fusce&non=consequat&mattis=nulla&pulvinar=nisl&nulla=nunc&pede=nisl&ullamcorper=duis&augue=bibendum&a=felis&suscipit=sed&nulla=interdum&elit=venenatis&ac=turpis&nulla=enim&sed=blandit&vel=mi&enim=in&sit=porttitor&amet=pede&nunc=justo&viverra=eu&dapibus=massa&nulla=donec&suscipit=dapibus",
+            "hostname": "rkNiw-633",
+            "uuid": "3629717f-89bd-40f8-89c3-6cee43abd607",
+            "ipv4": "146.156.82.114",
+            "last_authenticated_results": "2023-11-07T21:37:55.376Z",
+            "mac_address": "2E-1D-E9-48-97-A5",
+            "netbios_name": "lxG-250",
+            "operating_system": [
+                "Android 11"
+            ],
+            "network_id": "604a172c-c3d9-450e-b428-15243f6cfff8",
+            "tracked": false
+        },
+        "plugin": {
+            "bid": [
+                510195
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": true,
+            "cpe": [
+                "RRQ-53376"
+            ],
+            "cvss3_base_score": 9.9,
+            "cvss3_temporal_score": 9.2,
+            "cvss3_temporal_vector": {
+                "exploitability": "low",
+                "remediation_level": "critical",
+                "report_confidence": "unconfirmed",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H"
+            },
+            "cvss3_vector": {
+                "access_complexity": "very high",
+                "access_vector": "Physical",
+                "availability_impact": "insignificant",
+                "confidentiality_impact": "moderate",
+                "integrity_impact": "low",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:M/A:H"
+            },
+            "cvss_base_score": 8.2,
+            "cvss_temporal_score": 0.4,
+            "cvss_temporal_vector": {
+                "exploitability": "unproven",
+                "remediation_level": "high",
+                "report_confidence": "complete",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:M"
+            },
+            "cvss_vector": {
+                "access_complexity": "very high",
+                "access_vector": "system_remote",
+                "authentication": "PASSWORD",
+                "availability_impact": "SIGNIFICANT",
+                "confidentiality_impact": "HIGH",
+                "integrity_impact": "MEDIUM",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:M"
+            },
+            "description": "Ut tellus.",
+            "exploit_available": true,
+            "exploit_framework_canvas": true,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": true,
+            "exploit_framework_metasploit": false,
+            "exploitability_ease": "Sed sagittis.",
+            "exploited_by_malware": false,
+            "exploited_by_nessus": true,
+            "family": "Linux",
+            "family_id": 4,
+            "has_patch": true,
+            "id": 510195,
+            "in_the_news": false,
+            "name": "SocialMediaPlugin",
+            "patch_publication_date": "2023-12-29T06:48:27.376Z",
+            "modification_date": "2024-08-14T09:53:37.376Z",
+            "publication_date": "2023-11-11T00:45:48.376Z",
+            "risk_factor": "low",
+            "see_also": [
+                "https://bloglovin.com/cras/non.js?proin=justo&eu=morbi&mi=ut&nulla=odio&ac=cras&enim=mi&in=pede&tempor=malesuada&turpis=in&nec=imperdiet&euismod=et&scelerisque=commodo&quam=vulputate&turpis=justo&adipiscing=in&lorem=blandit&vitae=ultrices&mattis=enim&nibh=lorem&ligula=ipsum&nec=dolor&sem=sit&duis=amet&aliquam=consectetuer&convallis=adipiscing&nunc=elit&proin=proin&at=interdum&turpis=mauris&a=non&pede=ligula&posuere=pellentesque&nonummy=ultrices&integer=phasellus&non=id&velit=sapien&donec=in&diam=sapien&neque=iaculis&vestibulum=congue&eget=vivamus&vulputate=metus&ut=arcu&ultrices=adipiscing&vel=molestie&augue=hendrerit&vestibulum=at&ante=vulputate&ipsum=vitae&primis=nisl&in=aenean&faucibus=lectus&orci=pellentesque&luctus=eget&et=nunc&ultrices=donec&posuere=quis&cubilia=orci&curae=eget&donec=orci&pharetra=vehicula&magna=condimentum&vestibulum=curabitur&aliquet=in&ultrices=libero&erat=ut&tortor=massa&sollicitudin=volutpat&mi=convallis&sit=morbi&amet=odio&lobortis=odio&sapien=elementum&sapien=eu&non=interdum&mi=eu&integer=tincidunt&ac=in&neque=leo&duis=maecenas&bibendum=pulvinar&morbi=lobortis&non=est&quam=phasellus&nec=sit"
+            ],
+            "solution": "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+            "synopsis": "Duis ac nibh.",
+            "unsupported_by_vendor": false,
+            "version": "5.0.1",
+            "vuln_publication_date": "2023-10-27T09:40:41.376Z",
+            "xrefs": [
+                [
+                    {
+                        "type": "IAVT",
+                        "id": "0001-T-1111"
+                    }
+                ]
+            ],
+            "vpr": {
+                "score": 6.6,
+                "drivers": {
+                    "age_of_vuln": {
+                        "lower_bound": 47,
+                        "upper_bound": 12
+                    },
+                    "exploit_code_maturity": "low",
+                    "cvss_impact_score_predicted": true,
+                    "cvss3_impact_score": 10.0,
+                    "threat_intensity_last28": "VERY_HIGH",
+                    "threat_sources_last28": [
+                        "Pellentesque at nulla."
+                    ],
+                    "product_coverage": "LOW"
+                },
+                "updated": "2024-06-25T03:37:36.376Z"
+            },
+            "cve": [
+                "CVE-5676-33488"
+            ],
+            "type": "cloud"
+        },
+        "port": {
+            "port": 498,
+            "protocol": "FTP"
+        },
+        "scan": {
+            "schedule_uuid": "ada2ffe6-8176-472d-b5c1-e62f7b7b6948",
+            "started_at": "2024-03-25T04:17:59.376Z",
+            "uuid": "c2c0379e-8273-4b6b-afba-f483fd06aa46"
+        },
+        "severity": "critical",
+        "severity_id": 1,
+        "severity_default_id": 3,
+        "severity_modification_type": "NONE",
+        "first_found": "2023-11-02T03:56:31.376Z",
+        "last_fixed": "2024-07-12T05:33:56.376Z",
+        "last_found": "2024-07-16T14:46:11.376Z",
+        "state": "PENDING",
+        "indexed": "2024-08-26T19:19:40.376Z",
+        "source": "PHONE"
+    },
+    {
+        "asset": {
+            "agent_uuid": "cd5c3962-e2ae-4d2d-8ef2-1bc548b5ad50",
+            "bios_uuid": "bc6735d9-eadc-4ad5-91a9-0fadcfcc2193",
+            "device_type": "server",
+            "fqdn": "http://linkedin.com/ut/suscipit/a.png?condimentum=pellentesque&id=volutpat&luctus=dui&nec=maecenas&molestie=tristique&sed=est&justo=et&pellentesque=tempus&viverra=semper&pede=est&ac=quam&diam=pharetra&cras=magna&pellentesque=ac&volutpat=consequat&dui=metus&maecenas=sapien&tristique=ut&est=nunc&et=vestibulum&tempus=ante&semper=ipsum&est=primis&quam=in&pharetra=faucibus&magna=orci&ac=luctus&consequat=et&metus=ultrices&sapien=posuere&ut=cubilia&nunc=curae&vestibulum=mauris&ante=viverra&ipsum=diam&primis=vitae&in=quam&faucibus=suspendisse&orci=potenti&luctus=nullam&et=porttitor&ultrices=lacus&posuere=at&cubilia=turpis&curae=donec&mauris=posuere&viverra=metus&diam=vitae&vitae=ipsum&quam=aliquam&suspendisse=non&potenti=mauris&nullam=morbi&porttitor=non&lacus=lectus&at=aliquam&turpis=sit&donec=amet&posuere=diam",
+            "hostname": "TWTsq-516",
+            "uuid": "4b5a5573-81e6-4c2f-8c10-c41c134276bb",
+            "ipv4": "20.254.104.240",
+            "last_authenticated_results": "2024-07-07T06:54:35.376Z",
+            "mac_address": "C1-6F-BB-65-D7-BD",
+            "netbios_name": "aMr-416",
+            "operating_system": [
+                "Ubuntu 20.04"
+            ],
+            "network_id": "13e132f7-90cb-4ea5-9c84-3b55b7cc9396",
+            "tracked": true
+        },
+        "plugin": {
+            "bid": [
+                473800
+            ],
+            "checks_for_default_account": true,
+            "checks_for_malware": false,
+            "cpe": [
+                "QBM-48156"
+            ],
+            "cvss3_base_score": 1.0,
+            "cvss3_temporal_score": 6.1,
+            "cvss3_temporal_vector": {
+                "exploitability": "low",
+                "remediation_level": "high",
+                "report_confidence": "unconfirmed",
+                "raw": "AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss3_vector": {
+                "access_complexity": "very high",
+                "access_vector": "Local",
+                "availability_impact": "high",
+                "confidentiality_impact": "substantial",
+                "integrity_impact": "moderate",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss_base_score": 6.9,
+            "cvss_temporal_score": 7.8,
+            "cvss_temporal_vector": {
+                "exploitability": "unproven",
+                "remediation_level": "significant",
+                "report_confidence": "complete",
+                "raw": "AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss_vector": {
+                "access_complexity": "low",
+                "access_vector": "remote",
+                "authentication": "PIN",
+                "availability_impact": "MEDIUM",
+                "confidentiality_impact": "SIGNIFICANT",
+                "integrity_impact": "HIGH",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:M/I:H/A:H"
+            },
+            "description": "Suspendisse potenti.",
+            "exploit_available": true,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": true,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": true,
+            "exploitability_ease": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.",
+            "exploited_by_malware": true,
+            "exploited_by_nessus": false,
+            "family": "iOS",
+            "family_id": 6,
+            "has_patch": true,
+            "id": 473800,
+            "in_the_news": false,
+            "name": "SocialMediaPlugin",
+            "patch_publication_date": "2024-09-07T08:13:17.376Z",
+            "modification_date": "2023-12-12T22:29:24.376Z",
+            "publication_date": "2024-08-22T04:48:53.376Z",
+            "risk_factor": "low",
+            "see_also": [
+                "https://chronoengine.com/mattis/egestas/metus/aenean/fermentum/donec.aspx?luctus=primis&rutrum=in&nulla=faucibus&tellus=orci&in=luctus&sagittis=et&dui=ultrices&vel=posuere&nisl=cubilia&duis=curae&ac=mauris&nibh=viverra&fusce=diam&lacus=vitae&purus=quam&aliquet=suspendisse&at=potenti&feugiat=nullam&non=porttitor&pretium=lacus&quis=at&lectus=turpis&suspendisse=donec&potenti=posuere&in=metus&eleifend=vitae&quam=ipsum&a=aliquam&odio=non&in=mauris&hac=morbi&habitasse=non&platea=lectus&dictumst=aliquam&maecenas=sit&ut=amet&massa=diam&quis=in&augue=magna&luctus=bibendum&tincidunt=imperdiet&nulla=nullam&mollis=orci&molestie=pede&lorem=venenatis&quisque=non&ut=sodales&erat=sed&curabitur=tincidunt&gravida=eu&nisi=felis&at=fusce&nibh=posuere&in=felis&hac=sed&habitasse=lacus&platea=morbi&dictumst=sem&aliquam=mauris&augue=laoreet&quam=ut&sollicitudin=rhoncus&vitae=aliquet&consectetuer=pulvinar&eget=sed&rutrum=nisl&at=nunc&lorem=rhoncus&integer=dui&tincidunt=vel&ante=sem&vel=sed&ipsum=sagittis&praesent=nam&blandit=congue&lacinia=risus&erat=semper&vestibulum=porta&sed=volutpat&magna=quam&at=pede&nunc=lobortis&commodo=ligula&placerat=sit&praesent=amet"
+            ],
+            "solution": "Mauris sit amet eros.",
+            "synopsis": "Nulla suscipit ligula in lacus.",
+            "unsupported_by_vendor": false,
+            "version": "1.0.0",
+            "vuln_publication_date": "2024-07-03T13:31:13.376Z",
+            "xrefs": [
+                {
+                    "type": "IAVT",
+                    "id": "0001-T-2222"
+                }
+            ],
+            "vpr": {
+                "score": 8.4,
+                "drivers": {
+                    "age_of_vuln": {
+                        "lower_bound": 87,
+                        "upper_bound": 13
+                    },
+                    "exploit_code_maturity": "high",
+                    "cvss_impact_score_predicted": false,
+                    "cvss3_impact_score": 3.8,
+                    "threat_intensity_last28": "MEDIUM",
+                    "threat_sources_last28": [
+                        "In est risus, auctor sed, tristique in, tempus sit amet, sem."
+                    ],
+                    "product_coverage": "MEDIUM"
+                },
+                "updated": "2024-01-26T22:12:22.376Z"
+            },
+            "cve": [
+                "CVE-1384-3987",
+                "CVE-7324-126822",
+                "CVE-4251-70839"
+            ],
+            "type": "local"
+        },
+        "port": {
+            "port": 241,
+            "protocol": "SSH"
+        },
+        "scan": {
+            "schedule_uuid": "f6010d45-b469-4f20-a018-3aa01ddf81f5",
+            "started_at": "2024-01-22T03:44:23.376Z",
+            "uuid": "fe2c0468-5b9d-443f-9f8c-1c988fb002c7"
+        },
+        "severity": "low",
+        "severity_id": 4,
+        "severity_default_id": 1,
+        "severity_modification_type": "PATCH",
+        "first_found": "2024-09-27T11:45:30.376Z",
+        "last_fixed": "2024-08-31T17:29:02.376Z",
+        "last_found": "2024-09-28T23:22:37.376Z",
+        "state": "FIXED",
+        "indexed": "2024-07-12T09:00:03.376Z",
+        "source": "AGENT"
+    },
+    {
+        "asset": {
+            "agent_uuid": "eea9c7d7-49bf-4358-8ed6-6886c9a86297",
+            "bios_uuid": "a0965cb5-5774-4afa-82f4-7f08ac0b2af4",
+            "device_type": "tablet",
+            "fqdn": "http://ca.gov/ac/enim/in/tempor.js?orci=pede&nullam=morbi&molestie=porttitor&nibh=lorem&in=id&lectus=ligula&pellentesque=suspendisse&at=ornare&nulla=consequat&suspendisse=lectus&potenti=in&cras=est&in=risus&purus=auctor&eu=sed&magna=tristique&vulputate=in&luctus=tempus&cum=sit&sociis=amet&natoque=sem&penatibus=fusce&et=consequat&magnis=nulla&dis=nisl&parturient=nunc&montes=nisl&nascetur=duis&ridiculus=bibendum&mus=felis&vivamus=sed&vestibulum=interdum&sagittis=venenatis&sapien=turpis&cum=enim&sociis=blandit",
+            "hostname": "etWIK-121",
+            "uuid": "b40d7a0f-1d88-4c2f-8012-2888d8b79784",
+            "ipv4": "166.214.240.191",
+            "last_authenticated_results": "2023-12-18T11:52:33.376Z",
+            "mac_address": "DA-ED-23-5E-ED-E1",
+            "netbios_name": "eAb-627",
+            "operating_system": [
+                "Android 11"
+            ],
+            "network_id": "3fa4c9cf-cdbd-414f-a5bd-596be2aa3830",
+            "tracked": true
+        },
+        "plugin": {
+            "bid": [
+                602763
+            ],
+            "checks_for_default_account": true,
+            "checks_for_malware": false,
+            "cpe": [
+                "SMN-78145"
+            ],
+            "cvss3_base_score": 2.4,
+            "cvss3_temporal_score": 1.2,
+            "cvss3_temporal_vector": {
+                "exploitability": "critical",
+                "remediation_level": "negligible",
+                "report_confidence": "unconfirmed",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:M/I:H/A:H"
+            },
+            "cvss3_vector": {
+                "access_complexity": "very high",
+                "access_vector": "Local",
+                "availability_impact": "significant",
+                "confidentiality_impact": "insignificant",
+                "integrity_impact": "substantial",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss_base_score": 3.5,
+            "cvss_temporal_score": 8.8,
+            "cvss_temporal_vector": {
+                "exploitability": "low",
+                "remediation_level": "minimal",
+                "report_confidence": "limited",
+                "raw": "AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "cvss_vector": {
+                "access_complexity": "high",
+                "access_vector": "system_network",
+                "authentication": "PASSWORD",
+                "availability_impact": "CRITICAL",
+                "confidentiality_impact": "COMPLETE",
+                "integrity_impact": "MINOR",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:M/A:H"
+            },
+            "description": "Nulla mollis molestie lorem.",
+            "exploit_available": true,
+            "exploit_framework_canvas": false,
+            "exploit_framework_core": true,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": true,
+            "exploit_framework_metasploit": false,
+            "exploitability_ease": "Pellentesque ultrices mattis odio.",
+            "exploited_by_malware": false,
+            "exploited_by_nessus": true,
+            "family": "Android",
+            "family_id": 6,
+            "has_patch": false,
+            "id": 602763,
+            "in_the_news": false,
+            "name": "SecurityPlugin",
+            "patch_publication_date": "2024-10-06T02:50:22.376Z",
+            "modification_date": "2024-09-28T08:13:51.376Z",
+            "publication_date": "2024-09-13T22:28:52.376Z",
+            "risk_factor": "medium",
+            "see_also": [
+                "https://moonfruit.com/nisi/venenatis/tristique/fusce/congue.xml?libero=natoque&ut=penatibus"
+            ],
+            "solution": "Donec ut mauris eget massa tempor convallis.",
+            "synopsis": "Suspendisse ornare consequat lectus.",
+            "unsupported_by_vendor": false,
+            "version": "4.2.8",
+            "vuln_publication_date": "2023-11-13T18:15:01.376Z",
+            "xrefs": [
+                {
+                    "type": "IAVB",
+                    "id": "0001-B-0509"
+                }
+            ],
+            "vpr": {
+                "score": 9.8,
+                "drivers": {
+                    "age_of_vuln": {
+                        "lower_bound": 18,
+                        "upper_bound": 14
+                    },
+                    "exploit_code_maturity": "critical",
+                    "cvss_impact_score_predicted": true,
+                    "cvss3_impact_score": 7.7,
+                    "threat_intensity_last28": "VERY_LOW",
+                    "threat_sources_last28": [
+                        "Ut at dolor quis odio consequat varius."
+                    ],
+                    "product_coverage": "LOW"
+                },
+                "updated": "2024-09-08T02:35:31.376Z"
+            },
+            "cve": [
+                "CVE-2356-6527"
+            ],
+            "type": "local"
+        },
+        "port": {
+            "port": 54,
+            "protocol": "SSH"
+        },
+        "scan": {
+            "schedule_uuid": "54d92638-61b3-49b5-bda3-f36fac62ebf8",
+            "started_at": "2023-12-04T20:17:10.376Z",
+            "uuid": "06da00d6-78f4-4a34-badd-0dd9f2636644"
+        },
+        "severity": "medium",
+        "severity_id": 1,
+        "severity_default_id": 2,
+        "severity_modification_type": "NONE",
+        "first_found": "2024-10-11T19:54:38.376Z",
+        "last_fixed": "2023-11-20T02:42:52.376Z",
+        "last_found": "2024-01-27T06:10:42.376Z",
+        "state": "PENDING",
+        "indexed": "2024-01-27T01:19:56.376Z",
+        "source": "WEB"
+    },
+    {
+        "asset": {
+            "agent_uuid": "2657975c-5f1c-4a83-bcf4-fd4075dcbb49",
+            "bios_uuid": "9c9d3a21-168c-4508-a209-470be6843477",
+            "device_type": "server",
+            "fqdn": "http://freewebs.com/tempor/convallis/nulla/neque/libero.aspx?vivamus=felis&tortor=fusce&duis=posuere&mattis=felis&egestas=sed&metus=lacus&aenean=morbi&fermentum=sem&donec=mauris&ut=laoreet&mauris=ut&eget=rhoncus&massa=aliquet&tempor=pulvinar&convallis=sed&nulla=nisl&neque=nunc&libero=rhoncus&convallis=dui&eget=vel&eleifend=sem&luctus=sed&ultricies=sagittis&eu=nam&nibh=congue&quisque=risus&id=semper&justo=porta&sit=volutpat&amet=quam&sapien=pede&dignissim=lobortis&vestibulum=ligula&vestibulum=sit&ante=amet&ipsum=eleifend&primis=pede&in=libero&faucibus=quis&orci=orci&luctus=nullam&et=molestie&ultrices=nibh&posuere=in&cubilia=lectus&curae=pellentesque&nulla=at&dapibus=nulla&dolor=suspendisse&vel=potenti&est=cras&donec=in&odio=purus&justo=eu&sollicitudin=magna&ut=vulputate&suscipit=luctus&a=cum&feugiat=sociis&et=natoque&eros=penatibus&vestibulum=et&ac=magnis&est=dis&lacinia=parturient&nisi=montes&venenatis=nascetur&tristique=ridiculus",
+            "hostname": "UooJI-015",
+            "uuid": "08cd7601-5973-4b9d-8d8e-7057bfb72fc1",
+            "ipv4": "66.198.135.47",
+            "last_authenticated_results": "2024-01-30T08:45:58.376Z",
+            "mac_address": "63-FE-D0-2C-48-C6",
+            "netbios_name": "hve-709",
+            "operating_system": [
+                "Windows 10"
+            ],
+            "network_id": "8297d476-2fbf-4c58-980d-81421a100c21",
+            "tracked": false
+        },
+        "plugin": {
+            "bid": [
+                254746
+            ],
+            "checks_for_default_account": false,
+            "checks_for_malware": true,
+            "cpe": [
+                "EHJ-46310"
+            ],
+            "cvss3_base_score": 8.3,
+            "cvss3_temporal_score": 6.5,
+            "cvss3_temporal_vector": {
+                "exploitability": "high",
+                "remediation_level": "low",
+                "report_confidence": "unconfirmed",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:M"
+            },
+            "cvss3_vector": {
+                "access_complexity": "low",
+                "access_vector": "Adjacent Network",
+                "availability_impact": "negligible",
+                "confidentiality_impact": "low",
+                "integrity_impact": "significant",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:M/A:H"
+            },
+            "cvss_base_score": 9.1,
+            "cvss_temporal_score": 4.4,
+            "cvss_temporal_vector": {
+                "exploitability": "medium",
+                "remediation_level": "high",
+                "report_confidence": "unknown",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H"
+            },
+            "cvss_vector": {
+                "access_complexity": "very high",
+                "access_vector": "remote",
+                "authentication": "LDAP",
+                "availability_impact": "NEGLIGIBLE",
+                "confidentiality_impact": "MINIMAL",
+                "integrity_impact": "NEGLIGIBLE",
+                "raw": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            "description": "Nullam molestie nibh in lectus. Pellentesque at nulla.",
+            "exploit_available": false,
+            "exploit_framework_canvas": true,
+            "exploit_framework_core": false,
+            "exploit_framework_d2_elliot": false,
+            "exploit_framework_exploithub": false,
+            "exploit_framework_metasploit": false,
+            "exploitability_ease": "Nunc purus.",
+            "exploited_by_malware": false,
+            "exploited_by_nessus": false,
+            "family": "Android",
+            "family_id": 6,
+            "has_patch": false,
+            "id": 254746,
+            "in_the_news": false,
+            "name": "SecurityPlugin",
+            "patch_publication_date": "2024-06-11T11:53:55.376Z",
+            "modification_date": "2023-10-19T14:04:44.376Z",
+            "publication_date": "2024-02-11T10:59:50.376Z",
+            "risk_factor": "medium",
+            "see_also": [
+                "http://marriott.com/lacus/curabitur/at/ipsum/ac/tellus.html?dolor=nulla&quis=justo&odio=aliquam&consequat=quis&varius=turpis&integer=eget&ac=elit&leo=sodales&pellentesque=scelerisque&ultrices=mauris&mattis=sit&odio=amet&donec=eros&vitae=suspendisse&nisi=accumsan&nam=tortor&ultrices=quis&libero=turpis&non=sed&mattis=ante&pulvinar=vivamus&nulla=tortor&pede=duis&ullamcorper=mattis&augue=egestas&a=metus"
+            ],
+            "solution": "Cras pellentesque volutpat dui.",
+            "synopsis": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.",
+            "unsupported_by_vendor": false,
+            "version": "5.0.1",
+            "vuln_publication_date": "2024-07-01T20:03:17.376Z",
+            "xrefs": [
+                {
+                    "type": "IAVT",
+                    "id": "0001-T-0664"
+                }
+            ],
+            "vpr": {
+                "score": 9.7,
+                "drivers": {
+                    "age_of_vuln": {
+                        "lower_bound": 21,
+                        "upper_bound": 75
+                    },
+                    "exploit_code_maturity": "critical",
+                    "cvss_impact_score_predicted": true,
+                    "cvss3_impact_score": 0.3,
+                    "threat_intensity_last28": "HIGH",
+                    "threat_sources_last28": [
+                        "Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."
+                    ],
+                    "product_coverage": "HIGH"
+                },
+                "updated": "2024-04-25T16:59:30.376Z"
+            },
+            "cve": [
+                "CVE-9994-04492"
+            ],
+            "type": "remote"
+        },
+        "port": {
+            "port": 466,
+            "protocol": "UDP"
+        },
+        "scan": {
+            "schedule_uuid": "863eaee4-085d-44c4-af3b-367caa304d79",
+            "started_at": "2024-03-20T14:58:37.376Z",
+            "uuid": "d223cfef-1475-45d5-85cc-87c8d302a627"
+        },
+        "severity": "medium",
+        "severity_id": 2,
+        "severity_default_id": 4,
+        "severity_modification_type": "MAJOR",
+        "first_found": "2024-03-22T17:16:12.376Z",
+        "last_fixed": "2024-09-13T20:54:40.376Z",
+        "last_found": "2024-08-16T03:22:06.376Z",
+        "state": "CLOSED",
+        "indexed": "2024-02-04T17:44:33.376Z",
+        "source": "WEB"
+    }
+]

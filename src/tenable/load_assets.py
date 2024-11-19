@@ -1,6 +1,7 @@
 import json
-from mariadb import mariadb
-from src.config.constants import ASSET_EXPORT_DIR
+import mariadb
+
+from src.config.constants import ASSET_EXPORT_DIR, CONN_PARAMS
 from src.tenable.export_assets import AssetExportStatus
 
 INSERT_ASSET_SQL = """
@@ -22,8 +23,10 @@ VALUES (?, ?, STR_TO_DATE(?, "%Y-%m-%dT%T.%fZ"), STR_TO_DATE(?, "%Y-%m-%dT%T.%fZ
 ON DUPLICATE KEY UPDATE uuid=uuid;"""
 
 
-def load_tenable_assets(export: AssetExportStatus, to: mariadb.Connection):
-    conn = to
+def load_tenable_assets(export: AssetExportStatus, pool: mariadb.ConnectionPool):
+    """Loads all assets within the given export to the database"""
+
+    conn = pool.get_connection()
 
     for chunk_id in export.chunks_available:
         with open(ASSET_EXPORT_DIR / export.chunk_file_name(chunk_id)) as f:
@@ -103,7 +106,8 @@ def __load_single_chunk(chunk_json_str: str, cursor: mariadb.Cursor):
         installed_software = asset.get("installed_software")
         if installed_software and len(installed_software) > 0:
             cursor.executemany(
-                "INSERT INTO asset_installed_softwares(asset_uuid, software_cpe) VALUES (?,?);",
+                "INSERT INTO asset_installed_softwares(asset_uuid, software_cpe) VALUES (?,?) "
+                "ON DUPLICATE KEY UPDATE asset_uuid=asset_uuid;",
                 [(asset_uuid, cpe) for cpe in installed_software],
             )
 

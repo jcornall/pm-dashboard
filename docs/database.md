@@ -2,6 +2,16 @@
 
 Each patch management tool (pmt) is assigned a database in which exported data are stored.
 
+Before a migration can be run, the target database need to exist within the DBMS.
+
+By default, MySQL stores UTF8 up to 3-bytes - some of the patch management UTF8 data will need to be stored up to 4-bytes. It is therefore necessary to specify a character set when creating the databases.
+
+```
+CREATE DATABASE {database}
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```
+
 ## Migrations
 
 [golang-migrate](https://github.com/golang-migrate/migrate) is used to handle database migrations for this project.
