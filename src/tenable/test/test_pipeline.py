@@ -42,6 +42,7 @@ def create_testdb(fs, mocker, asset_export_status):
 
 def test_tenable_success(fs, mocker):
     pool = mariadb.ConnectionPool(pool_name="tenable", pool_size=5, **TEST_CONN_PARAMS_DB)
+    mocker.patch("mariadb.ConnectionPool", return_value=pool)
     fs.add_real_file(TEST_VULN_EXPORT_DIR / "0_TEST_1.json")
     fs.add_real_file(TEST_ASSET_EXPORT_DIR / "0_TEST_0.json")  # Alternate test asset data is loaded to avoid duplication
     mocker.patch("src.tenable.export_vulnerabilities.VulnExportStatus.chunk_file_name", return_value="0_TEST_1.json")
